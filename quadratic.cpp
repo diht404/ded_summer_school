@@ -13,6 +13,7 @@ int main()
     double a = read();
     double b = read();
     double c = read();
+    
     solve(a, b, c);
     return 0;
 }
@@ -38,11 +39,13 @@ double read()
  * if gets not number, print error and try again
  */
 {
-    double answer = 0;
     const int read_size = 100;
+    double answer = 0;
+    
     char str[read_size];
     printf("Enter a number: ");
     scanf("%s", str);
+    
     answer = atof(str);
     if (abs(answer) < 1e-10)
     {
@@ -58,8 +61,6 @@ double read()
             answer = read();
         }
     }
-    else
-        return answer;
     return answer;
 }
 
