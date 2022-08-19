@@ -5,11 +5,13 @@ int main()
     double a = read();
     double b = read();
     double c = read();
+    Solution solution;
 
-    solve(a, b, c);
+    solve(a, b, c, &solution);
+
+    print(&solution);
     return 0;
 }
-
 
 double read()
 /*
@@ -29,7 +31,7 @@ double read()
     return answer;
 }
 
-void solve(double a, double b, double c)
+void solve(double a, double b, double c, Solution *solution)
 /*
  * Solves quadratic equation and print answer.
  */
@@ -42,36 +44,49 @@ void solve(double a, double b, double c)
             // equation like c=0
             if (abs(c) < eps)
             {
-                printf("Any number.\n");
+                solution->any_number = true;
             }
             else
             {
-                printf("Equation isn\'t correct!\n");
+                solution->not_correct=true;
             }
         }
         else
         {
-            printf("%f", c / b);
+            solution->x1 = c / b;
         }
     }
     else
     {
         // quadratic equation
         double D = b * b - 4 * a * c;
-        if (abs(D)<eps)
+        if (abs(D) < eps)
         {
             // only one solution
-            printf("x = %f\n", -b / (2 * a));
+            solution->x1 = -b / (2 * a);
         }
         else if (D < 0)
         {
-            printf("No real solutions!\n");
+            solution->no_solution = true;
         }
         else
         {
             // two solutions
-            printf("x1 = %f \n", (-b + sqrt(D)) / (2 * a));
-            printf("x2 = %f \n", (-b - sqrt(D)) / (2 * a));
+            solution->x1 = (-b - sqrt(D)) / (2 * a);
+            solution->x2 = (-b + sqrt(D)) / (2 * a);
         }
+    }
+}
+
+void print(const Solution *solution)
+{
+    if (solution->not_correct) printf("Equation isn\'t correct!\n");
+    else if (solution->no_solution) printf("No real solutions!\n");
+    else if (solution->any_number) printf("Any number.\n");
+    else if (isnan(solution->x2)) printf("x = %f\n", solution->x1);
+    else
+    {
+        printf("x1 = %f\n", solution->x1);
+        printf("x2 = %f\n", solution->x2);
     }
 }
