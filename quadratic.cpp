@@ -4,7 +4,7 @@ int main()
 {
 
     Equation equation = {};
-    read_eq(&equation);
+    readEquation(&equation);
 
     Solution solution = {};
     solve(&equation, &solution);
