@@ -100,7 +100,7 @@ void solve(double a, double b, double c)
         else if (D < 1e-10)
         {
             // only one solution
-            printf("%f", -b / (2 * a));
+            printf("x = %f\n", -b / (2 * a));
         }
         else
         {
