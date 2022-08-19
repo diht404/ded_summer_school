@@ -34,7 +34,6 @@ double read()
 
 void read_eq(Equation *equation)
 {
-
     equation->a = read();
     equation->b = read();
     equation->c = read();
