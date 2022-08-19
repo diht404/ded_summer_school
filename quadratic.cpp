@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
+
+const double eps = 1e-10;
+
 bool check_str(char *a, const char *b);
 
 double read();
@@ -47,7 +50,7 @@ double read()
     scanf("%s", str);
     
     answer = atof(str);
-    if (abs(answer) < 1e-10)
+    if (abs(answer) < eps)
     {
         // check if the string is equal to zero
         if (check_str(str, "0\0") or
@@ -69,13 +72,13 @@ void solve(double a, double b, double c)
  * Solves quadratic equation and print answer.
  */
 {
-    if (abs(a) < 1e-10)
+    if (abs(a) < eps)
     {
         // linear equation
-        if (abs(b) < 1e-10)
+        if (abs(b) < eps)
         {
             // equation like c=0
-            if (abs(c) < 1e-10)
+            if (abs(c) < eps)
             {
                 printf("Any number.\n");
             }
@@ -97,13 +100,14 @@ void solve(double a, double b, double c)
         {
             printf("No real solutions!\n");
         }
-        else if (D < 1e-10)
+        else if (D < eps)
         {
             // only one solution
             printf("x = %f\n", -b / (2 * a));
         }
         else
         {
+            // two solutions
             printf("x1 = %f \n", (-b + sqrt(D)) / (2 * a));
             printf("x2 = %f \n", (-b - sqrt(D)) / (2 * a));
         }
