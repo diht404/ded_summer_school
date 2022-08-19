@@ -3,9 +3,9 @@
 int main()
 {
     Equation equation = {};
-    Solution solution = {};
     read_eq(&equation);
 
+    Solution solution = {};
     solve(&equation, &solution);
 
     print(&solution);
