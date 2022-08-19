@@ -21,12 +21,14 @@ double read()
 {
     double answer = NAN;
     printf("Enter a number: ");
-    bool correct = scanf("%lf", &answer);
-
-    if (!correct)
+    int correct = scanf("%lf", &answer);
+    while (correct!=1)
     {
         printf("Incorrect number, try again!\n");
-        answer = read();
+        {
+            while(getchar()!='\n') continue;
+        }
+        correct = scanf("%lf", &answer);
     }
     return answer;
 }
@@ -48,12 +50,12 @@ void solve(double a, double b, double c, Solution *solution)
             }
             else
             {
-                solution->not_correct=true;
+                solution->not_correct = true;
             }
         }
         else
         {
-            solution->x1 = - c / b;
+            solution->x1 = -c / b;
         }
     }
     else
@@ -83,10 +85,14 @@ void print(const Solution *solution)
  * Prints quadratic equation solutions
  */
 {
-    if (solution->not_correct) printf("Equation isn\'t correct!\n");
-    else if (solution->no_solution) printf("No real solutions!\n");
-    else if (solution->any_number) printf("Any number.\n");
-    else if (isnan(solution->x2)) printf("x = %f\n", solution->x1);
+    if (solution->not_correct)
+        printf("Equation isn\'t correct!\n");
+    else if (solution->no_solution)
+        printf("No real solutions!\n");
+    else if (solution->any_number)
+        printf("Any number.\n");
+    else if (isnan(solution->x2))
+        printf("x = %f\n", solution->x1);
     else
     {
         printf("x1 = %f\n", solution->x1);
