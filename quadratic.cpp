@@ -2,6 +2,7 @@
 
 int main()
 {
+
     Equation equation = {};
     read_eq(&equation);
 
@@ -13,7 +14,7 @@ int main()
     return 0;
 }
 
-void skip_unused_symbols()
+void skipUnusedSymbols()
 {
     while (getchar() != '\n')
         continue;
@@ -29,14 +30,14 @@ double read()
     while (correct != 1)
     {
         printf("Incorrect number, try again!\n");
-        skip_unused_symbols();
+        skipUnusedSymbols();
         correct = scanf("%lf", &answer);
     }
 
     return answer;
 }
 
-void read_eq(Equation *equation)
+void readEquation(Equation *equation)
 {
     equation->a = read();
     equation->b = read();

@@ -29,7 +29,7 @@ const double eps = 1e-10;
 /*
  * Skips symbols from print from UI
  */
-void skip_unused_symbols();
+void skipUnusedSymbols();
 
 /*
  * Read float number from console
@@ -40,7 +40,7 @@ double read();
 /*
  * read equation coefficients to struct
  */
-void read_eq(Equation *equation);
+void readEquation(Equation *equation);
 
 /*
  * Solves quadratic equation and print answer.
