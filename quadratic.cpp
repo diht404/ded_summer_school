@@ -3,13 +3,19 @@
 int main()
 {
     Equation equation = {};
-    read_eq(&equation);
     Solution solution = {};
+    read_eq(&equation);
 
     solve(&equation, &solution);
 
     print(&solution);
     return 0;
+}
+
+void skip_unused_symbols()
+{
+    while (getchar() != '\n')
+        continue;
 }
 
 double read()
@@ -20,10 +26,7 @@ double read()
     while (correct != 1)
     {
         printf("Incorrect number, try again!\n");
-        {
-            while (getchar() != '\n')
-                continue;
-        }
+        skip_unused_symbols();
         correct = scanf("%lf", &answer);
     }
     return answer;
@@ -62,27 +65,24 @@ void solve(Equation *equation, Solution *solution)
         {
             solution->x1 = -c / b;
         }
+        return;
+    }
+    // quadratic equation
+    double D = b * b - 4 * a * c;
+    if (abs(D) < eps)
+    {
+        solution->rootCount = oneSolution;
+        solution->x1 = -b / (2 * a);
+    }
+    else if (D < 0)
+    {
+        solution->rootCount = noRoots;
     }
     else
     {
-        // quadratic equation
-        double D = b * b - 4 * a * c;
-        if (abs(D) < eps)
-        {
-            // only one solution
-            solution->rootCount = oneSolution;
-            solution->x1 = -b / (2 * a);
-        }
-        else if (D < 0)
-        {
-            solution->rootCount = noRoots;
-        }
-        else
-        {
-            solution->rootCount = twoSolutions;
-            solution->x1 = (-b - sqrt(D)) / (2 * a);
-            solution->x2 = (-b + sqrt(D)) / (2 * a);
-        }
+        solution->rootCount = twoSolutions;
+        solution->x1 = (-b - sqrt(D)) / (2 * a);
+        solution->x2 = (-b + sqrt(D)) / (2 * a);
     }
 }
 
@@ -90,21 +90,16 @@ void print(const Solution *solution)
 {
     switch (solution->rootCount)
     {
-        case noRoots:
-            printf("No real solutions!\n");
+        case noRoots:printf("No real solutions!\n");
             break;
-        case infSolutions:
-            printf("Any number.\n");
+        case infSolutions:printf("Any number.\n");
             break;
-        case oneSolution:
-            printf("x = %lf\n", solution->x1);
+        case oneSolution:printf("x = %lf\n", solution->x1);
             break;
-        case twoSolutions:
-            printf("x1 = %lf\n", solution->x1);
+        case twoSolutions:printf("x1 = %lf\n", solution->x1);
             printf("x2 = %lf\n", solution->x2);
             break;
-        default:
-            fprintf(stderr,"Error");
+        default:fprintf(stderr, "Error");
             break;
     }
 }

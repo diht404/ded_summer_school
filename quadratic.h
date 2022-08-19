@@ -27,6 +27,11 @@ struct Solution
 const double eps = 1e-10;
 
 /*
+ * Skips symbols from print from UI
+ */
+void skip_unused_symbols();
+
+/*
  * Read float number from console
  * if gets not number, print error and try again
  */
