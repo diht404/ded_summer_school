@@ -65,7 +65,7 @@ double read()
 
 void solve(double a, double b, double c)
 /*
- * Solves quadratic equation and print answer
+ * Solves quadratic equation and print answer.
  */
 {
     if (abs(a) < 1e-10)
