@@ -79,6 +79,9 @@ void solve(double a, double b, double c, Solution *solution)
 }
 
 void print(const Solution *solution)
+/*
+ * Prints quadratic equation solutions
+ */
 {
     if (solution->not_correct) printf("Equation isn\'t correct!\n");
     else if (solution->no_solution) printf("No real solutions!\n");
