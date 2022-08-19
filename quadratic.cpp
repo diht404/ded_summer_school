@@ -42,10 +42,10 @@ double read()
     if (abs(answer) < eps)
     {
         // check if the string is equal to zero
-        if (check_str(str, "0\0") or
-            check_str(str, "0.\0") or
-            check_str(str, "0.0\0") or
-            check_str(str, ".\0"))
+        if (check_str(str, "0") or
+            check_str(str, "0.") or
+            check_str(str, "0.0") or
+            check_str(str, "."))
             return answer;
         else
         {
