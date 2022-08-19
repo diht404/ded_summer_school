@@ -41,6 +41,7 @@ double read()
     double answer = 0;
     const int read_size = 100;
     char str[read_size];
+    printf("Enter a number: ");
     scanf("%s", str);
     answer = atof(str);
     if (abs(answer) < 1e-10)
