@@ -21,7 +21,7 @@ struct Solution
 {
     double x1 = NAN;
     double x2 = NAN;
-    RootCount rootCount = noRoots;;
+    RootCount rootCount = noRoots;
 };
 
 const double eps = 1e-10;
