@@ -5,7 +5,7 @@ int main()
     double a = read();
     double b = read();
     double c = read();
-    
+
     solve(a, b, c);
     return 0;
 }
@@ -31,27 +31,14 @@ double read()
  * if gets not number, print error and try again
  */
 {
-    const int read_size = 100;
     double answer = 0;
-    
-    char str[read_size];
     printf("Enter a number: ");
-    scanf("%s", str);
-    
-    answer = atof(str);
-    if (abs(answer) < eps)
+    bool correct = scanf("%lf", &answer);
+
+    if (!correct)
     {
-        // check if the string is equal to zero
-        if (check_str(str, "0") or
-            check_str(str, "0.") or
-            check_str(str, "0.0") or
-            check_str(str, "."))
-            return answer;
-        else
-        {
-            printf("Incorrect number, try again!\n");
-            answer = read();
-        }
+        printf("Incorrect number, try again!\n");
+        answer = read();
     }
     return answer;
 }
