@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <math.h>
 
+struct Equation
+{
+    double a = NAN;
+    double b = NAN;
+    double c = NAN;
+};
+
 struct Solution
 {
     double x1 = NAN;
@@ -14,6 +21,8 @@ struct Solution
 const double eps = 1e-10;
 
 double read();
+
+void read_eq(Equation *equation);
 
 void solve(double a, double b, double c, Solution *solution);
 

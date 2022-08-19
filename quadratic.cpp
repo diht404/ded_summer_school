@@ -2,12 +2,11 @@
 
 int main()
 {
-    double a = read();
-    double b = read();
-    double c = read();
+    Equation equation = {};
+    read_eq(&equation);
     Solution solution = {};
 
-    solve(a, b, c, &solution);
+    solve(equation.a, equation.b, equation.c, &solution);
 
     print(&solution);
     return 0;
@@ -32,6 +31,18 @@ double read()
     }
     return answer;
 }
+
+void read_eq(Equation *equation)
+/*
+ * read equation coefficients to struct
+ */
+{
+
+    equation->a = read();
+    equation->b = read();
+    equation->c = read();
+}
+
 
 void solve(double a, double b, double c, Solution *solution)
 /*
