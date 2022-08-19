@@ -10,20 +10,6 @@ int main()
     return 0;
 }
 
-bool check_str(char *a, const char *b)
-/*
- * Check if strings are equal
- */
-{
-    int i = 0;
-    while (b[i] != '\0')
-    {
-        if (a[i] != b[i])
-            return false;
-        i += 1;
-    }
-    return true;
-}
 
 double read()
 /*
