@@ -85,14 +85,14 @@ void solve(double a, double b, double c)
     {
         // quadratic equation
         double D = b * b - 4 * a * c;
-        if (D < 0)
-        {
-            printf("No real solutions!\n");
-        }
-        else if (D < eps)
+        if (abs(D)<eps)
         {
             // only one solution
             printf("x = %f\n", -b / (2 * a));
+        }
+        else if (D < 0)
+        {
+            printf("No real solutions!\n");
         }
         else
         {
