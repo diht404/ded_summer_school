@@ -5,7 +5,7 @@ int main()
     double a = read();
     double b = read();
     double c = read();
-    Solution solution;
+    Solution solution = {};
 
     solve(a, b, c, &solution);
 
@@ -19,7 +19,7 @@ double read()
  * if gets not number, print error and try again
  */
 {
-    double answer = 0;
+    double answer = NAN;
     printf("Enter a number: ");
     bool correct = scanf("%lf", &answer);
 
@@ -53,7 +53,7 @@ void solve(double a, double b, double c, Solution *solution)
         }
         else
         {
-            solution->x1 = c / b;
+            solution->x1 = - c / b;
         }
     }
     else
