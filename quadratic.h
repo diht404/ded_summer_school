@@ -11,8 +11,8 @@ struct Equation
 
 enum RootCount
 {
-    noRoots      = 0,
-    oneSolution  = 1,
+    noRoots = 0,
+    oneSolution = 1,
     twoSolutions = 2,
     infSolutions = 3,
 };
