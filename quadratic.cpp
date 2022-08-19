@@ -1,4 +1,4 @@
-#include "qudratic.h"
+#include "quadratic.h"
 
 int main()
 {
