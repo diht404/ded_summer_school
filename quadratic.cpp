@@ -34,7 +34,7 @@ bool check_str(char *a, const char *b)
 
 double read()
 /*
- * read float number from console
+ * Read float number from console
  * if gets not number, print error and try again
  */
 {
