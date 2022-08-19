@@ -21,11 +21,12 @@ double read()
     double answer = NAN;
     printf("Enter a number: ");
     int correct = scanf("%lf", &answer);
-    while (correct!=1)
+    while (correct != 1)
     {
         printf("Incorrect number, try again!\n");
         {
-            while(getchar()!='\n') continue;
+            while (getchar() != '\n')
+                continue;
         }
         correct = scanf("%lf", &answer);
     }
@@ -42,7 +43,6 @@ void read_eq(Equation *equation)
     equation->b = read();
     equation->c = read();
 }
-
 
 void solve(double a, double b, double c, Solution *solution)
 /*
