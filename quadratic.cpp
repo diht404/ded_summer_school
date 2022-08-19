@@ -9,6 +9,7 @@ int main()
     solve(&equation, &solution);
 
     print(&solution);
+
     return 0;
 }
 
@@ -20,15 +21,18 @@ void skip_unused_symbols()
 
 double read()
 {
-    double answer = NAN;
     printf("Enter a number: ");
+
+    double answer = NAN;
     int correct = scanf("%lf", &answer);
+
     while (correct != 1)
     {
         printf("Incorrect number, try again!\n");
         skip_unused_symbols();
         correct = scanf("%lf", &answer);
     }
+
     return answer;
 }
 
@@ -66,6 +70,7 @@ void solve(Equation *equation, Solution *solution)
         }
         return;
     }
+
     // quadratic equation
     double D = b * b - 4 * a * c;
     if (abs(D) < eps)
