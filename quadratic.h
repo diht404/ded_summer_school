@@ -9,21 +9,40 @@ struct Equation
     double c = NAN;
 };
 
+enum RootCount
+{
+    noRoots      = 0,
+    oneSolution  = 1,
+    twoSolutions = 2,
+    infSolutions = 3,
+};
+
 struct Solution
 {
     double x1 = NAN;
     double x2 = NAN;
-    bool any_number = false;
-    bool not_correct = false;
-    bool no_solution = false;
+    RootCount rootCount = noRoots;;
 };
 
 const double eps = 1e-10;
 
+/*
+ * Read float number from console
+ * if gets not number, print error and try again
+ */
 double read();
 
+/*
+ * read equation coefficients to struct
+ */
 void read_eq(Equation *equation);
 
-void solve(double a, double b, double c, Solution *solution);
+/*
+ * Solves quadratic equation and print answer.
+ */
+void solve(Equation *equation, Solution *solution);
 
+/*
+ * Prints quadratic equation solutions
+ */
 void print(const Solution *solution);

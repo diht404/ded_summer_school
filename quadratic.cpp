@@ -6,17 +6,13 @@ int main()
     read_eq(&equation);
     Solution solution = {};
 
-    solve(equation.a, equation.b, equation.c, &solution);
+    solve(&equation, &solution);
 
     print(&solution);
     return 0;
 }
 
 double read()
-/*
- * Read float number from console
- * if gets not number, print error and try again
- */
 {
     double answer = NAN;
     printf("Enter a number: ");
@@ -34,9 +30,6 @@ double read()
 }
 
 void read_eq(Equation *equation)
-/*
- * read equation coefficients to struct
- */
 {
 
     equation->a = read();
@@ -44,11 +37,12 @@ void read_eq(Equation *equation)
     equation->c = read();
 }
 
-void solve(double a, double b, double c, Solution *solution)
-/*
- * Solves quadratic equation and print answer.
- */
+void solve(Equation *equation, Solution *solution)
 {
+    double a = equation->a;
+    double b = equation->b;
+    double c = equation->c;
+
     if (abs(a) < eps)
     {
         // linear equation
@@ -57,11 +51,11 @@ void solve(double a, double b, double c, Solution *solution)
             // equation like c=0
             if (abs(c) < eps)
             {
-                solution->any_number = true;
+                solution->rootCount = infSolutions;
             }
             else
             {
-                solution->not_correct = true;
+                solution->rootCount = noRoots;
             }
         }
         else
@@ -76,15 +70,16 @@ void solve(double a, double b, double c, Solution *solution)
         if (abs(D) < eps)
         {
             // only one solution
+            solution->rootCount = oneSolution;
             solution->x1 = -b / (2 * a);
         }
         else if (D < 0)
         {
-            solution->no_solution = true;
+            solution->rootCount = noRoots;
         }
         else
         {
-            // two solutions
+            solution->rootCount = twoSolutions;
             solution->x1 = (-b - sqrt(D)) / (2 * a);
             solution->x2 = (-b + sqrt(D)) / (2 * a);
         }
@@ -92,21 +87,24 @@ void solve(double a, double b, double c, Solution *solution)
 }
 
 void print(const Solution *solution)
-/*
- * Prints quadratic equation solutions
- */
 {
-    if (solution->not_correct)
-        printf("Equation isn\'t correct!\n");
-    else if (solution->no_solution)
-        printf("No real solutions!\n");
-    else if (solution->any_number)
-        printf("Any number.\n");
-    else if (isnan(solution->x2))
-        printf("x = %f\n", solution->x1);
-    else
+    switch (solution->rootCount)
     {
-        printf("x1 = %f\n", solution->x1);
-        printf("x2 = %f\n", solution->x2);
+        case noRoots:
+            printf("No real solutions!\n");
+            break;
+        case infSolutions:
+            printf("Any number.\n");
+            break;
+        case oneSolution:
+            printf("x = %lf\n", solution->x1);
+            break;
+        case twoSolutions:
+            printf("x1 = %lf\n", solution->x1);
+            printf("x2 = %lf\n", solution->x2);
+            break;
+        default:
+            fprintf(stderr,"Error");
+            break;
     }
 }
