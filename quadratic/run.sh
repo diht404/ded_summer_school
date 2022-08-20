@@ -1,7 +1,5 @@
 #! /bin/sh
-file=$@
-filename=${file%.*}
-extension=${file##*.}
+files=$@
 g++ -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ \
 -Waggressive-loop-optimizations -Wc++14-compat -Wmissing-declarations  \
 -Wcast-align -Wcast-qual -Wchar-subscripts -Wconditionally-supported \
@@ -23,6 +21,9 @@ float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,\
 leak,nonnull-attribute,null,object-size,return,\
 returns-nonnull-attribute,shift,signed-integer-overflow,\
 undefined,unreachable,vla-bound,vptr \
-"$filename.$extension" -o "$filename.out"
-./"$filename.out"
-rm ./"$filename.out"
+$files -o "main.out"
+./"main.out"
+rm ./"main.out"
+
+#./run.sh main.cpp quadraticUtils.cpp quadraticSolve.cpp
+#./run.sh tests.cpp quadraticSolve.cpp

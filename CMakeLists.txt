@@ -3,5 +3,5 @@ project(ded_summer_school C CXX)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(main quadratic/main.cpp quadratic/quadraticUtils.cpp quadratic/quadraticSolve.cpp quadratic/quadratic.h)
-add_executable(tests_quadratic quadratic/tests.cpp quadratic/quadraticSolve.cpp quadratic/quadratic.h quadratic/testUtils.h)
+add_executable(main quadratic/main.cpp quadratic/quadraticUtils.cpp quadratic/quadraticSolve.cpp)
+add_executable(tests_quadratic quadratic/tests.cpp quadratic/quadraticSolve.cpp)

@@ -47,7 +47,6 @@ void solveLinear(Equation *equation, Solution *solution)
     assert(equation != nullptr);
     assert(solution != nullptr);
 
-    double a = equation->a;
     double b = equation->b;
     double c = equation->c;
     if (abs(b) < eps)
