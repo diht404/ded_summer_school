@@ -97,7 +97,27 @@ void readEquation(Equation *equation);
  * enum data about count of roots
  * @return void
  */
-void solve(Equation *equation, Solution *solution);
+void solveQuadratic(Equation *equation, Solution *solution);
+
+/**
+ * @brief Solves quadratic equation and print answer.
+ *
+ * @param equation struct with fields a, b, c
+ * @param solution structure for storing quadratic equation solution and
+ * enum data about count of roots
+ * @return void
+ */
+void solveQuadratic(Equation *equation, Solution *solution);
+
+/**
+ * @brief Solves linear equation and print answer.
+ *
+ * @param equation struct with fields a, b, c
+ * @param solution structure for storing linear equation solution and
+ * enum data about count of roots
+ * @return void
+ */
+void solveLinear(Equation *equation, Solution *solution);
 
 /**
  * @brief Prints quadratic equation solutions

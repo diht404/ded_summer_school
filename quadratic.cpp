@@ -17,7 +17,7 @@ int main()
     readEquation(&equation);
 
     Solution solution = {};
-    solve(&equation, &solution);
+    solveQuadratic(&equation, &solution);
 
     print(&solution);
 

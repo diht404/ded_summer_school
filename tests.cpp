@@ -57,7 +57,7 @@ bool equalSolutions(const Solution *solution,
 bool testSolve(Equation *equation, Solution *correctSolution)
 {
     Solution solution = {};
-    solve(equation, &solution);
+    solveQuadratic(equation, &solution);
     return equalSolutions(&solution, correctSolution);
 }
 

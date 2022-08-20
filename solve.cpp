@@ -6,7 +6,7 @@
 
 #include "quadratic.h"
 
-void solve(Equation *equation, Solution *solution)
+void solveQuadratic(Equation *equation, Solution *solution)
 {
     double a = equation->a;
     double b = equation->b;
@@ -14,24 +14,7 @@ void solve(Equation *equation, Solution *solution)
 
     if (abs(a) < eps)
     {
-        // linear equation
-        if (abs(b) < eps)
-        {
-            // equation like c=0
-            if (abs(c) < eps)
-            {
-                solution->rootCount = infSolutions;
-            }
-            else
-            {
-                solution->rootCount = noRoots;
-            }
-        }
-        else
-        {
-            solution->x1 = -c / b;
-            solution->rootCount = oneSolution;
-        }
+        solveLinear(equation, solution);
         return;
     }
 
@@ -51,5 +34,29 @@ void solve(Equation *equation, Solution *solution)
         solution->rootCount = twoSolutions;
         solution->x1 = (-b - sqrt(D)) / (2 * a);
         solution->x2 = (-b + sqrt(D)) / (2 * a);
+    }
+}
+
+void solveLinear(Equation *equation, Solution *solution)
+{
+    double a = equation->a;
+    double b = equation->b;
+    double c = equation->c;
+    if (abs(b) < eps)
+    {
+        // equation like c=0
+        if (abs(c) < eps)
+        {
+            solution->rootCount = infSolutions;
+        }
+        else
+        {
+            solution->rootCount = noRoots;
+        }
+    }
+    else
+    {
+        solution->x1 = -c / b;
+        solution->rootCount = oneSolution;
     }
 }
