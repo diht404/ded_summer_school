@@ -4,4 +4,5 @@ Summer School Tasks
 ```shell
 doxygen Doxyfile
 ```
-
+# Open docs:
+./docs/html/annotated.html
