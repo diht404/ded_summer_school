@@ -1,5 +1,13 @@
+/**
+ * @file quadratic.cpp
+ */
+
 #include "quadratic.h"
 
+/**
+ * @brief main function for quadratic equation solution
+ * @return 0
+ */
 int main()
 {
 
