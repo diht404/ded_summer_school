@@ -16,8 +16,6 @@ bool equalNan(double data, double answer)
 {
     if (isnan(answer))
         return isnan(data);
-    if (isnan(data))
-        return false;
     return abs(data - answer) < eps;
 }
 
@@ -30,6 +28,9 @@ bool equalNan(double data, double answer)
 bool equalSolutions(const Solution *solution,
                     const Solution *correctSolution)
 {
+    assert(solution != nullptr);
+    assert(correctSolution != nullptr);
+
     bool answer = equalNan(solution->x1, correctSolution->x1) and
         equalNan(solution->x2, correctSolution->x2) and
         solution->rootCount == correctSolution->rootCount;
@@ -56,7 +57,23 @@ bool equalSolutions(const Solution *solution,
  */
 bool testSolve(Equation *equation, Solution *correctSolution)
 {
+    assert(equation != nullptr);
+    assert(correctSolution != nullptr);
+
     Solution solution = {};
+    if ((correctSolution->x1 - correctSolution->x2) < eps)
+    {
+        // if there is two equal answers in the test
+        // makes second equals NAN
+        correctSolution->x2 = NAN;
+    }
+    if (correctSolution->x1 > correctSolution->x2)
+    {
+        // x1<x2, swap them if test does not know about it
+        double tmp = correctSolution->x2;
+        correctSolution->x2 = correctSolution->x1;
+        correctSolution->x1 = tmp;
+    }
     solveQuadratic(equation, &solution);
     return equalSolutions(&solution, correctSolution);
 }
@@ -77,7 +94,7 @@ int main()
         {NAN, NAN, infSolutions},
         {-3, -2, twoSolutions},
     };
-    int failed=0;
+    int failed = 0;
     for (int i = 0; i < num_test; i++)
     {
         if (testSolve(&equation[i], &correctSolution[i]))
@@ -87,7 +104,7 @@ int main()
         else
         {
             printf("Test %d: failed\n", i);
-            failed+=1;
+            failed += 1;
         }
     }
     printf("Failed tests: %d\n", failed);

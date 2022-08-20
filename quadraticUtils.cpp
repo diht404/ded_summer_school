@@ -32,6 +32,7 @@ double read()
 void readEquation(Equation *equation)
 {
     assert(equation != nullptr);
+
     equation->a = read();
     equation->b = read();
     equation->c = read();
@@ -40,6 +41,7 @@ void readEquation(Equation *equation)
 void print(const Solution *solution)
 {
     assert(solution != nullptr);
+
     switch (solution->rootCount)
     {
         case noRoots:

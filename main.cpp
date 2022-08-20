@@ -14,7 +14,6 @@
  */
 int main()
 {
-
     Equation equation = {};
     readEquation(&equation);
 
