@@ -15,6 +15,7 @@
 
 /**
  * @brief structure for storing coefficients of a quadratic equation
+ *
  * @param a first coefficient of a quadratic equation
  * @param b second coefficient of a quadratic equation
  * @param c third coefficient of a quadratic equation
@@ -28,6 +29,7 @@ struct Equation
 
 /**
  * @brief Enumeration of the number of roots of a quadratic equation
+ *
  * @param noRoots case if equation doesn't have roots
  * @param oneSolution case if equation has only one root
  * @param twoSolutions case if equation has two roots
@@ -35,8 +37,8 @@ struct Equation
  */
 enum RootCount
 {
-    noRoots      = 0,
-    oneSolution  = 1,
+    noRoots = 0,
+    oneSolution = 1,
     twoSolutions = 2,
     infSolutions = 3,
 };
@@ -56,7 +58,8 @@ struct Solution
     RootCount rootCount = noRoots;
 };
 
-const double eps = 1e-10; ///< the constant of of the accuracy of solving the equation
+const double eps =
+    1e-10; ///< the constant of of the accuracy of solving the equation
 
 /**
  * @brief Skips symbols from print from UI
@@ -88,6 +91,7 @@ void readEquation(Equation *equation);
 
 /**
  * @brief Solves quadratic equation and print answer.
+ *
  * @param equation struct with fields a, b, c
  * @param solution structure for storing quadratic equation solution and
  * enum data about count of roots
@@ -97,6 +101,7 @@ void solve(Equation *equation, Solution *solution);
 
 /**
  * @brief Prints quadratic equation solutions
+ *
  * @param solution structure for storing quadratic equation solution and
  * enum data about count of roots
  * @return void
