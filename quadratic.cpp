@@ -58,16 +58,21 @@ void print(const Solution *solution)
 {
     switch (solution->rootCount)
     {
-        case noRoots:printf("No real solutions!\n");
+        case noRoots:
+            printf("No real solutions!\n");
             break;
-        case infSolutions:printf("Any number.\n");
+        case infSolutions:
+            printf("Any number.\n");
             break;
-        case oneSolution:printf("x = %lf\n", solution->x1);
+        case oneSolution:
+            printf("x = %lf\n", solution->x1);
             break;
-        case twoSolutions:printf("x1 = %lf\n", solution->x1);
+        case twoSolutions:
+            printf("x1 = %lf\n", solution->x1);
             printf("x2 = %lf\n", solution->x2);
             break;
-        default:fprintf(stderr, "Error");
+        default:
+            fprintf(stderr, "Error");
             break;
     }
 }
