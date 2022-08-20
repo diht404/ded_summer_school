@@ -1,28 +1,10 @@
 /**
  * @file quadratic.cpp
  *
- * Main file for quadratic equation solution
+ * Utils file for UI of quadratic equation solution
  */
 
 #include "quadratic.h"
-
-/**
- * @brief main function for quadratic equation solution
- * @return 0
- */
-int main()
-{
-
-    Equation equation = {};
-    readEquation(&equation);
-
-    Solution solution = {};
-    solveQuadratic(&equation, &solution);
-
-    print(&solution);
-
-    return 0;
-}
 
 void skipUnusedSymbols()
 {
@@ -49,6 +31,7 @@ double read()
 
 void readEquation(Equation *equation)
 {
+    assert(equation != nullptr);
     equation->a = read();
     equation->b = read();
     equation->c = read();
@@ -56,6 +39,7 @@ void readEquation(Equation *equation)
 
 void print(const Solution *solution)
 {
+    assert(solution != nullptr);
     switch (solution->rootCount)
     {
         case noRoots:

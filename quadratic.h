@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <assert.h>
 
 /**
  * @brief structure for storing coefficients of a quadratic equation
@@ -88,16 +89,6 @@ double read();
  * @return void
  */
 void readEquation(Equation *equation);
-
-/**
- * @brief Solves quadratic equation and print answer.
- *
- * @param equation struct with fields a, b, c
- * @param solution structure for storing quadratic equation solution and
- * enum data about count of roots
- * @return void
- */
-void solveQuadratic(Equation *equation, Solution *solution);
 
 /**
  * @brief Solves quadratic equation and print answer.

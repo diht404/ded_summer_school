@@ -2,20 +2,23 @@ CC = g++
 
 CFLAGS = -c
 
-quadratic: quadratic.o solve.o
-	$(CC) quadratic.o solve.o -o quadratic
+main: main.o quadraticUtils.o quadraticSolve.o
+	$(CC) main.o quadraticUtils.o quadraticSolve.o -o main
 
-debug: tests.o solve.o
-	$(CC) tests.o solve.o -o debug
+debug: tests.o quadraticSolve.o
+	$(CC) tests.o quadraticSolve.o -o debug
 
-quadratic.o: quadratic.cpp
-	$(CC) $(CFLAGS) quadratic.cpp
+main.o: main.cpp
+	$(CC) $(CFLAGS) main.cpp
 
-solve.o: solve.cpp
-	$(CC) $(CFLAGS) solve.cpp
+quadraticUtils.o: quadraticUtils.cpp
+	$(CC) $(CFLAGS) quadraticUtils.cpp
+
+quadraticSolve.o: quadraticSolve.cpp
+	$(CC) $(CFLAGS) quadraticSolve.cpp
 
 tests.o: tests.cpp
 	$(CC) $(CFLAGS) tests.cpp
 
 clean:
-	rm -rf *.o quadratic debug
+	rm -rf *.o main debug

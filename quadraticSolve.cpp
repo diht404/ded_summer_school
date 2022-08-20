@@ -1,13 +1,17 @@
 /**
  * @file solve.cpp
+ * @author diht404
+ * @date 08.20.2022
  *
- * File for quadratic equation solution functions
+ * @brief File for functions for solving a quadratic equation
  */
 
 #include "quadratic.h"
 
 void solveQuadratic(Equation *equation, Solution *solution)
 {
+    assert(equation != nullptr);
+    assert(solution != nullptr);
     double a = equation->a;
     double b = equation->b;
     double c = equation->c;
@@ -39,6 +43,8 @@ void solveQuadratic(Equation *equation, Solution *solution)
 
 void solveLinear(Equation *equation, Solution *solution)
 {
+    assert(equation != nullptr);
+    assert(solution != nullptr);
     double a = equation->a;
     double b = equation->b;
     double c = equation->c;
