@@ -1,7 +1,9 @@
 /**
  * @file quadratic.cpp
+ * @author diht404
+ * @date 08.20.2022
  *
- * Utils file for UI of quadratic equation solution
+ * @brief Utils file for UI of quadratic equation solution
  */
 
 #include "quadratic.h"

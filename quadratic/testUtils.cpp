@@ -1,7 +1,9 @@
 /**
  * @file testUtils.cpp
+ * @author diht404
+ * @date 08.20.2022
  *
- * Implementation of functions for unit tests from testUtils.h
+ * @brief Implementation of functions for unit tests from testUtils.h
  */
 
 #include "testUtils.h"

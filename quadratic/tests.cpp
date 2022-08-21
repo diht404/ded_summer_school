@@ -1,7 +1,9 @@
 /**
  * @file tests.cpp
+ * @author diht404
+ * @date 08.20.2022
  *
- * Unit tests for quadratic equation
+ * @brief Unit tests for quadratic equation
 */
 
 #include "testUtils.h"

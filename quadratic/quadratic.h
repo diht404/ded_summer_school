@@ -2,6 +2,7 @@
  * @file quadratic.h
  * @author diht404
  * @date 08.20.2022
+ *
  * @brief quadratic equation header
  *
  * This files contains all functions and structures, related to
