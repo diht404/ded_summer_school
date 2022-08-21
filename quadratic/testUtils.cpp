@@ -35,10 +35,10 @@ void printSolutionAndAnswer(const Solution *solution,
     printf("Answer: %d, Expected: %d\n",
            solution->rootCount,
            correctSolution->rootCount);
-    printf("Answer: %lf, Expected: %lf\n",
+    printf("Answer: %lg, Expected: %lg\n",
            solution->x1,
            correctSolution->x1);
-    printf("Answer: %lf, Expected: %lf\n",
+    printf("Answer: %lg, Expected: %lg\n",
            solution->x2,
            correctSolution->x2);
 }
@@ -71,23 +71,23 @@ void runTests(const Test tests[], const size_t len)
             failed++;
         }
 
-        printf("%sTest №%zu: %s. ",
-               flag ? ANSI_COLOR_GREEN : ANSI_COLOR_RED,
+        printf("Test №%zu: %s%s%s. ",
                i,
-               flag ? "passed" : "failed");
-        printf("Info about equation: %lf*x^2+%lf*x+%lf=0%s\n",
+               flag ? ANSI_COLOR_GREEN : ANSI_COLOR_RED,
+               flag ? "PASSED" : "FAILED",
+               ANSI_COLOR_RESET);
+        printf("Info about equation: %lgx^2 + %lgx + %lg = 0\n",
                tests[i].equation.a,
                tests[i].equation.b,
-               tests[i].equation.c,
-               ANSI_COLOR_RESET);
+               tests[i].equation.c);
     }
-    printf("%sPassed tests: %zu/%zu%s\n",
+    printf("Passed tests: %s%zu/%zu%s\n",
            ANSI_COLOR_GREEN,
            len - failed,
            len,
            ANSI_COLOR_RESET);
     if (failed)
-        printf("%sFailed tests: %zu/%zu%s\n",
+        printf("Failed tests: %s%zu/%zu%s\n",
                ANSI_COLOR_RED,
                failed,
                len,

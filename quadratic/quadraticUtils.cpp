@@ -8,15 +8,23 @@
 
 #include "quadratic.h"
 
-void skipUnusedSymbols()
+int skipUnusedSymbols()
 {
-    while (getchar() != '\n')
-        continue;
+    char symbol = getchar();
+
+    while (symbol != '\n')
+    {
+        if (symbol == EOF)
+            return 1;
+        symbol = getchar();
+    }
+
+    return 0;
 }
 
-double read()
+double readVariable(const char *name)
 {
-    printf("Enter a number: ");
+    printf("Enter a coefficient %s: ", name);
 
     double answer = NAN;
     int correct = scanf("%lf", &answer);
@@ -24,7 +32,8 @@ double read()
     while (correct != 1)
     {
         printf("Incorrect number, try again!\n");
-        skipUnusedSymbols();
+        if (skipUnusedSymbols())
+            fprintf(stderr,"EOF occurred.\n");
         correct = scanf("%lf", &answer);
     }
 
@@ -35,9 +44,9 @@ void readEquation(Equation *equation)
 {
     assert(equation != nullptr);
 
-    equation->a = read();
-    equation->b = read();
-    equation->c = read();
+    equation->a = readVariable("a");
+    equation->b = readVariable("b");
+    equation->c = readVariable("c");
 }
 
 void print(const Solution *solution)

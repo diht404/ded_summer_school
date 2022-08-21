@@ -39,8 +39,8 @@ struct Equation
  */
 enum RootCount
 {
-    noRoots = 0,
-    oneSolution = 1,
+    noRoots      = 0,
+    oneSolution  = 1,
     twoSolutions = 2,
     infSolutions = 3,
 };
@@ -50,7 +50,7 @@ enum RootCount
  * enum data about count of roots
  *
  * @param x1 first solution
- * @param x2 first solution
+ * @param x2 second solution
  * @param rootCount count of solutions
  */
 struct Solution
@@ -70,9 +70,9 @@ const char ANSI_COLOR_RESET[] = "\x1b[0m";  ///< colour reset for output
  * @brief Skips symbols from print from UI
  *
  * Deletes characters that were printed by the UI helper prompt
- * @return void
+ * @return 0 if success, 1 if occurred EOF
  */
-void skipUnusedSymbols();
+int skipUnusedSymbols();
 
 /**
  * @brief checks if double is near equal to zero
