@@ -110,7 +110,7 @@ void readEquation(Equation *equation);
  * enum data about count of roots
  * @return void
  */
-void solveQuadratic(Equation *equation, Solution *solution);
+void solveQuadratic(const Equation *equation, Solution *solution);
 
 /**
  * @brief Solves linear equation and print answer.
@@ -120,7 +120,7 @@ void solveQuadratic(Equation *equation, Solution *solution);
  * enum data about count of roots
  * @return void
  */
-void solveLinear(Equation *equation, Solution *solution);
+void solveLinear(const Equation *equation, Solution *solution);
 
 /**
  * @brief Prints quadratic equation solutions

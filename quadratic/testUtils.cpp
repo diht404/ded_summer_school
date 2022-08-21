@@ -8,15 +8,15 @@
 
 #include "testUtils.h"
 
-bool equalNan(double data, double answer)
+bool equalNan(const double data, const double answer)
 {
     if (isnan(answer))
         return isnan(data);
     return equalZero(data - answer);
 }
 
-bool equalSolutions(Solution *solution,
-                    Solution *correctSolution)
+bool equalSolutions(const Solution *solution,
+                    const Solution *correctSolution)
 {
     assert(solution != nullptr);
     assert(correctSolution != nullptr);
@@ -29,8 +29,8 @@ bool equalSolutions(Solution *solution,
         );
 }
 
-void printSolutionAndAnswer(Solution *solution,
-                            Solution *correctSolution)
+void printSolutionAndAnswer(const Solution *solution,
+                            const Solution *correctSolution)
 {
     printf("Answer: %d, Expected: %d\n",
            solution->rootCount,
@@ -43,19 +43,19 @@ void printSolutionAndAnswer(Solution *solution,
            correctSolution->x2);
 }
 
-bool testSolveQuadratic(Test *test, Solution *solution)
+bool testSolveQuadratic(const Test *test, Solution *solution)
 {
     assert(test != nullptr);
 
-    Equation *equation = &test->equation;
+    const Equation *equation = &test->equation;
 
     solveQuadratic(equation, solution);
-    Solution *correctSolution = &test->solution;
+    const Solution *correctSolution = &test->solution;
 
     return equalSolutions(solution, correctSolution);
 }
 
-void runTests(Test tests[], size_t len)
+void runTests(const Test tests[], const size_t len)
 {
     size_t failed = 0;
 

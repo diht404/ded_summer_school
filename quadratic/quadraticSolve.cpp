@@ -8,7 +8,7 @@
 
 #include "quadratic.h"
 
-void solveQuadratic(Equation *equation, Solution *solution)
+void solveQuadratic(const Equation *equation, Solution *solution)
 {
     assert(equation != nullptr);
     assert(solution != nullptr);
@@ -42,7 +42,7 @@ void solveQuadratic(Equation *equation, Solution *solution)
     }
 }
 
-void solveLinear(Equation *equation, Solution *solution)
+void solveLinear(const Equation *equation, Solution *solution)
 {
     assert(equation != nullptr);
     assert(solution != nullptr);

@@ -27,23 +27,23 @@ bool equalNan(double data, double answer);
  * @param correctSolution correct Solution struct
  * @return are two Solution structures equal
  */
-bool equalSolutions(Solution *solution,
-                    Solution *correctSolution);
+bool equalSolutions(const Solution *solution,
+                    const Solution *correctSolution);
 
 /**
  * @brief Test function for test function solve(Equation *equation, Solution *solution)
  * @param Test struct with fields Equation equation and Solution correctSolution
  * @return does function solve works correct
  */
-bool testSolveQuadratic(Test *test, Solution *solution);
+bool testSolveQuadratic(const Test *test, Solution *solution);
 
 /**
  * @brief prints solution and correct answer
  * @param solution checking Solution struct
  * @param correctSolution correct Solution struct
  */
-void printSolutionAndAnswer(Solution *solution,
-                              Solution *correctSolution);
+void printSolutionAndAnswer(const Solution *solution,
+                            const Solution *correctSolution);
 
 /**
  * @brief Tests program
@@ -51,4 +51,4 @@ void printSolutionAndAnswer(Solution *solution,
  * @param len number of tests
  * @return void
  */
-void runTests(Test tests[], size_t len);
+void runTests(const Test tests[], size_t len);
