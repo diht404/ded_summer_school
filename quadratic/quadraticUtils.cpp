@@ -33,7 +33,10 @@ double readVariable(const char *name)
     {
         printf("Incorrect number, try again!\n");
         if (skipUnusedSymbols())
+        {
             fprintf(stderr,"EOF occurred.\n");
+            return NAN;
+        }
         correct = scanf("%lf", &answer);
     }
 
