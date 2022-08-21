@@ -58,7 +58,9 @@ void print(const Solution *solution)
             printf("x2 = %lf\n", solution->x2);
             break;
         default:
-            fprintf(stderr, "Error, Unknown case %d:\n", solution->rootCount);
+            fprintf(stderr,
+                    "Error, Unknown root count %d:\n",
+                    solution->rootCount);
             break;
     }
 }
