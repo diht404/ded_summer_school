@@ -75,6 +75,14 @@ const double eps =
 void skipUnusedSymbols();
 
 /**
+ * @brief checks if double is equal to zero
+ *
+ * @param number checking double number
+ * @return is number is a zero
+ */
+bool equalZero(double number);
+
+/**
  * @brief reads one number
  *
  * Reads float number from console

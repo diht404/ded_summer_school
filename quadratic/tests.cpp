@@ -26,11 +26,7 @@ bool equalNan(double data, double answer)
 {
     if (isnan(answer))
         return isnan(data);
-    if (isnan(data))
-    {
-        return false;
-    }
-    return abs(data - answer) < eps;
+    return equalZero(data-answer);
 }
 
 bool equalSolutions(const Solution *solution,

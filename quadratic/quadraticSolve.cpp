@@ -17,7 +17,7 @@ void solveQuadratic(Equation *equation, Solution *solution)
     double b = equation->b;
     double c = equation->c;
 
-    if (abs(a) < eps)
+    if (equalZero(a))
     {
         solveLinear(equation, solution);
         return;
@@ -25,7 +25,7 @@ void solveQuadratic(Equation *equation, Solution *solution)
 
     // quadratic equation
     double D = b * b - 4 * a * c;
-    if (abs(D) < eps)
+    if (equalZero(D))
     {
         solution->rootCount = oneSolution;
         solution->x1 = -b / (2 * a);
@@ -49,10 +49,10 @@ void solveLinear(Equation *equation, Solution *solution)
 
     double b = equation->b;
     double c = equation->c;
-    if (abs(b) < eps)
+    if (equalZero(b))
     {
         // equation like c=0
-        if (abs(c) < eps)
+        if (equalZero(c))
         {
             solution->rootCount = infSolutions;
         }
@@ -66,4 +66,9 @@ void solveLinear(Equation *equation, Solution *solution)
         solution->x1 = -c / b;
         solution->rootCount = oneSolution;
     }
+}
+
+bool equalZero(double number)
+{
+    return abs(number)<eps;
 }
