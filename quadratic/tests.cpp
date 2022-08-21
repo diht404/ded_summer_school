@@ -65,7 +65,7 @@ int main()
                  .c=12},
              {
                  .x1=-2,
-                 .x2=-37,
+                 .x2=-3,
                  .rootCount=twoSolutions,
              }
             },
