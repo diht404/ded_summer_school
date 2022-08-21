@@ -21,7 +21,8 @@ int main()
                 {
                     .x1 = -3,
                     .x2 = NAN,
-                    .rootCount = oneSolution}
+                    .rootCount = oneSolution
+                }
             },
             {
                 {
