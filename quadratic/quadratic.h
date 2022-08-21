@@ -15,10 +15,6 @@
 #include <math.h>
 #include <assert.h>
 
-#define ANSI_COLOR_RED     "\x1b[31m"
-#define ANSI_COLOR_GREEN   "\x1b[32m"
-#define ANSI_COLOR_RESET   "\x1b[0m"
-
 /**
  * @brief structure for storing coefficients of a quadratic equation
  *
@@ -66,6 +62,9 @@ struct Solution
 
 const double eps =
     1e-10; ///< the constant of of the accuracy of solving the equation
+const char ANSI_COLOR_RED[]   = "\x1b[31m"; ///< red colour for output
+const char ANSI_COLOR_GREEN[] = "\x1b[32m"; ///< green colour for output
+const char ANSI_COLOR_RESET[] = "\x1b[0m";  ///< colour reset for output
 
 /**
  * @brief Skips symbols from print from UI
@@ -76,7 +75,7 @@ const double eps =
 void skipUnusedSymbols();
 
 /**
- * @brief checks if double is equal to zero
+ * @brief checks if double is near equal to zero
  *
  * @param number checking double number
  * @return is number is a zero

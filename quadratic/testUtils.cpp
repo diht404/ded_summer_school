@@ -15,80 +15,81 @@ bool equalNan(double data, double answer)
     return equalZero(data - answer);
 }
 
-bool equalSolutions(const Solution *solution,
-                    const Solution *correctSolution)
+bool equalSolutions(Solution *solution,
+                    Solution *correctSolution)
 {
     assert(solution != nullptr);
     assert(correctSolution != nullptr);
 
-    bool answer = solution->rootCount == correctSolution->rootCount &&
-        (equalNan(solution->x1, correctSolution->x1) &&
+    return solution->rootCount == correctSolution->rootCount &&
+        ((equalNan(solution->x1, correctSolution->x1) &&
             equalNan(solution->x2, correctSolution->x2)) ||
-        (equalNan(solution->x1, correctSolution->x2) &&
-            equalNan(solution->x2, correctSolution->x1));
-    if (not answer)
-    {
-        printf("Answer: %lf, Expected: %lf\n",
-               solution->x1,
-               correctSolution->x1);
-        printf("Answer: %lf, Expected: %lf\n",
-               solution->x2,
-               correctSolution->x2);
-        printf("Answer: %d, Expected: %d\n",
-               solution->rootCount,
-               correctSolution->rootCount);
-    }
-    return answer;
+            (equalNan(solution->x1, correctSolution->x2) &&
+                equalNan(solution->x2, correctSolution->x1))
+        );
 }
 
-bool testSolve(Test *test)
+void printSolutionAndAnswer(Solution *solution,
+                            Solution *correctSolution)
+{
+    printf("Answer: %d, Expected: %d\n",
+           solution->rootCount,
+           correctSolution->rootCount);
+    printf("Answer: %lf, Expected: %lf\n",
+           solution->x1,
+           correctSolution->x1);
+    printf("Answer: %lf, Expected: %lf\n",
+           solution->x2,
+           correctSolution->x2);
+}
+
+bool testSolveQuadratic(Test *test, Solution *solution)
 {
     assert(test != nullptr);
 
     Equation *equation = &test->equation;
-    Solution solution = {};
 
-    solveQuadratic(equation, &solution);
+    solveQuadratic(equation, solution);
     Solution *correctSolution = &test->solution;
 
-    return equalSolutions(&solution, correctSolution);
+    return equalSolutions(solution, correctSolution);
 }
 
 void runTests(Test tests[], size_t len)
 {
     size_t failed = 0;
-    size_t passed = 0;
+
     for (size_t i = 0; i < len; i++)
     {
-        if (testSolve(&tests[i]))
+        Solution solution = {};
+        bool flag = testSolveQuadratic(&tests[i], &solution);
+
+        if (!flag)
         {
-            printf("%sTest №%zu: passed.", ANSI_COLOR_GREEN, i);
-            printf("Info about equation: %lf*x^2+%lf*x+%lf=0%s\n",
-                   tests[i].equation.a,
-                   tests[i].equation.b,
-                   tests[i].equation.c, ANSI_COLOR_RESET);
-            passed += 1;
+            printSolutionAndAnswer(&solution,
+                                   &tests[i].solution);
+            failed++;
         }
-        else
-        {
-            printf("%sTest №%zu: failed.", ANSI_COLOR_RED, i);
-            printf("Info about equation: %lf*x^2+%lf*x+%lf=0%s\n",
-                   tests[i].equation.a,
-                   tests[i].equation.b,
-                   tests[i].equation.c,
-                   ANSI_COLOR_RESET);
-            failed += 1;
-        }
+
+        printf("%sTest №%zu: %s. ",
+               flag ? ANSI_COLOR_GREEN : ANSI_COLOR_RED,
+               i,
+               flag ? "passed" : "failed");
+        printf("Info about equation: %lf*x^2+%lf*x+%lf=0%s\n",
+               tests[i].equation.a,
+               tests[i].equation.b,
+               tests[i].equation.c,
+               ANSI_COLOR_RESET);
     }
     printf("%sPassed tests: %zu/%zu%s\n",
            ANSI_COLOR_GREEN,
-           passed,
-           passed + failed,
+           len - failed,
+           len,
            ANSI_COLOR_RESET);
     if (failed)
         printf("%sFailed tests: %zu/%zu%s\n",
                ANSI_COLOR_RED,
                failed,
-               passed + failed,
+               len,
                ANSI_COLOR_RESET);
 }

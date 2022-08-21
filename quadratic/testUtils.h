@@ -3,7 +3,7 @@
  * @author diht404
  * @date 08.20.2022
  *
- * Utils file for unit tests
+ * @brief Utils file for unit tests
  */
 #include "quadratic.h"
 
@@ -27,15 +27,23 @@ bool equalNan(double data, double answer);
  * @param correctSolution correct Solution struct
  * @return are two Solution structures equal
  */
-bool equalSolutions(const Solution *solution,
-                    const Solution *correctSolution);
+bool equalSolutions(Solution *solution,
+                    Solution *correctSolution);
 
 /**
  * @brief Test function for test function solve(Equation *equation, Solution *solution)
  * @param Test struct with fields Equation equation and Solution correctSolution
  * @return does function solve works correct
  */
-bool testSolve(Test *test);
+bool testSolveQuadratic(Test *test, Solution *solution);
+
+/**
+ * @brief prints solution and correct answer
+ * @param solution checking Solution struct
+ * @param correctSolution correct Solution struct
+ */
+void printSolutionAndAnswer(Solution *solution,
+                              Solution *correctSolution);
 
 /**
  * @brief Tests program

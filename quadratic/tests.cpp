@@ -12,41 +12,52 @@ int main()
 {
     Test tests[] =
         {
-            {{
-                 .a=1,
-                 .b=6,
-                 .c=9},
-             {
-                 .x1=-3,
-                 .x2=NAN,
-                 .rootCount=oneSolution}
+            {
+                {
+                    .a = 1,
+                    .b = 6,
+                    .c = 9,
+                },
+                {
+                    .x1 = -3,
+                    .x2 = NAN,
+                    .rootCount = oneSolution}
             },
-            {{
-                 .a=0,
-                 .b=5,
-                 .c=1},
-             {
-                 .x1=-0.2,
-                 .x2=NAN,
-                 .rootCount=oneSolution}
+            {
+                {
+                    .a = 0,
+                    .b = 5,
+                    .c = 1,
+                },
+                {
+                    .x1 = -0.2,
+                    .x2 = NAN,
+                    .rootCount=oneSolution,
+                }
             },
-            {{
-                 .a=0,
-                 .b=0,
-                 .c=1},
-             {.
-             x1=NAN,
-                 .x2=NAN,
-                 .rootCount=noRoots}
+            {
+                {
+                    .a = 0,
+                    .b = 0,
+                    .c = 1,
+                    },
+                {
+                    .x1 = NAN,
+                    .x2=NAN,
+                    .rootCount=noRoots,
+                }
             },
-            {{
-                 .a=0,
-                 .b=0,
-                 .c=0},
-             {
-                 .x1=NAN,
-                 .x2=NAN,
-                 .rootCount=infSolutions}
+            {
+                {
+                    .a = 0,
+                    .b = 0,
+                    .c = 0,
+                },
+                {
+                    .x1 = NAN,
+                    .x2 = NAN,
+                    .rootCount = infSolutions,
+                }
             },
             {{
                  .a=2,
@@ -55,7 +66,8 @@ int main()
              {
                  .x1=-2,
                  .x2=-3,
-                 .rootCount=twoSolutions}
+                 .rootCount=twoSolutions,
+             }
             },
         };
 
