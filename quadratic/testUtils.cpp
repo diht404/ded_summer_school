@@ -62,24 +62,24 @@ void runTests(const Test tests[], const size_t len)
     for (size_t i = 0; i < len; i++)
     {
         Solution solution = {};
-        bool flag = testSolveQuadratic(&tests[i], &solution);
+        bool passed = testSolveQuadratic(&tests[i], &solution);
 
-        if (!flag)
+        printf("Test №%zu: %s%s%s. ", i,
+               passed ? ANSI_COLOR_GREEN : ANSI_COLOR_RED,
+               passed ? "PASSED" : "FAILED",
+               ANSI_COLOR_RESET);
+
+        printf("Info about equation: %lgx^2 + %lgx + %lg = 0\n",
+               tests[i].equation.a,
+               tests[i].equation.b,
+               tests[i].equation.c);
+
+        if (!passed)
         {
             printSolutionAndAnswer(&solution,
                                    &tests[i].solution);
             failed++;
         }
-
-        printf("Test №%zu: %s%s%s. ",
-               i,
-               flag ? ANSI_COLOR_GREEN : ANSI_COLOR_RED,
-               flag ? "PASSED" : "FAILED",
-               ANSI_COLOR_RESET);
-        printf("Info about equation: %lgx^2 + %lgx + %lg = 0\n",
-               tests[i].equation.a,
-               tests[i].equation.b,
-               tests[i].equation.c);
     }
     printf("Passed tests: %s%zu/%zu%s\n",
            ANSI_COLOR_GREEN,
