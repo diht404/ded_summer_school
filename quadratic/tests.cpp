@@ -33,7 +33,7 @@ int main()
                 {
                     .x1 = -0.2,
                     .x2 = NAN,
-                    .rootCount=oneSolution,
+                    .rootCount = oneSolution,
                 }
             },
             {
@@ -44,8 +44,8 @@ int main()
                 },
                 {
                     .x1 = NAN,
-                    .x2=NAN,
-                    .rootCount=noRoots,
+                    .x2 = NAN,
+                    .rootCount = noRoots,
                 }
             },
             {
