@@ -49,13 +49,12 @@ int printSolutionAndAnswer(const Solution *solution,
 
 int testSolveQuadratic(const Test *test, Solution *solution, bool *answer)
 {
-    int errorCode = 0;
     if (test == nullptr) return 31;
     if (solution == nullptr) return 32;
 
     const Equation *equation = &test->equation;
 
-    errorCode = solveQuadratic(equation, solution);
+    int errorCode = solveQuadratic(equation, solution);
     if (errorCode != 0) return errorCode;
 
     const Solution *correctSolution = &test->solution;
