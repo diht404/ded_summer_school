@@ -23,28 +23,28 @@ void processError(int errorCode)
             fprintf(stderr, "EOF occurred.\n");
             break;
         case INF_VALUE:
-            fprintf(stderr, "Inf value occurred.\n");
+            fprintf(stderr, "Infinite value occurred.\n");
             break;
         case INF_FIRST:
-            fprintf(stderr, "Inf a coefficient.\n");
+            fprintf(stderr, "Infinite 'a' coefficient.\n");
             break;
         case INF_SECOND:
-            fprintf(stderr, "Inf b coefficient.\n");
+            fprintf(stderr, "Infinite 'b' coefficient.\n");
             break;
         case INF_THIRD:
-            fprintf(stderr, "Inf c coefficient.\n");
+            fprintf(stderr, "Infinite 'c' coefficient.\n");
             break;
         case NAN_VALUE:
             fprintf(stderr, "NAN value occurred.\n");
             break;
         case NAN_FIRST:
-            fprintf(stderr, "NAN a coefficient.\n");
+            fprintf(stderr, "NAN 'a' coefficient.\n");
             break;
         case NAN_SECOND:
-            fprintf(stderr, "NAN b coefficient.\n");
+            fprintf(stderr, "NAN 'b' coefficient.\n");
             break;
         case NAN_THIRD:
-            fprintf(stderr, "NAN c coefficient.\n");
+            fprintf(stderr, "NAN 'c' coefficient.\n");
             break;
         case NULL_FIRST:
             fprintf(stderr, "First argument is nullptr.\n");
