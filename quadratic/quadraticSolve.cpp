@@ -10,14 +10,17 @@
 
 int solveQuadratic(const Equation *equation, Solution *solution)
 {
-    if (equation == nullptr) return NULL_FIRST;
-    if (solution == nullptr) return NULL_SECOND;
+    assert(equation != nullptr);
+    assert(solution != nullptr);
 
     int error = NO_ERRORS;
 
     double a = equation->a;
     double b = equation->b;
     double c = equation->c;
+
+    if (isnan(a) || isnan(b) || isnan(c)) return NAN_VALUE;
+    if (isinf(a) || isinf(b) || isinf(c)) return INF_VALUE;
 
     if (equalZero(a))
     {
@@ -47,13 +50,16 @@ int solveQuadratic(const Equation *equation, Solution *solution)
 
 int solveLinear(const Equation *equation, Solution *solution)
 {
-    if (equation == nullptr) return NULL_FIRST;
-    if (solution == nullptr) return NULL_SECOND;
+    assert(equation != nullptr);
+    assert(solution != nullptr);
 
     int error = NO_ERRORS;
 
     double b = equation->b;
     double c = equation->c;
+
+    if (isnan(b) || isnan(c)) return NAN_VALUE;
+    if (isinf(b) || isinf(c)) return INF_VALUE;
 
     if (equalZero(b))
     {

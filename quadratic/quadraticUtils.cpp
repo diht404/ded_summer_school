@@ -23,6 +23,9 @@ int skipUnusedSymbols()
 }
 int readVariable(const char *name, double *param)
 {
+    assert(name  != nullptr);
+    assert(param != nullptr);
+
     printf("Enter a coefficient %s:\n", name);
 
     int correct = scanf("%lf", param);
@@ -48,7 +51,7 @@ int readVariable(const char *name, double *param)
 
 int readEquation(Equation *equation)
 {
-    if (equation == nullptr) return NULL_FIRST;
+    assert(equation != nullptr);
 
     int error = readVariable("a", &equation->a);
     if (error) return error;
@@ -64,8 +67,7 @@ int readEquation(Equation *equation)
 
 int print(const Solution *solution)
 {
-    int error = NO_ERRORS;
-    if (solution == nullptr) return NULL_FIRST;
+    assert(solution == nullptr);
 
     switch (solution->rootCount)
     {
@@ -86,7 +88,8 @@ int print(const Solution *solution)
             fprintf(stderr,
                     "Error, Unknown root count %d:\n",
                     solution->rootCount);
-            break;
+            return UNKNOWN_ROOT_COUNT;
     }
-    return error;
+
+    return 0;
 }

@@ -22,12 +22,12 @@ void processError(int errorCode)
         case EOF_ERROR:
             fprintf(stderr, "EOF occurred.\n");
             break;
-        case NULL_FIRST:
-            fprintf(stderr, "First argument is nullptr.\n");
-            break;
-        case NULL_SECOND:
-            fprintf(stderr, "Second argument is nullptr.\n");
-            break;
+//        case NULL_FIRST:
+//            fprintf(stderr, "First argument is nullptr.\n");
+//            break;
+//        case NULL_SECOND:
+//            fprintf(stderr, "Second argument is nullptr.\n");
+//            break;
         default:
             fprintf(stderr, "Unknown error code: %d.\n",
                     errorCode);

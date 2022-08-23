@@ -18,10 +18,9 @@ bool equalNan(const double data, const double answer)
 int equalSolutions(const Solution *solution,
                    const Solution *correctSolution, bool *answer)
 {
-    if (solution == nullptr)
-        return NULL_FIRST;
-    if (correctSolution == nullptr)
-        return NULL_SECOND;
+    assert(solution != nullptr);
+    assert(correctSolution != nullptr);
+    assert(answer != nullptr);
 
     *answer = solution->rootCount == correctSolution->rootCount &&
         ((equalNan(solution->x1, correctSolution->x1) &&
@@ -35,10 +34,9 @@ int equalSolutions(const Solution *solution,
 int printSolutionAndAnswer(const Solution *solution,
                            const Solution *correctSolution)
 {
-    if (solution == nullptr)
-        return NULL_FIRST;
-    if (correctSolution == nullptr)
-        return NULL_SECOND;
+    assert(solution != nullptr);
+    assert(correctSolution != nullptr);
+
     printf("Answer: %d, Expected: %d\n",
            solution->rootCount,
            correctSolution->rootCount);
@@ -48,6 +46,7 @@ int printSolutionAndAnswer(const Solution *solution,
     printf("Answer: %lg, Expected: %lg\n",
            solution->x2,
            correctSolution->x2);
+
     return NO_ERRORS;
 }
 
@@ -55,10 +54,9 @@ int testSolveQuadratic(const Test *test,
                        Solution *solution,
                        bool *answer)
 {
-    if (test == nullptr)
-        return NULL_FIRST;
-    if (solution == nullptr)
-        return NULL_SECOND;
+    assert(test != nullptr);
+    assert(solution != nullptr);
+    assert(answer != nullptr);
 
     const Equation *equation = &test->equation;
 
@@ -120,9 +118,9 @@ int runTests(const Test tests[], const size_t len)
         {
             error = printSolutionAndAnswer(&solution,
                                            &tests[i].solution);
+            if (error) return error;
+
             failed++;
-            if (error != NO_ERRORS)
-                return error;
         }
     }
     printf("Passed tests: %s%zu/%zu%s\n",
@@ -136,5 +134,6 @@ int runTests(const Test tests[], const size_t len)
                failed,
                len,
                ANSI_COLOR_RESET);
+
     return error;
 }
