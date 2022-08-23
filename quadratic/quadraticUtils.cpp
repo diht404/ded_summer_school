@@ -23,7 +23,7 @@ int skipUnusedSymbols()
 }
 int readVariable(const char *name, double *param)
 {
-    printf("Enter a coefficient %s: ", name);
+    printf("Enter a coefficient %s:\n", name);
 
     int correct = scanf("%lf", param);
 
