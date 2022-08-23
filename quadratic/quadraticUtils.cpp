@@ -67,7 +67,7 @@ int readEquation(Equation *equation)
 
 int print(const Solution *solution)
 {
-    assert(solution == nullptr);
+    assert(solution != nullptr);
 
     switch (solution->rootCount)
     {
