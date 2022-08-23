@@ -15,7 +15,7 @@ int skipUnusedSymbols()
     while (symbol != '\n')
     {
         if (symbol == EOF)
-            return 1;
+            return EOF_ERROR;
         symbol = getchar();
     }
 
@@ -26,24 +26,23 @@ int readVariable(const char *name, double *param)
     printf("Enter a coefficient %s:\n", name);
 
     int correct = scanf("%lf", param);
-
+    if (!isfinite(*param)) correct = 0;
     int readCount = 1;
     int error = NO_ERRORS;
 
-    while (correct != 1 and readCount<5)
+    while (correct != 1 && readCount < 5)
     {
         printf("Incorrect number, try again!\n");
-        if (skipUnusedSymbols())
-        {
-            error = EOF_ERROR;
-            return error;
-        }
-        readCount+=1;
+        error = skipUnusedSymbols();
+        if (error) return error;
+
+        readCount += 1;
         correct = scanf("%lf", param);
+        if (!isfinite(*param)) correct = 0;
     }
-    if (readCount==5) error = TOO_MANY_ATTEMPTS_TO_READ;
-    if (isnan(*param)) error = NAN_VALUE;
-    if (isinf(*param)) error = INF_VALUE;
+
+    if (readCount == 5) error = TOO_MANY_ATTEMPTS_TO_READ;
+
     return error;
 }
 
@@ -52,19 +51,13 @@ int readEquation(Equation *equation)
     if (equation == nullptr) return NULL_FIRST;
 
     int error = readVariable("a", &equation->a);
-    if (error == NAN_VALUE) return NAN_FIRST;
-    if (error == INF_VALUE) return INF_FIRST;
-    if (error != NO_ERRORS) return error;
+    if (error) return error;
 
     error = readVariable("b", &equation->b);
-    if (error == NAN_VALUE) return NAN_SECOND;
-    if (error == INF_VALUE) return INF_SECOND;
-    if (error != NO_ERRORS) return error;
+    if (error) return error;
 
     error = readVariable("c", &equation->c);
-    if (error == NAN_VALUE) return NAN_THIRD;
-    if (error == INF_VALUE) return INF_THIRD;
-    if (error != NO_ERRORS) return error;
+    if (error) return error;
 
     return error;
 }

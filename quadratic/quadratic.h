@@ -59,19 +59,8 @@ enum ErrorCodes
     NO_ERRORS = 0,
     TOO_MANY_ATTEMPTS_TO_READ = 1,
     EOF_ERROR = 2,
-
-    INF_VALUE = 10,
-    INF_FIRST = 11,
-    INF_SECOND = 12,
-    INF_THIRD = 13,
-
-    NAN_VALUE = 20,
-    NAN_FIRST = 21,
-    NAN_SECOND = 22,
-    NAN_THIRD = 23,
-
-    NULL_FIRST = 31,
-    NULL_SECOND = 32,
+    NULL_FIRST = 3,
+    NULL_SECOND = 4,
 };
 
 /**

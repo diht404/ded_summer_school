@@ -18,7 +18,7 @@ int main()
 
     Equation equation = {};
     error = readEquation(&equation);
-    if (error != NO_ERRORS)
+    if (error)
     {
         processError(error);
         return EXIT_FAILURE;
@@ -26,13 +26,13 @@ int main()
 
     Solution solution = {};
     error = solveQuadratic(&equation, &solution);
-    if (error != NO_ERRORS) {
+    if (error) {
         processError(error);
         return EXIT_FAILURE;
     }
 
     error = print(&solution);
-    if (error != NO_ERRORS) {
+    if (error) {
         processError(error);
         return EXIT_FAILURE;
     }

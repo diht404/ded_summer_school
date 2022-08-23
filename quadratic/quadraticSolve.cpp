@@ -19,14 +19,6 @@ int solveQuadratic(const Equation *equation, Solution *solution)
     double b = equation->b;
     double c = equation->c;
 
-    if (isinf(a)) return INF_FIRST;
-    if (isinf(b)) return INF_SECOND;
-    if (isinf(c)) return INF_THIRD;
-
-    if (isnan(a)) return INF_FIRST;
-    if (isnan(b)) return INF_SECOND;
-    if (isnan(c)) return INF_THIRD;
-
     if (equalZero(a))
     {
         error = solveLinear(equation, solution);
@@ -62,12 +54,6 @@ int solveLinear(const Equation *equation, Solution *solution)
 
     double b = equation->b;
     double c = equation->c;
-
-    if (isinf(b)) return INF_SECOND;
-    if (isinf(c)) return INF_THIRD;
-
-    if (isnan(b)) return NAN_SECOND;
-    if (isnan(c)) return NAN_THIRD;
 
     if (equalZero(b))
     {
