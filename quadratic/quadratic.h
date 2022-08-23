@@ -86,13 +86,6 @@ const char ANSI_COLOR_RED[]   = "\x1b[31m"; ///< red colour for output
 const char ANSI_COLOR_GREEN[] = "\x1b[32m"; ///< green colour for output
 const char ANSI_COLOR_RESET[] = "\x1b[0m";  ///< colour reset for output
 
-/**
- * @brief Skips symbols from print from UI
- *
- * Deletes characters that were printed by the UI helper prompt
- * @return 0 if success, 1 if occurred EOF
- */
-int skipUnusedSymbols();
 
 /**
  * @brief checks if double is near equal to zero
@@ -101,28 +94,6 @@ int skipUnusedSymbols();
  * @return is number is a zero
  */
 bool equalZero(double number);
-
-/**
- * @brief reads one number
- * Reads float number from console
- * if gets not number, print error and try again
- *
- * @param name name of argument
- * @param param name of argument
- * @return int error code
- */
-int readVariable(const char *name, double *param);
-
-/**
- * @brief reads quadratic equation coefficients to struct
- *
- * reads quadratic equation coefficients to struct,
- * which contain fields: a, b, c
- *
- * @param equation struct with fields a, b, c
- * @return void
- */
-int readEquation(Equation *equation);
 
 /**
  * @brief Solves quadratic equation and print answer.
@@ -145,6 +116,12 @@ int solveQuadratic(const Equation *equation, Solution *solution);
 int solveLinear(const Equation *equation, Solution *solution);
 
 /**
+ * @brief Processes error by code
+ * @param errorCode
+ */
+void processError(int errorCode);
+
+/**
  * @brief Prints quadratic equation solutions
  *
  * @param solution structure for storing quadratic equation solution and
@@ -154,7 +131,12 @@ int solveLinear(const Equation *equation, Solution *solution);
 int print(const Solution *solution);
 
 /**
- * @brief Processes error by code
- * @param errorCode
+ * @brief reads quadratic equation coefficients to struct
+ *
+ * reads quadratic equation coefficients to struct,
+ * which contain fields: a, b, c
+ *
+ * @param equation struct with fields a, b, c
+ * @return void
  */
-void processError(int errorCode);
+int readEquation(Equation *equation);

@@ -8,7 +8,26 @@
 
 #include "quadratic.h"
 
-int skipUnusedSymbols()
+/**
+ * @brief Skips symbols from print from UI
+ *
+ * Deletes characters that were printed by the UI helper prompt
+ * @return 0 if success, 1 if occurred EOF
+ */
+static int skipUnusedSymbols();
+
+/**
+ * @brief reads one number
+ * Reads float number from console
+ * if gets not number, print error and try again
+ *
+ * @param name name of argument
+ * @param param name of argument
+ * @return int error code
+ */
+static int readVariable(const char *name, double *param);
+
+static int skipUnusedSymbols()
 {
     int symbol = getchar();
 
@@ -21,6 +40,7 @@ int skipUnusedSymbols()
 
     return 0;
 }
+
 int readVariable(const char *name, double *param)
 {
     assert(name  != nullptr);
