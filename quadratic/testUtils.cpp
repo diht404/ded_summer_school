@@ -37,13 +37,13 @@ int printSolutionAndAnswer(const Solution *solution,
     assert(solution != nullptr);
     assert(correctSolution != nullptr);
 
-    printf("Answer: %d, Expected: %d\n",
+    printf("Given root count: %d, Expected: %d\n",
            solution->rootCount,
            correctSolution->rootCount);
-    printf("Answer: %lg, Expected: %lg\n",
+    printf("Given x1: %lg, Expected: %lg\n",
            solution->x1,
            correctSolution->x1);
-    printf("Answer: %lg, Expected: %lg\n",
+    printf("Given x2: %lg, Expected: %lg\n",
            solution->x2,
            correctSolution->x2);
 
@@ -88,13 +88,8 @@ void printEquation(const Equation *equation)
                equation->c);
         return;
     }
-
-    if (!equalZero(equation->c))
-    {
-        printf("Info about equation: %lg = 0\n",
-               equation->c);
-        return;
-    }
+    printf("Info about equation: %lg = 0\n",
+           equation->c);
 }
 
 int runTests(const Test tests[], const size_t len)
