@@ -47,10 +47,9 @@ int readVariable(const char *name, double *param)
 
 int readEquation(Equation *equation)
 {
-    assert(equation != nullptr);
+    if (equation == nullptr) return 31;
 
-    int errorCode = 0;
-    errorCode = readVariable("a", &equation->a);
+    int errorCode = readVariable("a", &equation->a);
     if (errorCode!=0) return errorCode;
     errorCode = readVariable("b", &equation->b);
     if (errorCode!=0) return errorCode;
