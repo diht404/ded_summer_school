@@ -14,40 +14,46 @@ void processError(int errorCode)
 {
     switch (errorCode)
     {
-        case 0:
+        case NO_ERRORS:
             break;
-        case 1:
+        case TOO_MANY_ATTEMPTS_TO_READ:
             fprintf(stderr, "Too many attempts to read equation.\n");
             break;
-        case 2:
+        case EOF_ERROR:
             fprintf(stderr, "EOF occurred.\n");
             break;
-        case 11:
-            fprintf(stderr, "Inf first coefficient\n");
+        case INF_VALUE:
+            fprintf(stderr, "Inf value occurred.\n");
             break;
-        case 12:
-            fprintf(stderr, "Inf second coefficient\n");
+        case INF_FIRST:
+            fprintf(stderr, "Inf a coefficient.\n");
             break;
-        case 13:
-            fprintf(stderr, "Inf third coefficient\n");
+        case INF_SECOND:
+            fprintf(stderr, "Inf b coefficient.\n");
             break;
-        case 21:
-            fprintf(stderr, "NAN first coefficient\n");
+        case INF_THIRD:
+            fprintf(stderr, "Inf c coefficient.\n");
             break;
-        case 22:
-            fprintf(stderr, "NAN second coefficient\n");
+        case NAN_VALUE:
+            fprintf(stderr, "NAN value occurred.\n");
             break;
-        case 23:
-            fprintf(stderr, "NAN third coefficient\n");
+        case NAN_FIRST:
+            fprintf(stderr, "NAN a coefficient.\n");
             break;
-        case 31:
-            fprintf(stderr, "First argument if nullptr\n");
+        case NAN_SECOND:
+            fprintf(stderr, "NAN b coefficient.\n");
             break;
-        case 32:
-            fprintf(stderr, "Second argument if nullptr\n");
+        case NAN_THIRD:
+            fprintf(stderr, "NAN c coefficient.\n");
+            break;
+        case NULL_FIRST:
+            fprintf(stderr, "First argument is nullptr.\n");
+            break;
+        case NULL_SECOND:
+            fprintf(stderr, "Second argument is nullptr.\n");
             break;
         default:
-            fprintf(stderr, "Unknown error code: %d\n",
+            fprintf(stderr, "Unknown error code: %d.\n",
                     errorCode);
             break;
     }

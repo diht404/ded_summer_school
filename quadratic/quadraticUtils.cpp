@@ -28,39 +28,51 @@ int readVariable(const char *name, double *param)
     int correct = scanf("%lf", param);
 
     int readCount = 1;
-    int errorCode = 0;
+    int errorCode = NO_ERRORS;
 
     while (correct != 1 and readCount<5)
     {
         printf("Incorrect number, try again!\n");
         if (skipUnusedSymbols())
         {
-            errorCode = 2;
+            errorCode = EOF_ERROR;
             return errorCode;
         }
         readCount+=1;
         correct = scanf("%lf", param);
     }
-    if (readCount==5) errorCode = 1;
+    if (readCount==5) errorCode = TOO_MANY_ATTEMPTS_TO_READ;
+    if (isnan(*param)) errorCode = NAN_VALUE;
+    if (isinf(*param)) errorCode = INF_VALUE;
     return errorCode;
 }
 
 int readEquation(Equation *equation)
 {
-    if (equation == nullptr) return 31;
+    if (equation == nullptr) return NULL_FIRST;
 
-    int errorCode = readVariable("a", &equation->a);
-    if (errorCode!=0) return errorCode;
-    errorCode = readVariable("b", &equation->b);
-    if (errorCode!=0) return errorCode;
-    errorCode = readVariable("c", &equation->c);
-    return errorCode;
+    int error = readVariable("a", &equation->a);
+    if (error == NAN_VALUE) return NAN_FIRST;
+    if (error == INF_VALUE) return INF_FIRST;
+    if (error != NO_ERRORS) return error;
+
+    error = readVariable("b", &equation->b);
+    if (error == NAN_VALUE) return NAN_SECOND;
+    if (error == INF_VALUE) return INF_SECOND;
+    if (error != NO_ERRORS) return error;
+
+    error = readVariable("c", &equation->c);
+    if (error == NAN_VALUE) return NAN_THIRD;
+    if (error == INF_VALUE) return INF_THIRD;
+    if (error != NO_ERRORS) return error;
+
+    return error;
 }
 
 int print(const Solution *solution)
 {
-    int errorCode = 0;
-    if (solution == nullptr) return 31;
+    int errorCode = NO_ERRORS;
+    if (solution == nullptr) return NULL_FIRST;
 
     switch (solution->rootCount)
     {

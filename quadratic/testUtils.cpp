@@ -18,8 +18,8 @@ bool equalNan(const double data, const double answer)
 int equalSolutions(const Solution *solution,
                     const Solution *correctSolution, bool *answer)
 {
-    if (solution == nullptr) return 31;
-    if (correctSolution == nullptr) return 32;
+    if (solution == nullptr) return NULL_FIRST;
+    if (correctSolution == nullptr) return NULL_SECOND;
 
     *answer = solution->rootCount == correctSolution->rootCount &&
         ((equalNan(solution->x1, correctSolution->x1) &&
@@ -27,14 +27,14 @@ int equalSolutions(const Solution *solution,
             (equalNan(solution->x1, correctSolution->x2) &&
                 equalNan(solution->x2, correctSolution->x1))
         );
-    return 0;
+    return NO_ERRORS;
 }
 
 int printSolutionAndAnswer(const Solution *solution,
                             const Solution *correctSolution)
 {
-    if (solution == nullptr) return 31;
-    if (correctSolution == nullptr) return 32;
+    if (solution == nullptr) return NULL_FIRST;
+    if (correctSolution == nullptr) return NULL_SECOND;
     printf("Answer: %d, Expected: %d\n",
            solution->rootCount,
            correctSolution->rootCount);
@@ -44,18 +44,18 @@ int printSolutionAndAnswer(const Solution *solution,
     printf("Answer: %lg, Expected: %lg\n",
            solution->x2,
            correctSolution->x2);
-    return 0;
+    return NO_ERRORS;
 }
 
 int testSolveQuadratic(const Test *test, Solution *solution, bool *answer)
 {
-    if (test == nullptr) return 31;
-    if (solution == nullptr) return 32;
+    if (test == nullptr) return NULL_FIRST;
+    if (solution == nullptr) return NULL_SECOND;
 
     const Equation *equation = &test->equation;
 
     int errorCode = solveQuadratic(equation, solution);
-    if (errorCode != 0) return errorCode;
+    if (errorCode != NO_ERRORS) return errorCode;
 
     const Solution *correctSolution = &test->solution;
 
@@ -66,13 +66,13 @@ int testSolveQuadratic(const Test *test, Solution *solution, bool *answer)
 int runTests(const Test tests[], const size_t len)
 {
     size_t failed = 0;
-    int errorCode = 0;
+    int error = NO_ERRORS;
     for (size_t i = 0; i < len; i++)
     {
         Solution solution = {};
         bool passed = false;
-        errorCode = testSolveQuadratic(&tests[i], &solution, &passed);
-        if (errorCode!=0) return errorCode;
+        error = testSolveQuadratic(&tests[i], &solution, &passed);
+        if (error != NO_ERRORS) return error;
         printf("Test №%zu: %s%s%s. ", i,
                passed ? ANSI_COLOR_GREEN : ANSI_COLOR_RED,
                passed ? "PASSED" : "FAILED",
@@ -85,10 +85,10 @@ int runTests(const Test tests[], const size_t len)
 
         if (!passed)
         {
-            errorCode = printSolutionAndAnswer(&solution,
+            error = printSolutionAndAnswer(&solution,
                                    &tests[i].solution);
             failed++;
-            if (errorCode!=0) return errorCode;
+            if (error != NO_ERRORS) return error;
         }
     }
     printf("Passed tests: %s%zu/%zu%s\n",
@@ -102,5 +102,5 @@ int runTests(const Test tests[], const size_t len)
                failed,
                len,
                ANSI_COLOR_RESET);
-    return errorCode;
+    return error;
 }

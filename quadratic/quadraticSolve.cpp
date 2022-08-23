@@ -10,22 +10,22 @@
 
 int solveQuadratic(const Equation *equation, Solution *solution)
 {
-    if (equation == nullptr) return 31;
-    if (solution == nullptr) return 32;
+    if (equation == nullptr) return NULL_FIRST;
+    if (solution == nullptr) return NULL_SECOND;
 
-    int errorCode = 0;
+    int errorCode = NO_ERRORS;
 
     double a = equation->a;
     double b = equation->b;
     double c = equation->c;
 
-    if (isinf(a)) return 11;
-    if (isinf(b)) return 12;
-    if (isinf(c)) return 13;
+    if (isinf(a)) return INF_FIRST;
+    if (isinf(b)) return INF_SECOND;
+    if (isinf(c)) return INF_THIRD;
 
-    if (isnan(a)) return 21;
-    if (isnan(b)) return 22;
-    if (isnan(c)) return 23;
+    if (isnan(a)) return INF_FIRST;
+    if (isnan(b)) return INF_SECOND;
+    if (isnan(c)) return INF_THIRD;
 
     if (equalZero(a))
     {
@@ -55,19 +55,19 @@ int solveQuadratic(const Equation *equation, Solution *solution)
 
 int solveLinear(const Equation *equation, Solution *solution)
 {
-    if (equation == nullptr) return 31;
-    if (solution == nullptr) return 32;
+    if (equation == nullptr) return NULL_FIRST;
+    if (solution == nullptr) return NULL_SECOND;
 
-    int errorCode = 0;
+    int errorCode = NO_ERRORS;
 
     double b = equation->b;
     double c = equation->c;
 
-    if (isinf(b)) return 12;
-    if (isinf(c)) return 13;
+    if (isinf(b)) return INF_SECOND;
+    if (isinf(c)) return INF_THIRD;
 
-    if (isnan(b)) return 22;
-    if (isnan(c)) return 23;
+    if (isnan(b)) return NAN_SECOND;
+    if (isnan(c)) return NAN_THIRD;
 
     if (equalZero(b))
     {

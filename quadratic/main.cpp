@@ -14,20 +14,28 @@
  */
 int main()
 {
-    Equation equation = {};
+    int error = NO_ERRORS;
 
-    int readErrorCode = readEquation(&equation);
-    processError(readErrorCode);
-    if (readErrorCode!=0) return readErrorCode;
+    Equation equation = {};
+    error = readEquation(&equation);
+    if (error != NO_ERRORS)
+    {
+        processError(error);
+        return EXIT_FAILURE;
+    }
 
     Solution solution = {};
+    error = solveQuadratic(&equation, &solution);
+    if (error != NO_ERRORS) {
+        processError(error);
+        return EXIT_FAILURE;
+    }
 
-    int readErrorSolve = solveQuadratic(&equation, &solution);
-    processError(readErrorSolve);
-    if (readErrorSolve!=0) return readErrorSolve;
+    error = print(&solution);
+    if (error != NO_ERRORS) {
+        processError(error);
+        return EXIT_FAILURE;
+    }
 
-    int printErrorCode = print(&solution);
-    processError(printErrorCode);
-
-    return printErrorCode;
+    return 0;
 }

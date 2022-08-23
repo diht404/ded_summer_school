@@ -74,7 +74,10 @@ int main()
             },
         };
 
-    int errorCodeRunTests = runTests(tests, sizeof(tests) / sizeof(Test));
-    processError(errorCodeRunTests);
+    int error = runTests(tests, sizeof(tests) / sizeof(Test));
+    if (error != NO_ERRORS) {
+        processError(error);
+        return EXIT_FAILURE;
+    }
     return 0;
 }
