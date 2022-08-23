@@ -1,1 +1,5 @@
 No info!
+
+// void-> int
+error code
+nan, inf

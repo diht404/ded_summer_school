@@ -15,6 +15,7 @@
 #include <math.h>
 #include <assert.h>
 
+
 /**
  * @brief structure for storing coefficients of a quadratic equation
  *
@@ -84,12 +85,14 @@ bool equalZero(double number);
 
 /**
  * @brief reads one number
- *
  * Reads float number from console
  * if gets not number, print error and try again
- * @return double number read
+ *
+ * @param name name of argument
+ * @param param name of argument
+ * @return int error code
  */
-double read();
+int readVariable(const char *name, double *param);
 
 /**
  * @brief reads quadratic equation coefficients to struct
@@ -100,7 +103,7 @@ double read();
  * @param equation struct with fields a, b, c
  * @return void
  */
-void readEquation(Equation *equation);
+int readEquation(Equation *equation);
 
 /**
  * @brief Solves quadratic equation and print answer.
@@ -108,9 +111,9 @@ void readEquation(Equation *equation);
  * @param equation struct with fields a, b, c
  * @param solution structure for storing quadratic equation solution and
  * enum data about count of roots
- * @return void
+ * @return error code
  */
-void solveQuadratic(const Equation *equation, Solution *solution);
+int solveQuadratic(const Equation *equation, Solution *solution);
 
 /**
  * @brief Solves linear equation and print answer.
@@ -118,15 +121,21 @@ void solveQuadratic(const Equation *equation, Solution *solution);
  * @param equation struct with fields a, b, c
  * @param solution structure for storing linear equation solution and
  * enum data about count of roots
- * @return void
+ * @return error code
  */
-void solveLinear(const Equation *equation, Solution *solution);
+int solveLinear(const Equation *equation, Solution *solution);
 
 /**
  * @brief Prints quadratic equation solutions
  *
  * @param solution structure for storing quadratic equation solution and
  * enum data about count of roots
- * @return void
+ * @return error code
  */
-void print(const Solution *solution);
+int print(const Solution *solution);
+
+/**
+ * @brief Processes error by code
+ * @param errorCode
+ */
+void processError(int errorCode);

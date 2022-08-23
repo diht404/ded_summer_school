@@ -21,40 +21,47 @@ int skipUnusedSymbols()
 
     return 0;
 }
-
-double readVariable(const char *name)
+int readVariable(const char *name, double *param)
 {
     printf("Enter a coefficient %s: ", name);
 
-    double answer = NAN;
-    int correct = scanf("%lf", &answer);
+    int correct = scanf("%lf", param);
 
-    while (correct != 1)
+    int readCount = 1;
+    int errorCode = 0;
+
+    while (correct != 1 and readCount<5)
     {
         printf("Incorrect number, try again!\n");
         if (skipUnusedSymbols())
         {
-            fprintf(stderr,"EOF occurred.\n");
-            return NAN;
+            errorCode = 2;
+            return errorCode;
         }
-        correct = scanf("%lf", &answer);
+        readCount+=1;
+        correct = scanf("%lf", param);
     }
-
-    return answer;
+    if (readCount==5) errorCode = 1;
+    return errorCode;
 }
 
-void readEquation(Equation *equation)
+int readEquation(Equation *equation)
 {
     assert(equation != nullptr);
 
-    equation->a = readVariable("a");
-    equation->b = readVariable("b");
-    equation->c = readVariable("c");
+    int errorCode = 0;
+    errorCode = readVariable("a", &equation->a);
+    if (errorCode!=0) return errorCode;
+    errorCode = readVariable("b", &equation->b);
+    if (errorCode!=0) return errorCode;
+    errorCode = readVariable("c", &equation->c);
+    return errorCode;
 }
 
-void print(const Solution *solution)
+int print(const Solution *solution)
 {
-    assert(solution != nullptr);
+    int errorCode = 0;
+    if (solution == nullptr) return 31;
 
     switch (solution->rootCount)
     {
@@ -77,4 +84,5 @@ void print(const Solution *solution)
                     solution->rootCount);
             break;
     }
+    return errorCode;
 }

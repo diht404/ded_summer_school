@@ -8,19 +8,29 @@
 
 #include "quadratic.h"
 
-void solveQuadratic(const Equation *equation, Solution *solution)
+int solveQuadratic(const Equation *equation, Solution *solution)
 {
-    assert(equation != nullptr);
-    assert(solution != nullptr);
+    if (equation == nullptr) return 31;
+    if (solution == nullptr) return 32;
+
+    int errorCode = 0;
 
     double a = equation->a;
     double b = equation->b;
     double c = equation->c;
 
+    if (isinf(a)) return 11;
+    if (isinf(b)) return 12;
+    if (isinf(c)) return 13;
+
+    if (isnan(a)) return 21;
+    if (isnan(b)) return 22;
+    if (isnan(c)) return 23;
+
     if (equalZero(a))
     {
-        solveLinear(equation, solution);
-        return;
+        errorCode = solveLinear(equation, solution);
+        return errorCode;
     }
 
     // quadratic equation
@@ -40,18 +50,28 @@ void solveQuadratic(const Equation *equation, Solution *solution)
         solution->x1 = (-b - sqrt(D)) / (2 * a);
         solution->x2 = (-b + sqrt(D)) / (2 * a);
     }
+    return errorCode;
 }
 
-void solveLinear(const Equation *equation, Solution *solution)
+int solveLinear(const Equation *equation, Solution *solution)
 {
-    assert(equation != nullptr);
-    assert(solution != nullptr);
+    if (equation == nullptr) return 31;
+    if (solution == nullptr) return 32;
+
+    int errorCode = 0;
 
     double b = equation->b;
     double c = equation->c;
+
+    if (isinf(b)) return 12;
+    if (isinf(c)) return 13;
+
+    if (isnan(b)) return 22;
+    if (isnan(c)) return 23;
+
     if (equalZero(b))
     {
-        // equation like c=0
+        // equation like c = 0
         if (equalZero(c))
         {
             solution->rootCount = infSolutions;
@@ -66,9 +86,10 @@ void solveLinear(const Equation *equation, Solution *solution)
         solution->x1 = -c / b;
         solution->rootCount = oneSolution;
     }
+    return errorCode;
 }
 
 bool equalZero(double number)
 {
-    return abs(number)<eps;
+    return abs(number) < eps;
 }

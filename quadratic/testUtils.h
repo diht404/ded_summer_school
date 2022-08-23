@@ -33,22 +33,24 @@ bool equalSolutions(const Solution *solution,
 /**
  * @brief Test function for test function solve(Equation *equation, Solution *solution)
  * @param Test struct with fields Equation equation and Solution correctSolution
- * @return does function solve works correct
+ * @param answer variable for passed/failed does function solve works correct
+ * @return error Code
  */
-bool testSolveQuadratic(const Test *test, Solution *solution);
+int testSolveQuadratic(const Test *test, Solution *solution, bool *answer);
 
 /**
  * @brief prints solution and correct answer
  * @param solution checking Solution struct
  * @param correctSolution correct Solution struct
+ * @return error code
  */
-void printSolutionAndAnswer(const Solution *solution,
+int printSolutionAndAnswer(const Solution *solution,
                             const Solution *correctSolution);
 
 /**
  * @brief Tests program
  * @param tests array of test data
  * @param len number of tests
- * @return void
+ * @return error code
  */
-void runTests(const Test tests[], size_t len);
+int runTests(const Test tests[], size_t len);

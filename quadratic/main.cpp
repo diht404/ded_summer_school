@@ -15,12 +15,19 @@
 int main()
 {
     Equation equation = {};
-    readEquation(&equation);
+
+    int readErrorCode = readEquation(&equation);
+    processError(readErrorCode);
+    if (readErrorCode!=0) return readErrorCode;
 
     Solution solution = {};
-    solveQuadratic(&equation, &solution);
 
-    print(&solution);
+    int readErrorSolve = solveQuadratic(&equation, &solution);
+    processError(readErrorSolve);
+    if (readErrorSolve!=0) return readErrorSolve;
 
-    return 0;
+    int printErrorCode = print(&solution);
+    processError(printErrorCode);
+
+    return printErrorCode;
 }

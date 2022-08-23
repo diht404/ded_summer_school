@@ -74,7 +74,7 @@ int main()
             },
         };
 
-    runTests(tests, sizeof(tests) / sizeof(Test));
-
+    int succesTest = runTests(tests, sizeof(tests) / sizeof(Test));
+    processError(succesTest);
     return 0;
 }
