@@ -10,7 +10,7 @@
 
 int skipUnusedSymbols()
 {
-    char symbol = getchar();
+    int symbol = getchar();
 
     while (symbol != '\n')
     {

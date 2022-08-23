@@ -92,11 +92,11 @@ void printEquation(const Equation *equation)
            equation->c);
 }
 
-int runTests(const Test tests[], const size_t len)
+int runTests(const Test tests[], const size_t length)
 {
     size_t failed = 0;
     int error = NO_ERRORS;
-    for (size_t i = 0; i < len; i++)
+    for (size_t i = 0; i < length; i++)
     {
         Solution solution = {};
         bool passed = false;
@@ -120,14 +120,14 @@ int runTests(const Test tests[], const size_t len)
     }
     printf("Passed tests: %s%zu/%zu%s\n",
            ANSI_COLOR_GREEN,
-           len - failed,
-           len,
+           length - failed,
+           length,
            ANSI_COLOR_RESET);
     if (failed)
         printf("Failed tests: %s%zu/%zu%s\n",
                ANSI_COLOR_RED,
                failed,
-               len,
+               length,
                ANSI_COLOR_RESET);
 
     return error;

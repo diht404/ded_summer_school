@@ -51,7 +51,7 @@ int printSolutionAndAnswer(const Solution *solution,
 /**
  * @brief Tests program
  * @param tests array of test data
- * @param len number of tests
+ * @param length number of tests
  * @return error code
  */
-int runTests(const Test tests[], size_t len);
+int runTests(const Test tests[], size_t length);
