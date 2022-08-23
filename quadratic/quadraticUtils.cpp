@@ -28,23 +28,23 @@ int readVariable(const char *name, double *param)
     int correct = scanf("%lf", param);
 
     int readCount = 1;
-    int errorCode = NO_ERRORS;
+    int error = NO_ERRORS;
 
     while (correct != 1 and readCount<5)
     {
         printf("Incorrect number, try again!\n");
         if (skipUnusedSymbols())
         {
-            errorCode = EOF_ERROR;
-            return errorCode;
+            error = EOF_ERROR;
+            return error;
         }
         readCount+=1;
         correct = scanf("%lf", param);
     }
-    if (readCount==5) errorCode = TOO_MANY_ATTEMPTS_TO_READ;
-    if (isnan(*param)) errorCode = NAN_VALUE;
-    if (isinf(*param)) errorCode = INF_VALUE;
-    return errorCode;
+    if (readCount==5) error = TOO_MANY_ATTEMPTS_TO_READ;
+    if (isnan(*param)) error = NAN_VALUE;
+    if (isinf(*param)) error = INF_VALUE;
+    return error;
 }
 
 int readEquation(Equation *equation)
@@ -71,7 +71,7 @@ int readEquation(Equation *equation)
 
 int print(const Solution *solution)
 {
-    int errorCode = NO_ERRORS;
+    int error = NO_ERRORS;
     if (solution == nullptr) return NULL_FIRST;
 
     switch (solution->rootCount)
@@ -95,5 +95,5 @@ int print(const Solution *solution)
                     solution->rootCount);
             break;
     }
-    return errorCode;
+    return error;
 }

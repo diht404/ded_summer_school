@@ -54,13 +54,13 @@ int testSolveQuadratic(const Test *test, Solution *solution, bool *answer)
 
     const Equation *equation = &test->equation;
 
-    int errorCode = solveQuadratic(equation, solution);
-    if (errorCode != NO_ERRORS) return errorCode;
+    int error = solveQuadratic(equation, solution);
+    if (error != NO_ERRORS) return error;
 
     const Solution *correctSolution = &test->solution;
 
-    errorCode = equalSolutions(solution, correctSolution, answer);
-    return errorCode;
+    error = equalSolutions(solution, correctSolution, answer);
+    return error;
 }
 
 int runTests(const Test tests[], const size_t len)

@@ -13,7 +13,7 @@ int solveQuadratic(const Equation *equation, Solution *solution)
     if (equation == nullptr) return NULL_FIRST;
     if (solution == nullptr) return NULL_SECOND;
 
-    int errorCode = NO_ERRORS;
+    int error = NO_ERRORS;
 
     double a = equation->a;
     double b = equation->b;
@@ -29,8 +29,8 @@ int solveQuadratic(const Equation *equation, Solution *solution)
 
     if (equalZero(a))
     {
-        errorCode = solveLinear(equation, solution);
-        return errorCode;
+        error = solveLinear(equation, solution);
+        return error;
     }
 
     // quadratic equation
@@ -50,7 +50,7 @@ int solveQuadratic(const Equation *equation, Solution *solution)
         solution->x1 = (-b - sqrt(D)) / (2 * a);
         solution->x2 = (-b + sqrt(D)) / (2 * a);
     }
-    return errorCode;
+    return error;
 }
 
 int solveLinear(const Equation *equation, Solution *solution)
@@ -58,7 +58,7 @@ int solveLinear(const Equation *equation, Solution *solution)
     if (equation == nullptr) return NULL_FIRST;
     if (solution == nullptr) return NULL_SECOND;
 
-    int errorCode = NO_ERRORS;
+    int error = NO_ERRORS;
 
     double b = equation->b;
     double c = equation->c;
@@ -86,7 +86,7 @@ int solveLinear(const Equation *equation, Solution *solution)
         solution->x1 = -c / b;
         solution->rootCount = oneSolution;
     }
-    return errorCode;
+    return error;
 }
 
 bool equalZero(double number)
