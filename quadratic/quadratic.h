@@ -62,7 +62,6 @@ enum ErrorCodes
     UNKNOWN_ROOT_COUNT = 3,
     INF_VALUE = 4,
     NAN_VALUE = 5,
-
 };
 
 /**
