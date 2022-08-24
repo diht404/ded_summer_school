@@ -15,22 +15,6 @@ bool equalNan(const double data, const double answer)
     return equalZero(data - answer);
 }
 
-//int equalSolutions(const Solution *solution,
-//                   const Solution *correctSolution, int *error /* = nullptr */)
-//{
-//    assert(solution != nullptr);
-//    assert(correctSolution != nullptr);
-//
-//    if (error) *error = NO_ERRORS;
-//
-//    return solution->rootCount == correctSolution->rootCount &&
-//        ((equalNan(solution->x1, correctSolution->x1) &&
-//            equalNan(solution->x2, correctSolution->x2)) ||
-//            (equalNan(solution->x1, correctSolution->x2) &&
-//                equalNan(solution->x2, correctSolution->x1))
-//        );
-//}
-
 int equalSolutions(const Solution *solution,
                    const Solution *correctSolution, bool *answer)
 {
