@@ -36,6 +36,14 @@ int main()
             {
                 {.a = 2, .b = -5, .c = 0,},
                 {.x1 = 0, .x2 = 2.5, .rootCount = twoSolutions},
+            },
+            {
+                {.a = 2, .b = 0, .c = 1,},
+                {.x1 = NAN, .x2 = NAN, .rootCount = noRoots},
+            },
+            {
+                {.a = 4, .b = 0, .c = -1,},
+                {.x1 = -0.5, .x2 = 0.5, .rootCount = twoSolutions},
             }
         };
 
