@@ -17,21 +17,20 @@ int main()
     int error = NO_ERRORS;
 
     Equation equation = {};
-    error = readEquation(&equation);
+    readEquation(&equation, &error);
     if (error)
     {
         processError(error);
         return EXIT_FAILURE;
     }
-
     Solution solution = {};
-    error = solveQuadratic(&equation, &solution);
+    solveQuadratic(&equation, &solution, &error);
     if (error) {
         processError(error);
         return EXIT_FAILURE;
     }
 
-    error = print(&solution);
+    print(&solution, &error);
     if (error) {
         processError(error);
         return EXIT_FAILURE;

@@ -10,11 +10,12 @@
 
 /**
  * @brief Skips symbols from print from UI
+ * @param error error code: nullptr if don't process errors or pointer if need to process errors
  *
  * Deletes characters that were printed by the UI helper prompt
- * @return 0 if success, 1 if occurred EOF
+ * @return void
  */
-static int skipUnusedSymbols();
+static void skipUnusedSymbols(int *error = nullptr);
 
 /**
  * @brief reads one number
@@ -22,72 +23,77 @@ static int skipUnusedSymbols();
  * if gets not number, print error and try again
  *
  * @param name name of argument
- * @param param name of argument
+ * @param error error code: nullptr if don't process errors or pointer if need to process errors
  * @return int error code
  */
-static int readVariable(const char *name, double *param);
+static double readVariable(const char *name, int *error = nullptr);
 
-static int skipUnusedSymbols()
+static void skipUnusedSymbols(int *error)
 {
     int symbol = getchar();
+
+    if (error) *error = NO_ERRORS;
 
     while (symbol != '\n')
     {
         if (symbol == EOF)
-            return EOF_ERROR;
+        {
+            *error = EOF_ERROR;
+            return;
+        }
         symbol = getchar();
     }
-
-    return 0;
 }
 
-int readVariable(const char *name, double *param)
+double readVariable(const char *name, int *error)
 {
-    assert(name  != nullptr);
-    assert(param != nullptr);
+    assert(name != nullptr);
+
+    double param=NAN;
+
+    if (error) *error = NO_ERRORS;
 
     printf("Enter a coefficient %s:\n", name);
 
-    int correct = scanf("%lf", param);
-    if (!isfinite(*param)) correct = 0;
+    int correct = scanf("%lf", &param);
+    if (!isfinite(param)) correct = 0;
     int readCount = 1;
-    int error = NO_ERRORS;
 
     while (correct != 1 && readCount < 5)
     {
         printf("Incorrect number, try again!\n");
-        error = skipUnusedSymbols();
-        if (error) return error;
+        skipUnusedSymbols(error);
+        if (*error) return param;
 
         readCount += 1;
-        correct = scanf("%lf", param);
-        if (!isfinite(*param)) correct = 0;
+        correct = scanf("%lf", &param);
+        if (!isfinite(param)) correct = 0;
     }
 
-    if (readCount == 5) error = TOO_MANY_ATTEMPTS_TO_READ;
-
-    return error;
+    if (readCount == 5) *error = TOO_MANY_ATTEMPTS_TO_READ;
+    return param;
 }
 
-int readEquation(Equation *equation)
+void readEquation(Equation *equation, int *error)
 {
     assert(equation != nullptr);
 
-    int error = readVariable("a", &equation->a);
-    if (error) return error;
+    if (error) *error = NO_ERRORS;
 
-    error = readVariable("b", &equation->b);
-    if (error) return error;
+    equation->a = readVariable("a", error);
+    if (*error) return;
 
-    error = readVariable("c", &equation->c);
-    if (error) return error;
+    equation->b = readVariable("b", error);
+    if (*error) return;
 
-    return error;
+    equation->c = readVariable("c", error);
 }
 
-int print(const Solution *solution)
+void print(const Solution *solution, int *error)
 {
     assert(solution != nullptr);
+
+    if (error) *error = NO_ERRORS;
 
     switch (solution->rootCount)
     {
@@ -108,8 +114,6 @@ int print(const Solution *solution)
             fprintf(stderr,
                     "Error, Unknown root count %d:\n",
                     solution->rootCount);
-            return UNKNOWN_ROOT_COUNT;
+            *error = UNKNOWN_ROOT_COUNT;
     }
-
-    return 0;
 }

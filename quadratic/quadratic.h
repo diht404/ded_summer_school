@@ -99,20 +99,24 @@ bool equalZero(double number);
  *
  * @param equation struct with fields a, b, c
  * @param solution structure for storing quadratic equation solution and
+ * @param error error code: nullptr if don't process errors or pointer if need to process errors
+ *
  * enum data about count of roots
  * @return error code
  */
-int solveQuadratic(const Equation *equation, Solution *solution);
+void solveQuadratic(const Equation *equation, Solution *solution, int *error = nullptr);
 
 /**
  * @brief Solves linear equation and print answer.
  *
  * @param equation struct with fields a, b, c
  * @param solution structure for storing linear equation solution and
+ * @param error error code: nullptr if don't process errors or pointer if need to process errors
+ *
  * enum data about count of roots
  * @return error code
  */
-int solveLinear(const Equation *equation, Solution *solution);
+void solveLinear(const Equation *equation, Solution *solution, int *error = nullptr);
 
 /**
  * @brief Processes error by code
@@ -125,9 +129,10 @@ void processError(int errorCode);
  *
  * @param solution structure for storing quadratic equation solution and
  * enum data about count of roots
- * @return error code
+ * @param error error code: nullptr if don't process errors or pointer if need to process errors
+ * @return void
  */
-int print(const Solution *solution);
+void print(const Solution *solution, int *error = nullptr);
 
 /**
  * @brief reads quadratic equation coefficients to struct
@@ -136,6 +141,7 @@ int print(const Solution *solution);
  * which contain fields: a, b, c
  *
  * @param equation struct with fields a, b, c
+ * @param error error code: nullptr if don't process errors or pointer if need to process errors
  * @return void
  */
-int readEquation(Equation *equation);
+void readEquation(Equation *equation, int *error = nullptr);

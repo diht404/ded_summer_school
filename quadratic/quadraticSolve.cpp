@@ -8,41 +8,48 @@
 
 #include "quadratic.h"
 
-int solveQuadratic(const Equation *equation, Solution *solution)
+void solveQuadratic(const Equation *equation, Solution *solution, int *error)
 {
     assert(equation != nullptr);
     assert(solution != nullptr);
 
-    int error = NO_ERRORS;
+    if (error) *error = NO_ERRORS;
 
     double a = equation->a;
     double b = equation->b;
     double c = equation->c;
 
     if (isnan(a) || isnan(b) || isnan(c))
-        return NAN_VALUE;
+    {
+        *error = NAN_VALUE;
+        return;
+    }
+
     if (isinf(a) || isinf(b) || isinf(c))
-        return INF_VALUE;
+    {
+        *error = INF_VALUE;
+        return;
+    }
 
     if (equalZero(a))
     {
-        error = solveLinear(equation, solution);
-        return error;
+        solveLinear(equation, solution, error);
+        return;
     }
 
     if (equalZero(c))
     {
         Equation new_equation = {0, equation->a, equation->b};
-        error = solveLinear(&new_equation, solution);
+        solveLinear(&new_equation, solution, error);
         solution->rootCount = twoSolutions;
         solution->x2 = 0;
-        if (solution->x1 > solution->x2){
+        if (solution->x1 > solution->x2)
+        {
             double tmp = solution->x1;
             solution->x1 = solution->x2;
             solution->x2 = tmp;
         }
-
-        return error;
+        return;
     }
 
     if (equalZero(b))
@@ -51,19 +58,18 @@ int solveQuadratic(const Equation *equation, Solution *solution)
         {
             solution->x1 = 0;
             solution->rootCount = oneSolution;
-            return error;
+            return;
         }
 
         if ((c*a)>0)
         {
             solution->rootCount = noRoots;
-
-            return error;
+            return;
         }
         solution->x1 = -sqrt(-c/a);
         solution->x2 = -solution->x1;
         solution->rootCount = twoSolutions;
-        return error;
+        return;
     }
 
     // quadratic equation
@@ -83,23 +89,28 @@ int solveQuadratic(const Equation *equation, Solution *solution)
         solution->x1 = (-b - sqrt(D)) / (2 * a);
         solution->x2 = (-b + sqrt(D)) / (2 * a);
     }
-    return error;
 }
 
-int solveLinear(const Equation *equation, Solution *solution)
+void solveLinear(const Equation *equation, Solution *solution, int *error)
 {
     assert(equation != nullptr);
     assert(solution != nullptr);
 
-    int error = NO_ERRORS;
+    if (error) *error = NO_ERRORS;
 
     double b = equation->b;
     double c = equation->c;
 
     if (isnan(b) || isnan(c))
-        return NAN_VALUE;
+    {
+        *error = NAN_VALUE;
+        return;
+    }
     if (isinf(b) || isinf(c))
-        return INF_VALUE;
+    {
+        *error = INF_VALUE;
+        return;
+    }
 
     if (equalZero(b))
     {
@@ -118,7 +129,6 @@ int solveLinear(const Equation *equation, Solution *solution)
         solution->x1 = -c / b;
         solution->rootCount = oneSolution;
     }
-    return error;
 }
 
 bool equalZero(double number)
