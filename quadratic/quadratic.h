@@ -79,7 +79,7 @@ struct Solution
     RootCount rootCount = noRoots;
 };
 
-const double eps =
+const double Eps =
     1e-10; ///< the constant of of the accuracy of solving the equation
 const char ANSI_COLOR_RED[]   = "\x1b[31m"; ///< red colour for output
 const char ANSI_COLOR_GREEN[] = "\x1b[32m"; ///< green colour for output

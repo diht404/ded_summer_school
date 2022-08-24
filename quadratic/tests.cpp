@@ -12,7 +12,7 @@ int main()
 {
     Test tests[] =
         {
-            {
+            [0] = {
                 {
                     .a = 1,
                     .b = 6,

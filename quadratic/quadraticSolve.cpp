@@ -28,6 +28,8 @@ int solveQuadratic(const Equation *equation, Solution *solution)
         return error;
     }
 
+    // c=0 -linear
+    // b=0 - +-
     // quadratic equation
     double D = b * b - 4 * a * c;
     if (equalZero(D))
@@ -83,5 +85,5 @@ int solveLinear(const Equation *equation, Solution *solution)
 
 bool equalZero(double number)
 {
-    return abs(number) < eps;
+    return abs(number) < Eps;
 }
