@@ -19,8 +19,10 @@ int solveQuadratic(const Equation *equation, Solution *solution)
     double b = equation->b;
     double c = equation->c;
 
-    if (isnan(a) || isnan(b) || isnan(c)) return NAN_VALUE;
-    if (isinf(a) || isinf(b) || isinf(c)) return INF_VALUE;
+    if (isnan(a) || isnan(b) || isnan(c))
+        return NAN_VALUE;
+    if (isinf(a) || isinf(b) || isinf(c))
+        return INF_VALUE;
 
     if (equalZero(a))
     {
@@ -28,6 +30,16 @@ int solveQuadratic(const Equation *equation, Solution *solution)
         return error;
     }
 
+    if (equalZero(c))
+    {
+        Equation new_equation = {0, equation->a, equation->b};
+        error = solveLinear(equation, solution);
+        solution->rootCount = twoSolutions;
+        if (solution->x1>0)
+        solution->x2 = solution->x1;
+        solution->x1;
+        return error;
+    }
     // c=0 -linear
     // b=0 - +-
     // quadratic equation
@@ -60,8 +72,10 @@ int solveLinear(const Equation *equation, Solution *solution)
     double b = equation->b;
     double c = equation->c;
 
-    if (isnan(b) || isnan(c)) return NAN_VALUE;
-    if (isinf(b) || isinf(c)) return INF_VALUE;
+    if (isnan(b) || isnan(c))
+        return NAN_VALUE;
+    if (isinf(b) || isinf(c))
+        return INF_VALUE;
 
     if (equalZero(b))
     {
