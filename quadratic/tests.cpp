@@ -30,9 +30,13 @@ int main()
                 {.x1 = NAN,.x2 = NAN,.rootCount = infSolutions,}
             },
             {
-                {.a = 2,.b = 10,.c = 12},
+                {.a = 2,.b = 10,.c = 12,},
                 {.x1 = -2,.x2 = -3,.rootCount = twoSolutions,}
             },
+            {
+                {.a = 2, .b = -5, .c = 0,},
+                {.x1 = 0, .x2 = 2.5, .rootCount = twoSolutions},
+            }
         };
 
     int error = runTests(tests, sizeof(tests) / sizeof(Test));

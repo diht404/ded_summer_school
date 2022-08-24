@@ -33,15 +33,35 @@ int solveQuadratic(const Equation *equation, Solution *solution)
     if (equalZero(c))
     {
         Equation new_equation = {0, equation->a, equation->b};
-        error = solveLinear(equation, solution);
+        error = solveLinear(&new_equation, solution);
         solution->rootCount = twoSolutions;
-        if (solution->x1>0)
-        solution->x2 = solution->x1;
-        solution->x1;
+        if (solution->x1 > 0)
+            solution->x2 = solution->x1;
+        solution->x1 = 0;
         return error;
     }
-    // c=0 -linear
-    // b=0 - +-
+
+    if (equalZero(b))
+    {
+        if (equalZero(c))
+        {
+            solution->x1 = 0;
+            solution->rootCount = oneSolution;
+            return error;
+        }
+
+        if ((c*a)>0)
+        {
+            solution->rootCount = noRoots;
+            return error;
+        }
+
+        solution->x1 = -sqrt(c/a);
+        solution->x2 = -solution->x1;
+        solution->rootCount = twoSolutions;
+        return error;
+    }
+
     // quadratic equation
     double D = b * b - 4 * a * c;
     if (equalZero(D))
