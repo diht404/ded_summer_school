@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include <cstdio>
 
 struct Test
 {
-    const char *s  = "0987654321";
+    char *s;
     const char *cs = "0987654321";
     const char *ct = "0987654321";
     char c = ' ';
