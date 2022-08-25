@@ -15,7 +15,6 @@
 #include <math.h>
 #include <assert.h>
 
-
 /**
  * @brief structure for storing coefficients of a quadratic equation
  *
@@ -40,8 +39,8 @@ struct Equation
  */
 enum RootCount
 {
-    noRoots      = 0,
-    oneSolution  = 1,
+    noRoots = 0,
+    oneSolution = 1,
     twoSolutions = 2,
     infSolutions = 3,
 };
@@ -81,7 +80,7 @@ struct Solution
 
 const double Eps =
     1e-10; ///< the constant of of the accuracy of solving the equation
-const char ANSI_COLOR_RED[]   = "\x1b[31m"; ///< red colour for output
+const char ANSI_COLOR_RED[] = "\x1b[31m"; ///< red colour for output
 const char ANSI_COLOR_GREEN[] = "\x1b[32m"; ///< green colour for output
 const char ANSI_COLOR_RESET[] = "\x1b[0m";  ///< colour reset for output
 

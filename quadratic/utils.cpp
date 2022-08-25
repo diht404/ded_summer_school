@@ -17,7 +17,8 @@ void processError(int errorCode)
         case NO_ERRORS:
             break;
         case TOO_MANY_ATTEMPTS_TO_READ:
-            fprintf(stderr, "Too many attempts to read equation.\n");
+            fprintf(stderr,
+                    "Too many attempts to read equation.\n");
             break;
         case EOF_ERROR:
             fprintf(stderr, "EOF occurred.\n");

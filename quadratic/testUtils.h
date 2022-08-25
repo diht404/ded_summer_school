@@ -37,7 +37,9 @@ int equalSolutions(const Solution *solution,
  * @param answer variable for passed/failed does function works correct
  * @return error code
  */
-int testSolveQuadratic(const Test *test, Solution *solution, bool *answer);
+int testSolveQuadratic(const Test *test,
+                       Solution *solution,
+                       bool *answer);
 
 /**
  * @brief prints solution and correct answer
@@ -46,7 +48,7 @@ int testSolveQuadratic(const Test *test, Solution *solution, bool *answer);
  * @return error code
  */
 int printSolutionAndAnswer(const Solution *solution,
-                            const Solution *correctSolution);
+                           const Solution *correctSolution);
 
 /**
  * @brief Tests program

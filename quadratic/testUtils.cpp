@@ -16,18 +16,18 @@ bool equalNan(const double data, const double answer)
 }
 
 int equalSolutions(const Solution *solution,
-                   const Solution *correctSolution, bool *answer)
+                   const Solution *correctSolution,
+                   bool *answer)
 {
     assert(solution != nullptr);
     assert(correctSolution != nullptr);
     assert(answer != nullptr);
 
-    *answer = solution->rootCount == correctSolution->rootCount &&
-        ((equalNan(solution->x1, correctSolution->x1) &&
-            equalNan(solution->x2, correctSolution->x2)) ||
-            (equalNan(solution->x1, correctSolution->x2) &&
-                equalNan(solution->x2, correctSolution->x1))
-        );
+    *answer = solution->rootCount == correctSolution->rootCount
+        && ((equalNan(solution->x1, correctSolution->x1)
+            && equalNan(solution->x2, correctSolution->x2))
+            || (equalNan(solution->x1, correctSolution->x2)
+                && equalNan(solution->x2, correctSolution->x1)));
     return NO_ERRORS;
 }
 
@@ -88,8 +88,7 @@ void printEquation(const Equation *equation)
                equation->c);
         return;
     }
-    printf("Info about equation: %lg = 0\n",
-           equation->c);
+    printf("Info about equation: %lg = 0\n", equation->c);
 }
 
 int runTests(const Test tests[], const size_t length)
@@ -104,15 +103,16 @@ int runTests(const Test tests[], const size_t length)
         error = testSolveQuadratic(&tests[i], &solution, &passed);
         if (error) return error;
 
-        printf("Test №%zu: %s%s%s. ", i,
+        printf("Test №%zu: %s%s%s. ",
+               i,
                passed ? ANSI_COLOR_GREEN : ANSI_COLOR_RED,
                passed ? "PASSED" : "FAILED",
                ANSI_COLOR_RESET);
         printEquation(&(tests[i].equation));
         if (!passed)
         {
-            error = printSolutionAndAnswer(&solution,
-                                           &tests[i].solution);
+            error =
+                printSolutionAndAnswer(&solution, &tests[i].solution);
             if (error) return error;
 
             failed++;

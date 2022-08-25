@@ -43,7 +43,7 @@ static int skipUnusedSymbols()
 
 int readVariable(const char *name, double *param)
 {
-    assert(name  != nullptr);
+    assert(name != nullptr);
     assert(param != nullptr);
 
     printf("Enter a coefficient %s:\n", name);

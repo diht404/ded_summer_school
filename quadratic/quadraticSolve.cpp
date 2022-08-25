@@ -36,7 +36,8 @@ int solveQuadratic(const Equation *equation, Solution *solution)
         error = solveLinear(&new_equation, solution);
         solution->rootCount = twoSolutions;
         solution->x2 = 0;
-        if (solution->x1 > solution->x2){
+        if (solution->x1 > solution->x2)
+        {
             double tmp = solution->x1;
             solution->x1 = solution->x2;
             solution->x2 = tmp;
@@ -54,13 +55,13 @@ int solveQuadratic(const Equation *equation, Solution *solution)
             return error;
         }
 
-        if ((c*a)>0)
+        if ((c * a) > 0)
         {
             solution->rootCount = noRoots;
 
             return error;
         }
-        solution->x1 = -sqrt(-c/a);
+        solution->x1 = -sqrt(-c / a);
         solution->x2 = -solution->x1;
         solution->rootCount = twoSolutions;
         return error;

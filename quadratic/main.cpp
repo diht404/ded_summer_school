@@ -26,13 +26,15 @@ int main()
 
     Solution solution = {};
     error = solveQuadratic(&equation, &solution);
-    if (error) {
+    if (error)
+    {
         processError(error);
         return EXIT_FAILURE;
     }
 
     error = print(&solution);
-    if (error) {
+    if (error)
+    {
         processError(error);
         return EXIT_FAILURE;
     }
