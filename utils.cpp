@@ -129,7 +129,7 @@ bool test_strcpy(Test tests[], int length)
         char *answer = my_strcpy(s, ct);
         char *correct = strcpy(s, ct);
 
-        bool success = answer == correct;
+        bool success = !strcmp(answer, correct);
         all_success *= success;
         if (!success)
         {
@@ -170,7 +170,7 @@ bool test_strncpy(Test tests[], int length)
         char *answer = my_strncpy(s, ct, n);
         char *correct = strncpy(s, ct, n);
 
-        bool success = answer == correct;
+        bool success = !strcmp(answer, correct);
         all_success *= success;
 
         if (!success)
@@ -315,7 +315,7 @@ char *my_fgets(char *s, int size, FILE *stream)
 {
     assert(s != nullptr);
     assert(stream != nullptr);
-    char c = ' ';
+    char c = 0;
 
     size_t i = 0;
     for (; i < size - 1; i++)
@@ -373,7 +373,7 @@ char *my_strdup(const char *s)
 {
     assert(s != nullptr);
 
-    char *str = (char *) malloc(my_strlen(s) + 1);
+    char *str = (char *) calloc(my_strlen(s) + 1, sizeof(char));
     my_strcpy(str, s);
     my_strcat(str, "\0");
     return str;
@@ -385,17 +385,17 @@ char *my_getline(char *s, FILE *stream, char delim)
     assert(s != nullptr);
     assert(stream != nullptr);
 
-    char c = ' ';
+    char c = 0;
     while (true)
     {
         c = fgetc(stream);
-        if (c == EOF or c == '\n' or c == delim) break;
-        *
-            s = c;
-        s++;
+        if (c == EOF or c == '\n' or c == delim)
+            break;
+
+        *s++ = c;
     }
-    *
-        s = '\0';
+
+    *s = '\0';
     return
         s;
 }
