@@ -8,4 +8,4 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -W
 #add_executable(main_quadratic quadratic/main.cpp quadratic/quadraticUtils.cpp quadratic/quadraticSolve.cpp quadratic/utils.cpp)
 #add_executable(tests_quadratic quadratic/tests.cpp quadratic/quadraticSolve.cpp quadratic/testUtils.cpp quadratic/utils.cpp)
 #add_executable(string_functions string_functions/main.cpp string_functions/utils.cpp)
-add_executable(onegin string_functions/main.cpp string_functions/utils.cpp)
+add_executable(onegin onegin.cpp utils.cpp)
