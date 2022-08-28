@@ -5,15 +5,19 @@
 #include <cstdio>
 #include <unistd.h>
 
-struct Text {
-    char **txt = nullptr;
-    size_t length = 0;  // nOfLines
-    // Line* lines;
-    //
+struct Line {
+    char *str = nullptr;
+    long length = 0;
 };
 
+struct Text {
+    Line *lines = nullptr;
+    long length = 0;  // nOfLines
+};
 
-Text readFile(FILE *fp);
+Text readFile2(FILE *fp);
+//
+//Text readFile(FILE *fp);
 
 char *revStr(char *revstr, char *str);
 

@@ -12,22 +12,22 @@ int main() {
         exit(1);
     }
 
-    Text text = readFile(fp);
+    Text text = readFile2(fp);
 
     fclose(fp);
-
+    printf("%d\n", text.length);
     printf("NOT SORTED\n");
     print(&text);                /// -> file
-
-    printf("\n\nSORTED\n");
-    bubbleSort(&text, compareStr);
-    print(&text);
-
-    printf("\n\nSORTED BACK\n");
-    bubbleSort(&text, compareStrBack);
-    print(&text);
-
-    printf("\n");
+//
+//    printf("\n\nSORTED\n");
+//    bubbleSort(&text, compareStr);
+//    print(&text);
+//
+//    printf("\n\nSORTED BACK\n");
+//    bubbleSort(&text, compareStrBack);
+//    print(&text);
+//
+//    printf("\n");
 
     return 0;
 }
