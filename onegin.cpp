@@ -8,16 +8,18 @@ int main() {
         exit(1);
     }
     // all file in one block
-    size_t length = countLines(fp);
-    Text text = {readFile(fp, length), length};
+    //size_t length = countLines(fp);
+    //Text text = {readFile(fp, length), length};
+
+    Text text = readFile2(fp);
 
     fclose(fp);
 
-    printf("NOT VERY SORTED\n");
+    printf("NOT SORTED\n");
     print(&text);
 
     printf("\n\nSORTED\n");
-    bubbleSort(&text, compareStr);
+    bubbleSort(&text, compareStr2);
     print(&text);
 
     printf("\n\nSORTED BACK\n");
@@ -26,6 +28,6 @@ int main() {
 
     printf("\n");
 
-    textFree(&text);
+//    textFree(text);
     return 0;
 }
