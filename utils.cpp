@@ -1,12 +1,10 @@
 #include "onegin.h"
 
-    char **readFile(FILE *fp, size_t length) {
+char **readFile(FILE *fp, size_t length) {
     rewind(fp);
     char **txt = (char **) calloc(length, sizeof(char *));
-    // cal
     for (size_t i = 0; i < length; i++) {
         txt[i] = (char *) calloc(1, 128);
-        // cal
         char *result = fgets(txt[i], 128, fp);
         if (result == NULL) {
             assert(0);
@@ -42,6 +40,14 @@ char *revStr(char *revstr, char *str) {
     return revstr;
 }
 
+//bool compareStrBack2(char *lhs, char *rhs){
+//    size_t len_lhs = strlen(lhs);
+//    size_t len_rhs = strlen(rhs);
+//
+//
+//    while;
+//}
+
 bool compareStrBack(char *lhs, char *rhs) {
     char *revLhs = (char *) calloc(1, 128);
     revStr(revLhs, lhs);
@@ -50,10 +56,10 @@ bool compareStrBack(char *lhs, char *rhs) {
     return strcmp(revLhs, revRhs) > 0;
 }
 
-void bubbleSort(Text *text) {
+void bubbleSort(Text *text, bool (*comparator)(char *lhs, char *rhs)) {
     for (int i = 0; i < text->length - 1; i++) {
         for (int j = 0; j < text->length - i - 1; j++) {
-            if (compareStr(text->txt[j], text->txt[j + 1])) {
+            if (comparator(text->txt[j], text->txt[j + 1])) {
                 auto tmp = text->txt[j];
                 text->txt[j] = text->txt[j + 1];
                 text->txt[j + 1] = tmp;
@@ -62,21 +68,15 @@ void bubbleSort(Text *text) {
     }
 }
 
-void bubbleSortBack(Text *text) {
-    for (int i = 0; i < text->length - 1; i++) {
-        for (int j = 0; j < text->length - i - 1; j++) {
-            if (compareStrBack(text->txt[j], text->txt[j + 1])) {
-                auto tmp = text->txt[j];
-                text->txt[j] = text->txt[j + 1];
-                text->txt[j + 1] = tmp;
-            }
-        }
-    }
-}
-
-void print(Text *text)
-{
+void print(Text *text) {
     for (size_t i = 0; i < text->length; i++) {
         printf("%s", text->txt[i]);
     }
+}
+
+void textFree(Text *text) {
+    for (size_t i = 0; i < text->length; i++) {
+        free(text->txt[i]);
+    }
+    free(text->txt);
 }

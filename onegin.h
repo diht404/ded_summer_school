@@ -19,8 +19,8 @@ bool compareStr(char *lhs, char *rhs);
 
 bool compareStrBack(char *lhs, char *rhs);
 
-void bubbleSort(Text *text);
-
-void bubbleSortBack(Text *text);
+void bubbleSort(Text *text, bool (*comparator)(char *lhs, char *rhs) = compareStr);
 
 void print(Text *text);
+
+void textFree(Text *text);

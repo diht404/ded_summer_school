@@ -17,13 +17,15 @@ int main() {
     print(&text);
 
     printf("\n\nSORTED\n");
-    bubbleSort(&text);
+    bubbleSort(&text, compareStr);
     print(&text);
 
     printf("\n\nSORTED BACK\n");
-    bubbleSortBack(&text);
+    bubbleSort(&text, compareStrBack);
     print(&text);
 
     printf("\n");
+
+    textFree(&text);
     return 0;
 }
