@@ -4,6 +4,10 @@
 #include <string.h>
 #include <cstdio>
 
+struct Text {
+    char **txt = nullptr;
+    size_t length = 0;
+};
 
 char **readFile(FILE *fp, size_t length);
 
@@ -15,8 +19,8 @@ bool compareStr(char *lhs, char *rhs);
 
 bool compareStrBack(char *lhs, char *rhs);
 
-void bubbleSort(char **txt, size_t length);
+void bubbleSort(Text *text);
 
-void bubbleSortBack(char **txt, size_t length);
+void bubbleSortBack(Text *text);
 
-void print(char **txt, size_t length);
+void print(Text *text);

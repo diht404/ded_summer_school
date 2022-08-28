@@ -50,33 +50,33 @@ bool compareStrBack(char *lhs, char *rhs) {
     return strcmp(revLhs, revRhs) > 0;
 }
 
-void bubbleSort(char **txt, size_t length) {
-    for (int i = 0; i < length - 1; i++) {
-        for (int j = 0; j < length - i - 1; j++) {
-            if (compareStr(txt[j], txt[j + 1])) {
-                auto tmp = txt[j];
-                txt[j] = txt[j + 1];
-                txt[j + 1] = tmp;
+void bubbleSort(Text *text) {
+    for (int i = 0; i < text->length - 1; i++) {
+        for (int j = 0; j < text->length - i - 1; j++) {
+            if (compareStr(text->txt[j], text->txt[j + 1])) {
+                auto tmp = text->txt[j];
+                text->txt[j] = text->txt[j + 1];
+                text->txt[j + 1] = tmp;
             }
         }
     }
 }
 
-void bubbleSortBack(char **txt, size_t length) {
-    for (int i = 0; i < length - 1; i++) {
-        for (int j = 0; j < length - i - 1; j++) {
-            if (compareStrBack(txt[j], txt[j + 1])) {
-                auto tmp = txt[j];
-                txt[j] = txt[j + 1];
-                txt[j + 1] = tmp;
+void bubbleSortBack(Text *text) {
+    for (int i = 0; i < text->length - 1; i++) {
+        for (int j = 0; j < text->length - i - 1; j++) {
+            if (compareStrBack(text->txt[j], text->txt[j + 1])) {
+                auto tmp = text->txt[j];
+                text->txt[j] = text->txt[j + 1];
+                text->txt[j + 1] = tmp;
             }
         }
     }
 }
 
-void print(char **txt, size_t length)
+void print(Text *text)
 {
-    for (size_t i = 0; i < length; i++) {
-        printf("%s", txt[i]);
+    for (size_t i = 0; i < text->length; i++) {
+        printf("%s", text->txt[i]);
     }
 }

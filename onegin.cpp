@@ -8,22 +8,21 @@ int main() {
         exit(1);
     }
     // all file in one block
-    // struct<txt, length>
     size_t length = countLines(fp);
+    Text text = {readFile(fp, length), length};
 
-    char **txt = readFile(fp, length);
     fclose(fp);
 
     printf("NOT VERY SORTED\n");
-    print(txt, length);
+    print(&text);
 
     printf("\n\nSORTED\n");
-    bubbleSort(txt, length);
-    print(txt, length);
+    bubbleSort(&text);
+    print(&text);
 
     printf("\n\nSORTED BACK\n");
-    bubbleSortBack(txt, length);
-    print(txt, length);
+    bubbleSortBack(&text);
+    print(&text);
 
     printf("\n");
     return 0;
