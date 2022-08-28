@@ -1,6 +1,7 @@
 #include "onegin.h"
 
 int main() {
+//    printf("%d", compareStr2("aa", "aa"));
     const char *filename = "onegin.txt";
     FILE *fp = fopen(filename, "r");
     if (fp == nullptr) {
@@ -19,7 +20,7 @@ int main() {
     print(&text);
 
     printf("\n\nSORTED\n");
-    bubbleSort(&text, compareStr2);
+    bubbleSort(&text, compareStr);
     print(&text);
 
     printf("\n\nSORTED BACK\n");
@@ -28,6 +29,5 @@ int main() {
 
     printf("\n");
 
-//    textFree(text);
     return 0;
 }

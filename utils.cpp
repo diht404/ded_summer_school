@@ -67,10 +67,6 @@ size_t countLines(FILE *fp) {
     return i;
 }
 
-bool compareStr(char *lhs, char *rhs) {
-    return strcmp(lhs, rhs) > 0;
-}
-
 char *revStr(char *revstr, char *str) {
     size_t left = 0;
     size_t right = strlen(str) - 1;
@@ -84,19 +80,7 @@ char *revStr(char *revstr, char *str) {
     return revstr;
 }
 
-//bool compareStrBack2(char *lhs, char *rhs){
-//    size_t len_lhs = strlen(lhs);
-//    size_t len_rhs = strlen(rhs);
-//
-//
-//    while;
-//}
-
-
-//bab
-//aabg
-// operator <
-bool compareStr2(char *lhs, char *rhs) {
+bool compareStr(char *lhs, char *rhs) {
     size_t i = 0;
     size_t j = 0;
     while (lhs[i] != '\0' or rhs[j] != '\0') {
@@ -119,6 +103,8 @@ bool compareStr2(char *lhs, char *rhs) {
 
         if (lhs[i] < rhs[j])
             return false;
+        i++;
+        j++;
     }
     return false;
 }

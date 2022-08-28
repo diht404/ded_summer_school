@@ -21,8 +21,6 @@ char *revStr(char *revstr, char *str);
 
 bool compareStr(char *lhs, char *rhs);
 
-bool compareStr2(char *lhs, char *rhs);
-
 bool compareStrBack(char *lhs, char *rhs);
 
 void bubbleSort(Text *text, bool (*comparator)(char *lhs, char *rhs) = compareStr);
