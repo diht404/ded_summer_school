@@ -1,23 +1,23 @@
 #include "onegin.h"
 
+// 1) fseek + ftell + rewind
+// 2) calloc + fread
+// 3) 1st -> count lines + calloc
+// 4) 2st ->
 int main() {
-//    printf("%d", compareStr2("aa", "aa"));
     const char *filename = "onegin.txt";
     FILE *fp = fopen(filename, "r");
     if (fp == nullptr) {
         perror("Unable to open file!");
         exit(1);
     }
-    // all file in one block
-    //size_t length = countLines(fp);
-    //Text text = {readFile(fp, length), length};
 
-    Text text = readFile2(fp);
+    Text text = readFile(fp);
 
     fclose(fp);
 
     printf("NOT SORTED\n");
-    print(&text);
+    print(&text);                /// -> file
 
     printf("\n\nSORTED\n");
     bubbleSort(&text, compareStr);

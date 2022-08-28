@@ -1,70 +1,38 @@
 #include "onegin.h"
 
-Text readFile2(FILE *fp) {
-    size_t arr_size = 0;
+Text readFile(FILE *fp) {
+    size_t txt_size = 0;
     size_t buffer_size = 0;
     char c = EOF;
-    size_t arr_capacity = 1;
-    char **txt = (char **) calloc(arr_capacity, sizeof(char *));
-    char *buffer = (char *) calloc(1, 128);
+    size_t txt_capacity = 1;
+    char **txt = (char **) calloc(txt_capacity, sizeof(char *));
+    assert(txt != nullptr);
+    char *buffer = (char *) calloc(128, sizeof(char));  ///
+    assert(buffer != nullptr);
     while ((c = fgetc(fp)) != EOF) {
         if (c == '\n') {
             buffer[buffer_size] = '\0';
-            txt[arr_size] = (char *) calloc(buffer_size, sizeof(char));
-            strcpy(txt[arr_size], buffer);
-            if (arr_size >= arr_capacity) {
-                txt = (char **) realloc(txt, arr_capacity * 2 * sizeof(char *));
-                arr_capacity *= 2;
+            txt[txt_size] = (char *) calloc(buffer_size, sizeof(char));
+            assert(txt[txt_size] != nullptr);
+            strcpy(txt[txt_size], buffer);
+            if (txt_size >= txt_capacity) {
+                txt = (char **) realloc(txt, txt_capacity * 2 * sizeof(char *));
+                txt_capacity *= 2;
             }
-            buffer[0] = '\0';
+            //buffer[0] = '\0';
             buffer_size = 0;
-            arr_size++;
+            txt_size++;
         } else {
             buffer[buffer_size] = c;
             buffer_size++;
         }
     }
-    free(buffer);
-    return {txt, arr_size};
-//    }
-//    text->txt = txt;
-//    text->length = arr_capacity;
-//    c = fgetc(fp);
-//    char **txt = (char **) calloc(buffer_size, sizeof(char *));
-//    for (size_t arr_size = 0; arr_size < buffer_size; arr_size++) {
-//        if (arr_size >= buffer_size)
-//            txt = (char **) realloc(txt, 2 * buffer_size * sizeof(char *));
-//        txt[arr_size] = (char *) calloc(1, 128);
-//        char *result = fgets(txt[arr_size], 128, fp);
-//        if (result == NULL) {
-//            assert(0);
-//        }
-//    }
-//    text->txt = txt;
-//    text->buffer_size = arr_size;
-}
-
-char **readFile(FILE *fp, size_t length) {
-    rewind(fp);
-    char **txt = (char **) calloc(length, sizeof(char *));
-    for (size_t i = 0; i < length; i++) {
-        txt[i] = (char *) calloc(1, 128);
-        char *result = fgets(txt[i], 128, fp);
-        if (result == NULL) {
-            assert(0);
-        }
-    }
-    return txt;
-}
-
-size_t countLines(FILE *fp) {
-    rewind(fp);
-    char str[128];
-    size_t i = 0;
-    while (fgets(str, sizeof(str), fp) != NULL) {
-        i++;
-    }
-    return i;
+    //buffer[buffer_size] = '\0';
+    txt[txt_size] = (char *) calloc(buffer_size, sizeof(char));
+    assert(txt[txt_size] != nullptr);
+    strcpy(txt[txt_size], buffer);
+    txt_size++;
+    return {txt, txt_size};
 }
 
 char *revStr(char *revstr, char *str) {
@@ -133,11 +101,4 @@ void print(Text *text) {
     for (size_t i = 0; i < text->length; i++) {
         printf("%s\n", text->txt[i]);
     }
-}
-
-void textFree(Text *text) {
-    for (size_t i = 0; i < text->length; i++) {
-        free(text->txt[i]);
-    }
-    free(text->txt);
 }

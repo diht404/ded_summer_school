@@ -7,15 +7,13 @@
 
 struct Text {
     char **txt = nullptr;
-    size_t length = 0;
+    size_t length = 0;  // nOfLines
+    // Line* lines;
+    //
 };
 
 
-Text readFile2(FILE *fp);
-
-char **readFile(FILE *fp, size_t length);
-
-size_t countLines(FILE *fp);
+Text readFile(FILE *fp);
 
 char *revStr(char *revstr, char *str);
 
@@ -26,5 +24,3 @@ bool compareStrBack(char *lhs, char *rhs);
 void bubbleSort(Text *text, bool (*comparator)(char *lhs, char *rhs) = compareStr);
 
 void print(Text *text);
-
-void textFree(Text *text);
