@@ -1,6 +1,6 @@
 #include "onegin.h"
 // ctype.h isalnum
-Text readFile2(FILE *fp)
+Text readFile(FILE *fp)
 {
     fseek(fp, 0, SEEK_END);
     long lenOfFile = ftell(fp);
@@ -9,7 +9,7 @@ Text readFile2(FILE *fp)
     char *txt = (char *) calloc(lenOfFile, sizeof(char));
     fread(txt, sizeof(char), lenOfFile, fp);
 
-    size_t countLines = 0;
+    size_t countLines = 1;
     for (long i = 0; i < lenOfFile; i++)
     {
         if (txt[i] == '\n')
@@ -35,44 +35,8 @@ Text readFile2(FILE *fp)
             line_id++;
         }
     }
-
-    return {lines, lenOfFile};
+    return {lines, countLines};
 }
-//
-//Text readFile(FILE *fp) {
-//    size_t txt_size = 0;
-//    size_t buffer_size = 0;
-//    char c = EOF;
-//    size_t txt_capacity = 1;
-//    char **txt = (char **) calloc(txt_capacity, sizeof(char *));
-//    assert(txt != nullptr);
-//    char *buffer = (char *) calloc(128, sizeof(char));
-//    assert(buffer != nullptr);
-//    while ((c = fgetc(fp)) != EOF) {
-//        if (c == '\n') {
-//            buffer[buffer_size] = '\0';
-//            txt[txt_size] = (char *) calloc(buffer_size, sizeof(char));
-//            assert(txt[txt_size] != nullptr);
-//            strcpy(txt[txt_size], buffer);
-//            if (txt_size >= txt_capacity) {
-//                txt = (char **) realloc(txt, txt_capacity * 2 * sizeof(char *));
-//                txt_capacity *= 2;
-//            }
-//            //buffer[0] = '\0';
-//            buffer_size = 0;
-//            txt_size++;
-//        } else {
-//            buffer[buffer_size] = c;
-//            buffer_size++;
-//        }
-//    }
-//    //buffer[buffer_size] = '\0';
-//    txt[txt_size] = (char *) calloc(buffer_size, sizeof(char));
-//    assert(txt[txt_size] != nullptr);
-//    strcpy(txt[txt_size], buffer);
-//    txt_size++;
-//    return {txt, txt_size};
-//}
 
 char *revStr(char *revstr, char *str) {///
     size_t left = 0;

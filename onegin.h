@@ -12,12 +12,10 @@ struct Line {
 
 struct Text {
     Line *lines = nullptr;
-    long length = 0;  // nOfLines
+    size_t length = 0;
 };
 
-Text readFile2(FILE *fp);
-//
-//Text readFile(FILE *fp);
+Text readFile(FILE *fp);
 
 char *revStr(char *revstr, char *str);
 
