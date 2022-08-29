@@ -24,4 +24,4 @@ int compareStrQ(const void *lhsVoid, const void *rhsVoid);
 
 int compareStrBackQ(const void *lhsVoid, const void *rhsVoid);
 
-void printFile(Text *text, const char *filename);
+void printFile(Text *text, const char *filename, bool sorted=true);

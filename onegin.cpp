@@ -9,9 +9,9 @@ int main()
         perror("Unable to open file!");
         exit(1);
     }
-
     Text text = readFile(fp);
     fclose(fp);
+
     printFile(&text, "not_sorted.txt");
 
     qsort(text.lines, text.length, sizeof(Line), compareStrQ);
@@ -19,5 +19,7 @@ int main()
 
     qsort(text.lines, text.length, sizeof(Line), compareStrBackQ);
     printFile(&text, "sorted_back.txt");
+
+//    printFile(&text, "not_sorted.txt");
     return 0;
 }

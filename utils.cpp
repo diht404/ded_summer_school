@@ -116,17 +116,17 @@ int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
     const Line *lhs = (const Line *) lhsVoid;
     const Line *rhs = (const Line *) rhsVoid;
 
-    long i = lhs->length-1;
-    long j = rhs->length-1;
+    long i = lhs->length - 1;
+    long j = rhs->length - 1;
 
     while (i >= 0 and j >= 0)
     {
-        if (lhs->str[i] == '.' or lhs->str[i]=='\0')
+        if (lhs->str[i] == '.' or lhs->str[i] == '\0')
         {
             i--;
             continue;
         }
-        if (rhs->str[j] == '.' or rhs->str[j]=='\0')
+        if (rhs->str[j] == '.' or rhs->str[j] == '\0')
         {
             j--;
             continue;
@@ -165,7 +165,7 @@ int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
     return 1;
 }
 
-void printFile(Text *text, const char *filename)
+void printFile(Text *text, const char *filename, bool sorted)
 {
     assert(text != nullptr);
     assert(filename != nullptr);
@@ -173,7 +173,12 @@ void printFile(Text *text, const char *filename)
     FILE *fp = fopen(filename, "w");
     for (int i = 0; i < text->length; i++)
     {
-        fprintf(fp, "%s\n", text->lines[i].str);
+        if (sorted)
+            fprintf(fp, "%s\n", text->lines[i].str);
+        else
+        {
+            fprintf(fp, "%s\n", text->lines[i].str);
+        }
     }
     fclose(fp);
 }
