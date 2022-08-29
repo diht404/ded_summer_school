@@ -108,46 +108,6 @@ int compareStrQ(const void *lhsVoid, const void *rhsVoid)
     return 1;
 }
 
-//bool compareStr(const Line *lhs, const Line *rhs)
-//{
-//    assert(lhs != nullptr);
-//    assert(rhs != nullptr);
-//
-//    size_t i = 0;
-//    size_t j = 0;
-//
-//    while (lhs->str[i] != '\0' and rhs->str[j] != '\0')
-//    {
-//        if (lhs->str[i] == '.')
-//        {
-//            i++;
-//            continue;
-//        }
-//        if (rhs->str[j] == '.')
-//        {
-//            j++;
-//            continue;
-//        }
-//
-//        if (lhs->str[i] < rhs->str[j])
-//            return true;
-//
-//        if (lhs->str[i] > rhs->str[j])
-//            return false;
-//
-//        i++;
-//        j++;
-//    }
-//
-//    if (lhs->str[i] == '\0' and rhs->str[j] == '\0')
-//        return false;
-//
-//    if (lhs->str[i] == '\0' and rhs->str[j] != '\0')
-//        return true;
-//
-//    return false;
-//}
-
 int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
 {
     assert(lhsVoid != nullptr);
@@ -158,7 +118,6 @@ int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
 
     long i = lhs->length-1;
     long j = rhs->length-1;
-//    printf("'%s' '%s' ", lhs->str, rhs->str);
 
     while (i >= 0 and j >= 0)
     {
@@ -175,12 +134,10 @@ int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
 
         if (lhs->str[i] < rhs->str[j])
         {
-//            printf("%d\n", -1);
             return -1;
         }
         if (lhs->str[i] > rhs->str[j])
         {
-//            printf("%d\n", 1);
             return 1;
         }
 
@@ -198,87 +155,14 @@ int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
     }
     if (i < 0 and j < 0)
     {
-//        printf("%d\n", 0);
         return 0;
     }
 
     if (i < 0)
     {
-//        printf("%d\n", -1);
         return -1;
     }
-//    printf("%d\n", 1);
     return 1;
-}
-
-bool compareStrBack(const Line *lhs, const Line *rhs)
-{
-    assert(lhs != nullptr);
-    assert(rhs != nullptr);
-
-    long i = lhs->length;
-    long j = rhs->length;
-
-    while (i > 0 and j > 0)
-    {
-        if (lhs->str[i] == '.')
-        {
-            i--;
-            continue;
-        }
-        if (rhs->str[j] == '.')
-        {
-            j--;
-            continue;
-        }
-
-        if (lhs->str[i] < rhs->str[j])
-            return true;
-
-        if (lhs->str[i] > rhs->str[j])
-            return false;
-
-        i--;
-        j--;
-    }
-
-    if (i < 0 and j < 0)
-        return false;
-
-    if (i < 0 and j >= 0)
-        return true;
-
-    return false;
-}
-
-void bubbleSort(Text *text,
-                bool (*comparator)(const Line *lhs, const Line *rhs))
-{
-    assert(text != nullptr);
-    assert(comparator != nullptr);
-
-    for (int i = 0; i < text->length - 1; i++)
-    {
-        for (int j = 0; j < text->length - i - 1; j++)
-        {
-            if (comparator(&(text->lines[j + 1]), &(text->lines[j])))
-            {
-                Line tmp = text->lines[j];
-                text->lines[j] = text->lines[j + 1];
-                text->lines[j + 1] = tmp;
-            }
-        }
-    }
-}
-
-void print(Text *text)
-{
-    assert(text != nullptr);
-
-    for (size_t i = 0; i < text->length; i++)
-    {
-        printf("%s\n", text->lines[i].str);
-    }
 }
 
 void printFile(Text *text, const char *filename)
