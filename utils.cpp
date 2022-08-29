@@ -51,32 +51,27 @@ char *revStr(char *revstr, char *str) {///
     return revstr;
 }
 
-bool compareStr(char *lhs, char *rhs) {///
+bool compareStr(char *lhs, char *rhs) {
     size_t i = 0;
     size_t j = 0;
-    while (lhs[i] != '\0' or rhs[j] != '\0') {
-        if (lhs[i] == ' ' or lhs[i] == '.' or lhs[i] == ',' or lhs[i] == ',' or
-            lhs[i] == '!' or lhs[i] == ';' or lhs[i] == '?' or lhs[i] == ':')
-            i++;
 
-        if (lhs[j] == ' ' or lhs[j] == '.' or lhs[j] == ',' or lhs[j] == ',' or
-            lhs[j] == '!' or lhs[j] == ';' or lhs[j] == '?' or lhs[i] == ':')
-            j++;
-
-        if (lhs[i] == '\0')
-            return true;
-
-        if (lhs[j] == '\0')
-            return false;
-
+    while (lhs[i] != '\0' and rhs[j] != '\0') {
         if (lhs[i] < rhs[j])
             return true;
 
-        if (lhs[i] < rhs[j])
+        if (lhs[i] > rhs[j])
             return false;
+
         i++;
         j++;
     }
+
+    if (lhs[i] == '\0' and rhs[i] == '\0')
+        return false;
+
+    if (lhs[i] == '\0' and rhs[i] != '\0')
+        return true;
+
     return false;
 }
 
@@ -91,7 +86,7 @@ bool compareStrBack(char *lhs, char *rhs) {
 void bubbleSort(Text *text, bool (*comparator)(char *lhs, char *rhs)) {
     for (int i = 0; i < text->length - 1; i++) {
         for (int j = 0; j < text->length - i - 1; j++) {
-            if (comparator(text->lines[j].str, text->lines[j+1].str)) {
+            if (comparator(text->lines[j+1].str, text->lines[j].str)) {
                 char *tmp = text->lines[j].str;
                 text->lines[j].str = text->lines[j+1].str;
                 text->lines[j+1].str = tmp;

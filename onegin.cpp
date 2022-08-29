@@ -14,15 +14,15 @@ int main() {
 
     Text text = readFile(fp);
 
-    fclose(fp);
-    printf("%d\n", text.length);
-    printf("NOT SORTED\n");
-    print(&text);                /// -> file
-//
-//    printf("\n\nSORTED\n");
-//    bubbleSort(&text, compareStr);
-//    print(&text);
-//
+//    fclose(fp);
+//    printf("%d\n", text.length);
+//    printf("NOT SORTED\n");
+//    print(&text);                /// -> file
+
+    printf("\n\nSORTED\n");
+    bubbleSort(&text, compareStr);
+    print(&text);
+
 //    printf("\n\nSORTED BACK\n");
 //    bubbleSort(&text, compareStrBack);
 //    print(&text);
