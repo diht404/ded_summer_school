@@ -1,9 +1,5 @@
 #include "onegin.h"
 
-// 1) fseek + ftell + rewind
-// 2) calloc + fread
-// 3) 1st -> count lines + calloc
-// 4) 2st ->
 int main() {
     const char *filename = "onegin.txt";
     FILE *fp = fopen(filename, "r");
@@ -16,7 +12,6 @@ int main() {
     fclose(fp);
 
     printFile(&text, "not_sorted.txt");
-
     qsort(text.lines, text.length, sizeof(Line), compareStrQ);
 //    bubbleSort(&text, compareStr);
     printFile(&text, "sorted.txt");

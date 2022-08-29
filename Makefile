@@ -1,6 +1,6 @@
 CC = g++
 
-CFLAGS = -c
+CFLAGS = -c #-fsanitize=address -ggdb3
 
 main: onegin.o utils.o
 	$(CC) onegin.o utils.o -o main

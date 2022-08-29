@@ -50,8 +50,8 @@ int compareStrQ(const void *lhsVoid, const void *rhsVoid)
     assert(lhsVoid != nullptr);
     assert(rhsVoid != nullptr);
 
-    const Line *lhs = (const Line*) lhsVoid;
-    const Line *rhs = (const Line*) lhsVoid;
+    const Line *lhs = (const Line *)lhsVoid;
+    const Line *rhs = (const Line *)rhsVoid;
 
     long i = 0;
     long j = 0;
@@ -133,8 +133,8 @@ int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
     assert(lhsVoid != nullptr);
     assert(rhsVoid != nullptr);
 
-    const Line *lhs = (const Line*) lhsVoid;
-    const Line *rhs = (const Line*) lhsVoid;
+    const Line *lhs = (const Line *)lhsVoid;
+    const Line *rhs = (const Line *)rhsVoid;
 
     long i = lhs->length;
     long j = lhs->length;
