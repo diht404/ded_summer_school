@@ -2,6 +2,9 @@
 
 Text readFile(FILE *fp)
 {
+
+    assert(fp != nullptr);
+
     fseek(fp, 0, SEEK_END);
     long lenOfFile = ftell(fp);
     rewind(fp);
@@ -20,15 +23,17 @@ Text readFile(FILE *fp)
 
     long position = 0;
     long line_id = 0;
-    size_t length = 0;
+
     for (long i = 0; i < lenOfFile; i++)
     {
         if (position == 0)
         {
             lines[line_id] = {&txt[i], 0};
         }
+
         lines[line_id].length++;
         position++;
+
         if (txt[i] == '\n')
         {
             lines[line_id].length = position;
@@ -40,23 +45,11 @@ Text readFile(FILE *fp)
     return {lines, countLines};
 }
 
-char *revStr(char *revstr, char *str)
-{///
-    size_t left = 0;
-    size_t right = strlen(str) - 1;
-    strcpy(revstr, str);
-    for (size_t i = left; i < right; i++)
-    {
-        char temp = revstr[i];
-        revstr[i] = revstr[right];
-        revstr[right] = temp;
-        right--;
-    }
-    return revstr;
-}
-
 bool compareStr(Line *lhs, Line *rhs)
 {
+    assert(lhs != nullptr);
+    assert(rhs != nullptr);
+
     size_t i = 0;
     size_t j = 0;
 
@@ -94,6 +87,9 @@ bool compareStr(Line *lhs, Line *rhs)
 
 bool compareStrBack(Line *lhs, Line *rhs)
 {
+    assert(lhs != nullptr);
+    assert(rhs != nullptr);
+
     int i = lhs->length;
     int j = lhs->length;
 
@@ -131,6 +127,9 @@ bool compareStrBack(Line *lhs, Line *rhs)
 
 void bubbleSort(Text *text, bool (*comparator)(Line *lhs, Line *rhs))
 {
+    assert(text != nullptr);
+    assert(comparator != nullptr);
+
     for (int i = 0; i < text->length - 1; i++)
     {
         for (int j = 0; j < text->length - i - 1; j++)
@@ -147,10 +146,10 @@ void bubbleSort(Text *text, bool (*comparator)(Line *lhs, Line *rhs))
 
 void print(Text *text)
 {
+    assert(text != nullptr);
+
     for (size_t i = 0; i < text->length; i++)
     {
-        printf("%s ,  %d \n",
-               text->lines[i].str,
-               text->lines[i].length);
+        printf("%s\n",text->lines[i].str);
     }
 }

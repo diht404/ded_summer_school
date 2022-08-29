@@ -13,11 +13,10 @@ int main() {
     }
 
     Text text = readFile(fp);
+    fclose(fp);
 
-//    fclose(fp);
-//    printf("%d\n", text.length);
-//    printf("NOT SORTED\n");
-//    print(&text);                /// -> file
+    printf("NOT SORTED\n");
+//    printFile(&text, "sorted.txt");
 
     printf("\n\nSORTED\n");
     bubbleSort(&text, compareStr);

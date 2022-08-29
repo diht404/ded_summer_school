@@ -18,8 +18,6 @@ struct Text {
 
 Text readFile(FILE *fp);
 
-char *revStr(char *revstr, char *str);
-
 bool compareStr(Line *lhs, Line *rhs);
 
 bool compareStrBack(Line *lhs, Line *rhs);
