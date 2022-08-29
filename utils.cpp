@@ -70,63 +70,83 @@ int compareStrQ(const void *lhsVoid, const void *rhsVoid)
         }
 
         if (lhs->str[i] < rhs->str[j])
+        {
+//            printf("i='%ld' '%c' j='%ld' '%c'\n",
+//                   i,
+//                   lhs->str[i],
+//                   j,
+//                   rhs->str[j]);
             return -1;
-
+        }
         if (lhs->str[i] > rhs->str[j])
             return 1;
 
         i++;
         j++;
     }
-
+    while (lhs->str[i] == '.')
+    {
+        i++;
+    }
+    while (rhs->str[j] == '.')
+    {
+        j++;
+    }
     if (lhs->str[i] == '\0' and rhs->str[j] == '\0')
         return 0;
 
     if (lhs->str[i] == '\0' and rhs->str[j] != '\0')
-        return -1;
+    {
 
+//        printf("i='%ld' '%c' j='%ld' '%c'\n",
+//               i,
+//               lhs->str[i],
+//               j,
+//               rhs->str[j]);
+        return -1;
+    }
     return 1;
 }
 
-bool compareStr(const Line *lhs, const Line *rhs)
-{
-    assert(lhs != nullptr);
-    assert(rhs != nullptr);
-
-    size_t i = 0;
-    size_t j = 0;
-
-    while (lhs->str[i] != '\0' and rhs->str[j] != '\0')
-    {
-        if (lhs->str[i] == '.')
-        {
-            i++;
-            continue;
-        }
-        if (rhs->str[j] == '.')
-        {
-            j++;
-            continue;
-        }
-
-        if (lhs->str[i] < rhs->str[j])
-            return true;
-
-        if (lhs->str[i] > rhs->str[j])
-            return false;
-
-        i++;
-        j++;
-    }
-
-    if (lhs->str[i] == '\0' and rhs->str[j] == '\0')
-        return false;
-
-    if (lhs->str[i] == '\0' and rhs->str[j] != '\0')
-        return true;
-
-    return false;
-}
+//bool compareStr(const Line *lhs, const Line *rhs)
+//{
+//    assert(lhs != nullptr);
+//    assert(rhs != nullptr);
+//
+//    size_t i = 0;
+//    size_t j = 0;
+//
+//    while (lhs->str[i] != '\0' and rhs->str[j] != '\0')
+//    {
+//        if (lhs->str[i] == '.')
+//        {
+//            i++;
+//            continue;
+//        }
+//        if (rhs->str[j] == '.')
+//        {
+//            j++;
+//            continue;
+//        }
+//
+//        if (lhs->str[i] < rhs->str[j])
+//            return true;
+//
+//        if (lhs->str[i] > rhs->str[j])
+//            return false;
+//
+//        i++;
+//        j++;
+//    }
+//
+//    if (lhs->str[i] == '\0' and rhs->str[j] == '\0')
+//        return false;
+//
+//    if (lhs->str[i] == '\0' and rhs->str[j] != '\0')
+//        return true;
+//
+//    return false;
+//}
 
 int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
 {
@@ -136,38 +156,58 @@ int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
     const Line *lhs = (const Line *) lhsVoid;
     const Line *rhs = (const Line *) rhsVoid;
 
-    long i = lhs->length;
-    long j = lhs->length;
+    long i = lhs->length-1;
+    long j = rhs->length-1;
+//    printf("'%s' '%s' ", lhs->str, rhs->str);
 
-    while (i > 0 and j > 0)
+    while (i >= 0 and j >= 0)
     {
-        if (lhs->str[i] == '.')
+        if (lhs->str[i] == '.' or lhs->str[i]=='\0')
         {
             i--;
             continue;
         }
-        if (rhs->str[j] == '.')
+        if (rhs->str[j] == '.' or rhs->str[j]=='\0')
         {
             j--;
             continue;
         }
 
         if (lhs->str[i] < rhs->str[j])
+        {
+//            printf("%d\n", -1);
             return -1;
-
+        }
         if (lhs->str[i] > rhs->str[j])
+        {
+//            printf("%d\n", 1);
             return 1;
+        }
 
         i--;
         j--;
     }
 
+    while (lhs->str[i] == '.')
+    {
+        i--;
+    }
+    while (rhs->str[j] == '.')
+    {
+        j--;
+    }
     if (i < 0 and j < 0)
+    {
+//        printf("%d\n", 0);
         return 0;
+    }
 
-    if (i < 0 and j >= 0)
+    if (i < 0)
+    {
+//        printf("%d\n", -1);
         return -1;
-
+    }
+//    printf("%d\n", 1);
     return 1;
 }
 
@@ -176,8 +216,8 @@ bool compareStrBack(const Line *lhs, const Line *rhs)
     assert(lhs != nullptr);
     assert(rhs != nullptr);
 
-    int i = lhs->length;
-    int j = lhs->length;
+    long i = lhs->length;
+    long j = rhs->length;
 
     while (i > 0 and j > 0)
     {
