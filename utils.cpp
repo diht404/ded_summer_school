@@ -50,8 +50,8 @@ int compareStrQ(const void *lhsVoid, const void *rhsVoid)
     assert(lhsVoid != nullptr);
     assert(rhsVoid != nullptr);
 
-    const Line *lhs = (const Line *)lhsVoid;
-    const Line *rhs = (const Line *)rhsVoid;
+    const Line *lhs = (const Line *) lhsVoid;
+    const Line *rhs = (const Line *) rhsVoid;
 
     long i = 0;
     long j = 0;
@@ -133,8 +133,8 @@ int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
     assert(lhsVoid != nullptr);
     assert(rhsVoid != nullptr);
 
-    const Line *lhs = (const Line *)lhsVoid;
-    const Line *rhs = (const Line *)rhsVoid;
+    const Line *lhs = (const Line *) lhsVoid;
+    const Line *rhs = (const Line *) rhsVoid;
 
     long i = lhs->length;
     long j = lhs->length;
@@ -170,7 +170,6 @@ int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
 
     return 1;
 }
-
 
 bool compareStrBack(const Line *lhs, const Line *rhs)
 {
@@ -212,7 +211,8 @@ bool compareStrBack(const Line *lhs, const Line *rhs)
     return false;
 }
 
-void bubbleSort(Text *text, bool (*comparator)(const Line *lhs, const Line *rhs))
+void bubbleSort(Text *text,
+                bool (*comparator)(const Line *lhs, const Line *rhs))
 {
     assert(text != nullptr);
     assert(comparator != nullptr);

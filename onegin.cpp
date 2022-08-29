@@ -1,9 +1,11 @@
 #include "onegin.h"
 
-int main() {
+int main()
+{
     const char *filename = "onegin.txt";
     FILE *fp = fopen(filename, "r");
-    if (fp == nullptr) {
+    if (fp == nullptr)
+    {
         perror("Unable to open file!");
         exit(1);
     }
@@ -17,7 +19,7 @@ int main() {
     printFile(&text, "sorted.txt");
 
     qsort(text.lines, text.length, sizeof(Line), compareStrBackQ);
-//    bubbleSort(&text, compareStrBack);
+    bubbleSort(&text, compareStrBack);
     printFile(&text, "sorted_back.txt");
 
     return 0;
