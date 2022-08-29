@@ -25,3 +25,5 @@ bool compareStrBack(Line *lhs, Line *rhs);
 void bubbleSort(Text *text, bool (*comparator)(Line *lhs, Line *rhs) = compareStr);
 
 void print(Text *text);
+
+void printFile(Text *text, const char *filename);

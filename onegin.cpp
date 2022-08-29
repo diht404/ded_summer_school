@@ -15,18 +15,13 @@ int main() {
     Text text = readFile(fp);
     fclose(fp);
 
-    printf("NOT SORTED\n");
-//    printFile(&text, "sorted.txt");
+    printFile(&text, "not_sorted.txt");
 
-    printf("\n\nSORTED\n");
     bubbleSort(&text, compareStr);
-    print(&text);
+    printFile(&text, "sorted.txt");
 
-    printf("\n\nSORTED BACK\n");
     bubbleSort(&text, compareStrBack);
-    print(&text);
-
-    printf("\n");
+    printFile(&text, "sorted_back.txt");
 
     return 0;
 }

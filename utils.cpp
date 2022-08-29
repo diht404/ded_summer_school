@@ -150,6 +150,19 @@ void print(Text *text)
 
     for (size_t i = 0; i < text->length; i++)
     {
-        printf("%s\n",text->lines[i].str);
+        printf("%s\n", text->lines[i].str);
     }
+}
+
+void printFile(Text *text, const char *filename)
+{
+    assert(text != nullptr);
+    assert(filename != nullptr);
+
+    FILE *fp = fopen(filename, "w");
+    for(int i = 0; i < text->length; i++)
+    {
+        fprintf(fp, "%s\n", text->lines[i].str);
+    }
+    fclose(fp);
 }
