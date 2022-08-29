@@ -4,6 +4,7 @@
 #include <string.h>
 #include <cstdio>
 #include <unistd.h>
+#include <ctype.h>
 
 struct Line {
     char *str = nullptr;
@@ -19,10 +20,10 @@ Text readFile(FILE *fp);
 
 char *revStr(char *revstr, char *str);
 
-bool compareStr(char *lhs, char *rhs);
+bool compareStr(Line *lhs, Line *rhs);
 
-bool compareStrBack(char *lhs, char *rhs);
+bool compareStrBack(Line *lhs, Line *rhs);
 
-void bubbleSort(Text *text, bool (*comparator)(char *lhs, char *rhs) = compareStr);
+void bubbleSort(Text *text, bool (*comparator)(Line *lhs, Line *rhs) = compareStr);
 
 void print(Text *text);

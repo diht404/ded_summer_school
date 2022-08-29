@@ -1,5 +1,5 @@
 #include "onegin.h"
-// ctype.h isalnum
+
 Text readFile(FILE *fp)
 {
     fseek(fp, 0, SEEK_END);
@@ -16,7 +16,7 @@ Text readFile(FILE *fp)
             countLines++;
     }
 
-    Line *lines = (Line *) calloc(countLines, sizeof (Line));
+    Line *lines = (Line *) calloc(countLines, sizeof(Line));
 
     long position = 0;
     long line_id = 0;
@@ -29,8 +29,10 @@ Text readFile(FILE *fp)
         }
         lines[line_id].length++;
         position++;
-        if (txt[i]=='\n'){
-            position=0;
+        if (txt[i] == '\n')
+        {
+            lines[line_id].length = position;
+            position = 0;
             txt[i] = '\0';
             line_id++;
         }
@@ -38,11 +40,13 @@ Text readFile(FILE *fp)
     return {lines, countLines};
 }
 
-char *revStr(char *revstr, char *str) {///
+char *revStr(char *revstr, char *str)
+{///
     size_t left = 0;
     size_t right = strlen(str) - 1;
     strcpy(revstr, str);
-    for (size_t i = left; i < right; i++) {
+    for (size_t i = left; i < right; i++)
+    {
         char temp = revstr[i];
         revstr[i] = revstr[right];
         revstr[right] = temp;
@@ -51,52 +55,102 @@ char *revStr(char *revstr, char *str) {///
     return revstr;
 }
 
-bool compareStr(char *lhs, char *rhs) {
+bool compareStr(Line *lhs, Line *rhs)
+{
     size_t i = 0;
     size_t j = 0;
 
-    while (lhs[i] != '\0' and rhs[j] != '\0') {
-        if (lhs[i] < rhs[j])
+    while (lhs->str[i] != '\0' and rhs->str[j] != '\0')
+    {
+        if (lhs->str[i] == '.')
+        {
+            i++;
+            continue;
+        }
+        if (rhs->str[j] == '.')
+        {
+            j++;
+            continue;
+        }
+
+        if (lhs->str[i] < rhs->str[j])
             return true;
 
-        if (lhs[i] > rhs[j])
+        if (lhs->str[i] > rhs->str[j])
             return false;
 
         i++;
         j++;
     }
 
-    if (lhs[i] == '\0' and rhs[i] == '\0')
+    if (lhs->str[i] == '\0' and rhs->str[j] == '\0')
         return false;
 
-    if (lhs[i] == '\0' and rhs[i] != '\0')
+    if (lhs->str[i] == '\0' and rhs->str[j] != '\0')
         return true;
 
     return false;
 }
 
-bool compareStrBack(char *lhs, char *rhs) {
-    char *revLhs = (char *) calloc(1, 128);
-    revStr(revLhs, lhs);
-    char *revRhs = (char *) calloc(1, 128);
-    revStr(revRhs, rhs);
-    return strcmp(revLhs, revRhs) > 0;
+bool compareStrBack(Line *lhs, Line *rhs)
+{
+    int i = lhs->length;
+    int j = lhs->length;
+
+    while (i > 0 and j > 0)
+    {
+        if (lhs->str[i] == '.')
+        {
+            i--;
+            continue;
+        }
+        if (rhs->str[j] == '.')
+        {
+            j--;
+            continue;
+        }
+
+        if (lhs->str[i] < rhs->str[j])
+            return true;
+
+        if (lhs->str[i] > rhs->str[j])
+            return false;
+
+        i--;
+        j--;
+    }
+
+    if (i < 0 and j < 0)
+        return false;
+
+    if (i < 0 and j >= 0)
+        return true;
+
+    return false;
 }
 
-void bubbleSort(Text *text, bool (*comparator)(char *lhs, char *rhs)) {
-    for (int i = 0; i < text->length - 1; i++) {
-        for (int j = 0; j < text->length - i - 1; j++) {
-            if (comparator(text->lines[j+1].str, text->lines[j].str)) {
-                char *tmp = text->lines[j].str;
-                text->lines[j].str = text->lines[j+1].str;
-                text->lines[j+1].str = tmp;
+void bubbleSort(Text *text, bool (*comparator)(Line *lhs, Line *rhs))
+{
+    for (int i = 0; i < text->length - 1; i++)
+    {
+        for (int j = 0; j < text->length - i - 1; j++)
+        {
+            if (comparator(&(text->lines[j + 1]), &(text->lines[j])))
+            {
+                Line tmp = text->lines[j];
+                text->lines[j] = text->lines[j + 1];
+                text->lines[j + 1] = tmp;
             }
         }
     }
 }
 
-void print(Text *text) {
-    for (size_t i = 0; i < text->length; i++) {
-        printf("%s\n", text->lines[i].str);
+void print(Text *text)
+{
+    for (size_t i = 0; i < text->length; i++)
+    {
+        printf("%s ,  %d \n",
+               text->lines[i].str,
+               text->lines[i].length);
     }
 }

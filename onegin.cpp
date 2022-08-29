@@ -23,11 +23,11 @@ int main() {
     bubbleSort(&text, compareStr);
     print(&text);
 
-//    printf("\n\nSORTED BACK\n");
-//    bubbleSort(&text, compareStrBack);
-//    print(&text);
-//
-//    printf("\n");
+    printf("\n\nSORTED BACK\n");
+    bubbleSort(&text, compareStrBack);
+    print(&text);
+
+    printf("\n");
 
     return 0;
 }
