@@ -12,7 +12,7 @@ int main() {
         exit(1);
     }
 
-    Text text = readFile2(fp);
+    Text text = readFile(fp);
 
     fclose(fp);
     printf("%d\n", text.length);
