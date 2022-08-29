@@ -16,6 +16,7 @@ struct Text
 {
     Line *lines = nullptr;
     size_t length = 0;
+    char * txt;
 };
 
 Text readFile(FILE *fp);

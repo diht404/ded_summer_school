@@ -42,7 +42,7 @@ Text readFile(FILE *fp)
             line_id++;
         }
     }
-    return {lines, countLines};
+    return {lines, countLines, txt};
 }
 
 int compareStrQ(const void *lhsVoid, const void *rhsVoid)
@@ -171,13 +171,31 @@ void printFile(Text *text, const char *filename, bool sorted)
     assert(filename != nullptr);
 
     FILE *fp = fopen(filename, "w");
-    for (int i = 0; i < text->length; i++)
+
+    if (sorted)
     {
-        if (sorted)
-            fprintf(fp, "%s\n", text->lines[i].str);
-        else
+        for(int i = 0; i < text->length; i++)
         {
             fprintf(fp, "%s\n", text->lines[i].str);
+        }
+    }
+    else
+    {
+        size_t i = 0;
+        size_t length = 0;
+        while (length < text->length)
+        {
+            if (text->txt[i] == '\0')
+            {
+                fprintf(fp, "\n");
+                length++;
+                i++;
+            }
+            else
+            {
+                fprintf(fp, "%c", text->txt[i]);
+                i++;
+            }
         }
     }
     fclose(fp);
