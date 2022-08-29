@@ -17,10 +17,12 @@ int main() {
 
     printFile(&text, "not_sorted.txt");
 
-    bubbleSort(&text, compareStr);
+    qsort(text.lines, text.length, sizeof(Line), compareStrQ);
+//    bubbleSort(&text, compareStr);
     printFile(&text, "sorted.txt");
 
-    bubbleSort(&text, compareStrBack);
+    qsort(text.lines, text.length, sizeof(Line), compareStrBackQ);
+//    bubbleSort(&text, compareStrBack);
     printFile(&text, "sorted_back.txt");
 
     return 0;

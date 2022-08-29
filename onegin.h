@@ -18,11 +18,15 @@ struct Text {
 
 Text readFile(FILE *fp);
 
-bool compareStr(Line *lhs, Line *rhs);
+int compareStrQ(const void *lhsVoid, const void *rhsVoid);
 
-bool compareStrBack(Line *lhs, Line *rhs);
+bool compareStr(const Line *lhs, const Line *rhs);
 
-void bubbleSort(Text *text, bool (*comparator)(Line *lhs, Line *rhs) = compareStr);
+bool compareStrBack(const Line *lhs, const Line *rhs);
+
+int compareStrBackQ(const void *lhsVoid, const void *rhsVoid);
+
+void bubbleSort(Text *text, bool (*comparator)(const Line *lhs, const Line *rhs) = compareStr);
 
 void print(Text *text);
 

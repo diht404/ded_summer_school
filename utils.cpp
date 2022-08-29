@@ -45,7 +45,50 @@ Text readFile(FILE *fp)
     return {lines, countLines};
 }
 
-bool compareStr(Line *lhs, Line *rhs)
+int compareStrQ(const void *lhsVoid, const void *rhsVoid)
+{
+    assert(lhsVoid != nullptr);
+    assert(rhsVoid != nullptr);
+
+    const Line *lhs = (const Line*) lhsVoid;
+    const Line *rhs = (const Line*) lhsVoid;
+
+    long i = 0;
+    long j = 0;
+
+    while (lhs->str[i] != '\0' and rhs->str[j] != '\0')
+    {
+        if (lhs->str[i] == '.')
+        {
+            i++;
+            continue;
+        }
+        if (rhs->str[j] == '.')
+        {
+            j++;
+            continue;
+        }
+
+        if (lhs->str[i] < rhs->str[j])
+            return -1;
+
+        if (lhs->str[i] > rhs->str[j])
+            return 1;
+
+        i++;
+        j++;
+    }
+
+    if (lhs->str[i] == '\0' and rhs->str[j] == '\0')
+        return 0;
+
+    if (lhs->str[i] == '\0' and rhs->str[j] != '\0')
+        return -1;
+
+    return 1;
+}
+
+bool compareStr(const Line *lhs, const Line *rhs)
 {
     assert(lhs != nullptr);
     assert(rhs != nullptr);
@@ -85,7 +128,51 @@ bool compareStr(Line *lhs, Line *rhs)
     return false;
 }
 
-bool compareStrBack(Line *lhs, Line *rhs)
+int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
+{
+    assert(lhsVoid != nullptr);
+    assert(rhsVoid != nullptr);
+
+    const Line *lhs = (const Line*) lhsVoid;
+    const Line *rhs = (const Line*) lhsVoid;
+
+    long i = lhs->length;
+    long j = lhs->length;
+
+    while (i > 0 and j > 0)
+    {
+        if (lhs->str[i] == '.')
+        {
+            i--;
+            continue;
+        }
+        if (rhs->str[j] == '.')
+        {
+            j--;
+            continue;
+        }
+
+        if (lhs->str[i] < rhs->str[j])
+            return -1;
+
+        if (lhs->str[i] > rhs->str[j])
+            return 1;
+
+        i--;
+        j--;
+    }
+
+    if (i < 0 and j < 0)
+        return 0;
+
+    if (i < 0 and j >= 0)
+        return -1;
+
+    return 1;
+}
+
+
+bool compareStrBack(const Line *lhs, const Line *rhs)
 {
     assert(lhs != nullptr);
     assert(rhs != nullptr);
@@ -125,7 +212,7 @@ bool compareStrBack(Line *lhs, Line *rhs)
     return false;
 }
 
-void bubbleSort(Text *text, bool (*comparator)(Line *lhs, Line *rhs))
+void bubbleSort(Text *text, bool (*comparator)(const Line *lhs, const Line *rhs))
 {
     assert(text != nullptr);
     assert(comparator != nullptr);
@@ -160,7 +247,7 @@ void printFile(Text *text, const char *filename)
     assert(filename != nullptr);
 
     FILE *fp = fopen(filename, "w");
-    for(int i = 0; i < text->length; i++)
+    for (int i = 0; i < text->length; i++)
     {
         fprintf(fp, "%s\n", text->lines[i].str);
     }
