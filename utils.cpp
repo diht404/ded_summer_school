@@ -45,7 +45,7 @@ Text readFile(FILE *fp)
     return {lines, countLines, txt};
 }
 
-int compareStrQ(const void *lhsVoid, const void *rhsVoid)
+int compareStr(const void *lhsVoid, const void *rhsVoid)
 {
     assert(lhsVoid != nullptr);
     assert(rhsVoid != nullptr);
@@ -71,11 +71,6 @@ int compareStrQ(const void *lhsVoid, const void *rhsVoid)
 
         if (lhs->str[i] < rhs->str[j])
         {
-//            printf("i='%ld' '%c' j='%ld' '%c'\n",
-//                   i,
-//                   lhs->str[i],
-//                   j,
-//                   rhs->str[j]);
             return -1;
         }
         if (lhs->str[i] > rhs->str[j])
@@ -97,18 +92,12 @@ int compareStrQ(const void *lhsVoid, const void *rhsVoid)
 
     if (lhs->str[i] == '\0' and rhs->str[j] != '\0')
     {
-
-//        printf("i='%ld' '%c' j='%ld' '%c'\n",
-//               i,
-//               lhs->str[i],
-//               j,
-//               rhs->str[j]);
         return -1;
     }
     return 1;
 }
 
-int compareStrBackQ(const void *lhsVoid, const void *rhsVoid)
+int compareStrBack(const void *lhsVoid, const void *rhsVoid)
 {
     assert(lhsVoid != nullptr);
     assert(rhsVoid != nullptr);
@@ -174,7 +163,7 @@ void printFile(Text *text, const char *filename, bool sorted)
 
     if (sorted)
     {
-        for(int i = 0; i < text->length; i++)
+        for (int i = 0; i < text->length; i++)
         {
             fprintf(fp, "%s\n", text->lines[i].str);
         }
@@ -199,4 +188,46 @@ void printFile(Text *text, const char *filename, bool sorted)
         }
     }
     fclose(fp);
+}
+
+void swapLines(Line *lhs, Line *rhs)
+{
+    Line tmp = *lhs;
+    *lhs = *rhs;
+    *rhs = tmp;
+}
+
+size_t partition(Line *lines, size_t l, size_t r,
+                 int (*comp)(const void *, const void *))
+{
+    Line *pivot = &lines[r];
+    int greater = l - 1;
+    for (int j = l; j < r; j++)
+    {
+        if (comp(&lines[j], pivot)<=0)
+        {
+            greater++;
+            swapLines(&lines[greater], &lines[j]);
+        }
+    }
+    swapLines(&lines[greater + 1], &lines[r]);
+
+    return greater + 1;
+}
+
+void sort(Line *lines, size_t l, size_t r,
+          int (*comp)(const void *, const void *))
+{
+    if (l < r)
+    {
+        size_t pivotInd = partition(lines, l, r, comp);
+        sort(lines, l, pivotInd - 1, comp);
+        sort(lines, pivotInd + 1, r, comp);
+    }
+}
+
+void qSort(Line *lines, size_t count,
+           int (*comp)(const void *, const void *))
+{
+    sort(lines, 0, count - 1, comp);
 }

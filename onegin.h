@@ -21,8 +21,25 @@ struct Text
 
 Text readFile(FILE *fp);
 
-int compareStrQ(const void *lhsVoid, const void *rhsVoid);
+int compareStr(const void *lhsVoid, const void *rhsVoid);
 
-int compareStrBackQ(const void *lhsVoid, const void *rhsVoid);
+int compareStrBack(const void *lhsVoid, const void *rhsVoid);
 
 void printFile(Text *text, const char *filename, bool sorted = true);
+
+void swapLines(Line *lhs, Line *rhs);
+
+size_t partition(Line *lines, size_t l, size_t r,
+                 int (*comp)(const void *, const void *));
+
+void sort(Line *lines, size_t l, size_t r,
+          int (*comp)(const void *, const void *));
+
+/**
+ * @brief qsort implementaion
+ * @param lines pointer to the array to sort
+ * @param count number of elements in the array
+ * @param comp comparator
+ */
+void qSort(Line *lines, size_t count,
+           int (*comp)(const void *, const void *));

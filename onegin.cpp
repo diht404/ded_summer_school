@@ -13,13 +13,13 @@ int main()
     fclose(fp);
 
 //    printFile(&text, "not_sorted.txt");
-
-    qsort(text.lines, text.length, sizeof(Line), compareStrQ);
+//    qsort(text.lines, text.length, sizeof(Line), compareStr);
+    qSort(text.lines, text.length, compareStr);
     printFile(&text, "sorted.txt");
 
-    qsort(text.lines, text.length, sizeof(Line), compareStrBackQ);
-    printFile(&text, "sorted_back.txt");
-
-    printFile(&text, "not_sorted.txt", false);
+//    qsort(text.lines, text.length, sizeof(Line), compareStrBack);
+//    printFile(&text, "sorted_back.txt");
+//
+//    printFile(&text, "not_sorted.txt", false);
     return 0;
 }
