@@ -192,32 +192,42 @@ void printFile(Text *text, const char *filename, bool sorted)
 
 void swapLines(Line *lhs, Line *rhs)
 {
+    assert(lhs != nullptr);
+    assert(rhs != nullptr);
+
     Line tmp = *lhs;
     *lhs = *rhs;
     *rhs = tmp;
 }
 
-size_t partition(Line *lines, size_t l, size_t r,
+size_t partition(Line *lines, const size_t l, const size_t r,
                  int (*comp)(const void *, const void *))
 {
+    assert(lines != nullptr);
+    assert(comp != nullptr);
+
     Line *pivot = &lines[r];
-    int greater = l - 1;
+    int greaterLine = l - 1;
+
     for (int j = l; j < r; j++)
     {
-        if (comp(&lines[j], pivot)<=0)
+        if (comp(&lines[j], pivot) <= 0)
         {
-            greater++;
-            swapLines(&lines[greater], &lines[j]);
+            swapLines(&lines[++greaterLine], &lines[j]);
         }
     }
-    swapLines(&lines[greater + 1], &lines[r]);
 
-    return greater + 1;
+    swapLines(&lines[++greaterLine], pivot);
+
+    return greaterLine;
 }
 
-void sort(Line *lines, size_t l, size_t r,
+void sort(Line *lines, const size_t l, const size_t r,
           int (*comp)(const void *, const void *))
 {
+    assert(lines != nullptr);
+    assert(comp != nullptr);
+
     if (l < r)
     {
         size_t pivotInd = partition(lines, l, r, comp);
@@ -226,8 +236,11 @@ void sort(Line *lines, size_t l, size_t r,
     }
 }
 
-void qSort(Line *lines, size_t count,
+void qSort(Line *lines, const size_t count,
            int (*comp)(const void *, const void *))
 {
+    assert(lines != nullptr);
+    assert(comp != nullptr);
+
     sort(lines, 0, count - 1, comp);
 }
