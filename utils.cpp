@@ -154,42 +154,6 @@ int compareStrBack(const void *lhsVoid, const void *rhsVoid)
     return 1;
 }
 
-void printFile(Text *text, const char *filename, bool sorted)
-{
-    assert(text != nullptr);
-    assert(filename != nullptr);
-
-    FILE *fp = fopen(filename, "w");
-
-    if (sorted)
-    {
-        for (int i = 0; i < text->length; i++)
-        {
-            fprintf(fp, "%s\n", text->lines[i].str);
-        }
-    }
-    else
-    {
-        size_t i = 0;
-        size_t length = 0;
-        while (length < text->length)
-        {
-            if (text->txt[i] == '\0')
-            {
-                fprintf(fp, "\n");
-                length++;
-                i++;
-            }
-            else
-            {
-                fprintf(fp, "%c", text->txt[i]);
-                i++;
-            }
-        }
-    }
-    fclose(fp);
-}
-
 void swapLines(Line *lhs, Line *rhs)
 {
     assert(lhs != nullptr);
@@ -243,4 +207,40 @@ void qSort(Line *lines, const size_t count,
     assert(comp != nullptr);
 
     sort(lines, 0, count - 1, comp);
+}
+
+void printFile(Text *text, const char *filename, bool sorted)
+{
+    assert(text != nullptr);
+    assert(filename != nullptr);
+
+    FILE *fp = fopen(filename, "w");
+
+    if (sorted)
+    {
+        for (int i = 0; i < text->length; i++)
+        {
+            fprintf(fp, "%s\n", text->lines[i].str);
+        }
+    }
+    else
+    {
+        size_t i = 0;
+        size_t length = 0;
+        while (length < text->length)
+        {
+            if (text->txt[i] == '\0')
+            {
+                fprintf(fp, "\n");
+                length++;
+                i++;
+            }
+            else
+            {
+                fprintf(fp, "%c", text->txt[i]);
+                i++;
+            }
+        }
+    }
+    fclose(fp);
 }
