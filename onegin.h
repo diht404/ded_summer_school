@@ -148,3 +148,12 @@ size_t generateLineId(Text *text);
  * @param poem struct Poem for storing nonsense poem
  */
 void printPoem(Poem *poem);
+
+/**
+ * @brief frees all memory
+ *
+ * @param text Struct for storing array of strings, its' length and pointer
+ * to memory block with not sorted text(array of string)
+ * @param poem struct Poem for storing nonsense poem
+ */
+void freeAll(Text *text, Poem *poem);

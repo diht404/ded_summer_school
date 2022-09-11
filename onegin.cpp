@@ -24,6 +24,7 @@ int main()
     printPoem(&poem);
 
     printFile(&text, "not_sorted.txt", false);
-    //TODO:free memory
+
+    freeAll(&text, &poem);
     return 0;
 }

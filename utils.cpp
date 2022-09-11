@@ -295,7 +295,8 @@ char **generatePoem(Text *text, size_t numParts)
     assert(text != nullptr);
 
     // Shakespeare wrote 7 lines in block
-    char **poem = (char **) calloc(ShakespeareNumLines * numParts, sizeof(char *));
+    char **poem = (char **) calloc(ShakespeareNumLines * numParts,
+                                   sizeof(char *));
 
     srand(time(0));
     for (int i = 0; i < numParts; i++)
@@ -311,8 +312,15 @@ void printPoem(Poem *poem)
 {
     for (size_t i = 0; i < poem->numParts * poem->numLines; i++)
     {
-        printf("%llu: %s\n",  i % poem->numLines * 1, poem->poem[i]);
-        if (i % poem->numLines == poem->numLines-1)
+        printf("%llu: %s\n", i % poem->numLines * 1, poem->poem[i]);
+        if (i % poem->numLines == poem->numLines - 1)
             printf("\n");
     }
+}
+
+void freeAll(Text *text, Poem *poem)
+{
+    free(text->txt);
+    free(text->lines);
+    free(poem->poem);
 }
