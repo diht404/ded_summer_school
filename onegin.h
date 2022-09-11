@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <unistd.h>
 #include <ctype.h>
+#include <time.h>
 
 /**
  * @brief Struct for storing a string and its' length
@@ -25,6 +26,22 @@ struct Text
     size_t length = 0;
     char *txt;
 };
+
+/**
+ * @brief struct for storing nonsense poem
+ *
+ * @param poem array of pointer for poem
+ * @param numParts number of parts of poem
+ * @param numLines number of lines in block
+ */
+struct Poem
+{
+    char **poem = nullptr;
+    size_t numParts = 0;
+    size_t numLines = 0;
+};
+
+const int ShakespeareNumLines = 7;
 
 Text readFile(FILE *fp);
 
@@ -80,6 +97,7 @@ size_t partition(Line *lines, size_t l, size_t r,
 
 /**
  * @brief qsort implementation
+ *
  * @param lines pointer to the array to sort
  * @param l the left border of the segment
  * @param r the right border of the segment
@@ -90,9 +108,43 @@ void sort(Line *lines, size_t l, size_t r,
 
 /**
  * @brief qsort with signature similar to qsort from stdlib.h
+ *
  * @param lines pointer to the array to sort
  * @param count number of elements in the array
  * @param comp comparator for strings
  */
 void qSort(Line *lines, size_t count,
            int (*comp)(const void *, const void *));
+
+/**
+ * @brief generate poem with numParts blocks
+ *
+ * @param text back sorted text for generation
+ * @param poem array of pointers to string of poem
+ * @return void
+ */
+void generateBlock(Text *text, char **poem);
+
+/**
+ * @brief generate poem with numParts blocks
+ *
+ * @param text back sorted text for generation
+ * @param numParts number of blocks to generate
+ * @return array of pointers to string of poem
+ */
+char **generatePoem(Text *text, size_t numParts);
+
+/**
+ * @brief selects random line index from text
+ *
+ * @param text back sorted text for generation
+ * @return random line index from text
+ */
+size_t generateLineId(Text *text);
+
+/**
+ * @brief prints nonsense poem
+ *
+ * @param poem struct Poem for storing nonsense poem
+ */
+void printPoem(Poem *poem);

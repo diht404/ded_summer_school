@@ -58,12 +58,12 @@ int compareStr(const void *lhsVoid, const void *rhsVoid)
 
     while (lhs->str[i] != '\0' and rhs->str[j] != '\0')
     {
-        if (lhs->str[i] == '.')
+        if (!isalnum(lhs->str[i]))
         {
             i++;
             continue;
         }
-        if (rhs->str[j] == '.')
+        if (!isalnum(rhs->str[j]))
         {
             j++;
             continue;
@@ -79,11 +79,11 @@ int compareStr(const void *lhsVoid, const void *rhsVoid)
         i++;
         j++;
     }
-    while (lhs->str[i] == '.')
+    while (!isalnum(lhs->str[i]))
     {
         i++;
     }
-    while (rhs->str[j] == '.')
+    while (!isalnum(rhs->str[j]))
     {
         j++;
     }
@@ -110,12 +110,12 @@ int compareStrBack(const void *lhsVoid, const void *rhsVoid)
 
     while (i >= 0 and j >= 0)
     {
-        if (lhs->str[i] == '.' or lhs->str[i] == '\0')
+        if (!isalnum(lhs->str[i]) or lhs->str[i] == '\0')
         {
             i--;
             continue;
         }
-        if (rhs->str[j] == '.' or rhs->str[j] == '\0')
+        if (!isalnum(rhs->str[j]) or rhs->str[j] == '\0')
         {
             j--;
             continue;
@@ -134,11 +134,11 @@ int compareStrBack(const void *lhsVoid, const void *rhsVoid)
         j--;
     }
 
-    while (lhs->str[i] == '.')
+    while (!isalnum(lhs->str[i]))
     {
         i--;
     }
-    while (rhs->str[j] == '.')
+    while (!isalnum(rhs->str[j]))
     {
         j--;
     }
@@ -243,4 +243,76 @@ void printFile(Text *text, const char *filename, bool sorted)
         }
     }
     fclose(fp);
+}
+
+size_t generateLineId(Text *text)
+{
+    assert(text != nullptr);
+    // long text required!
+    assert(text->length > 10);
+
+    size_t lineId = 0;
+    size_t attempts = 0;
+    do
+    {
+        lineId = rand() % (text->length - 2);
+        attempts++;
+    }
+    while (strlen(&text->lines[lineId].str[0]) < 10 or attempts < 100);
+    // searches strings more than 10 characters,
+    // if can't do it 100 times - return anything
+
+    return lineId;
+}
+
+void generateBlock(Text *text, char **poem)
+{
+    assert(text != nullptr);
+
+    size_t lineId = 0;
+    // Shakespeare wrote 8 lines in block
+    // Rhymes:
+    // 0 and 2
+    // 1 and 3 and 4
+    // 5 and 6
+
+    lineId = generateLineId(text);
+    poem[0] = (text->lines[lineId].str);
+    poem[2] = (text->lines[lineId + 1].str);
+
+    lineId = generateLineId(text);
+    poem[1] = (text->lines[lineId].str);
+    poem[3] = (text->lines[lineId + 1].str);
+    poem[4] = (text->lines[lineId + 2].str);
+
+    lineId = generateLineId(text);
+    poem[5] = (text->lines[lineId].str);
+    poem[6] = (text->lines[lineId + 1].str);
+}
+
+char **generatePoem(Text *text, size_t numParts)
+{
+    assert(text != nullptr);
+
+    // Shakespeare wrote 7 lines in block
+    char **poem = (char **) calloc(ShakespeareNumLines * numParts, sizeof(char *));
+
+    srand(time(0));
+    for (int i = 0; i < numParts; i++)
+    {
+        generateBlock(text, poem);
+        poem += ShakespeareNumLines;
+    }
+    poem -= ShakespeareNumLines * numParts;
+    return poem;
+}
+
+void printPoem(Poem *poem)
+{
+    for (size_t i = 0; i < poem->numParts * poem->numLines; i++)
+    {
+        printf("%llu: %s\n",  i % poem->numLines * 1, poem->poem[i]);
+        if (i % poem->numLines == poem->numLines-1)
+            printf("\n");
+    }
 }

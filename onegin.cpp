@@ -18,6 +18,12 @@ int main()
     qSort(text.lines, text.length, compareStrBack);
     printFile(&text, "sorted_back.txt");
 
+    size_t numParts = 3;
+    Poem poem = {generatePoem(&text, numParts), numParts, ShakespeareNumLines};
+
+    printPoem(&poem);
+
     printFile(&text, "not_sorted.txt", false);
+    //TODO:free memory
     return 0;
 }
