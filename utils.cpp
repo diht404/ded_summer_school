@@ -200,7 +200,7 @@ void sort(Line *lines, const size_t l, const size_t r,
     }
 }
 
-void qSort(Line *lines, const size_t count,
+void qSort(Line *lines, const size_t count, size_t size,
            int (*comp)(const void *, const void *))
 {
     assert(lines != nullptr);

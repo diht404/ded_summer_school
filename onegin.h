@@ -112,9 +112,10 @@ void sort(Line *lines, size_t l, size_t r,
  *
  * @param lines pointer to the array to sort
  * @param count number of elements in the array
+ * @param size size of each element in the array in bytes
  * @param comp comparator for strings
  */
-void qSort(Line *lines, size_t count,
+void qSort(Line *lines, size_t count, size_t size,
            int (*comp)(const void *, const void *));
 
 /**

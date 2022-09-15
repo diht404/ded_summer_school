@@ -12,11 +12,11 @@ int main()
     Text text = readFile(fp);
     fclose(fp);
 
-    qSort(text.lines, text.length, compareStr);
+    qSort(text.lines, text.length, sizeof(Line), compareStr);
     printFile(&text, "sorted.txt");
     printFile(&text, "All_Data.txt");
 
-    qSort(text.lines, text.length, compareStrBack);
+    qSort(text.lines, text.length, sizeof(Line),compareStrBack);
     printFile(&text, "sorted_back.txt");
     printFile(&text, "All_Data.txt");
 
