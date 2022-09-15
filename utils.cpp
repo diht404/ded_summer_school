@@ -214,7 +214,7 @@ void printFile(Text *text, const char *filename, bool sorted)
     assert(text != nullptr);
     assert(filename != nullptr);
 
-    FILE *fp = fopen(filename, "w");
+    FILE *fp = fopen(filename, "a");
 
     if (sorted)
     {

@@ -14,9 +14,11 @@ int main()
 
     qSort(text.lines, text.length, compareStr);
     printFile(&text, "sorted.txt");
+    printFile(&text, "All_Data.txt");
 
     qSort(text.lines, text.length, compareStrBack);
     printFile(&text, "sorted_back.txt");
+    printFile(&text, "All_Data.txt");
 
     size_t numParts = 3;
     Poem poem = {generatePoem(&text, numParts), numParts, ShakespeareNumLines};
@@ -24,6 +26,7 @@ int main()
     printPoem(&poem);
 
     printFile(&text, "not_sorted.txt", false);
+    printFile(&text, "All_Data.txt");
 
     freeAll(&text, &poem);
     return 0;
