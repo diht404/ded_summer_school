@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <time.h>
+#include <sys\stat.h>
 
 /**
  * @brief Struct for storing a string and its' length
