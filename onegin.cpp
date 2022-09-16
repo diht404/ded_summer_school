@@ -1,13 +1,27 @@
 #include "onegin.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    const char *filename = "onegin.txt";
+    // error codes
+
+    char *filename = "onegin.txt";
+    if (argc == 1)
+    {
+        filename = "onegin.txt";
+    }
+    if (argc == 2)
+    {
+        filename = argv[1];
+    }
+    if (argc > 2)
+    {
+        fprintf(stderr, "Required 0 or 1 command line arguments, but get %d\n", argc-1);
+    }
     FILE *fp = fopen(filename, "r");
     if (fp == nullptr)
     {
         perror("Unable to open file!");
-        exit(1);
+        return 1;
     }
     Text text = readFile(fp);
     fclose(fp);

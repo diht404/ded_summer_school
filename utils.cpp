@@ -1,39 +1,48 @@
 #include "onegin.h"
 
-char *readF(FILE *fp, long *lenOfFile)
+char *readFileToBuf(FILE *fp, long *lenOfFile)
 {
     assert(fp != nullptr);
+    assert(fp != nullptr);
 
-    struct stat buff;
+    struct stat buff = {};
     fstat(fileno(fp), &buff);
     *lenOfFile = buff.st_size;
 
-    char *txt = (char *) calloc(*lenOfFile, sizeof(char));
+    char *txt = (char *) calloc(*lenOfFile + 1, sizeof(char));
+    if (txt == nullptr)
+    {
+        fprintf(stderr, "Can't allocate memory.");
+    }
     fread(txt, sizeof(char), *lenOfFile, fp);
     return txt;
+}
+
+size_t countLines(const char *txt, long lenOfFile)
+{
+    size_t numLines = 1;
+    for (long i = 0; i < lenOfFile; i++)
+    {
+        if (txt[i] == '\n')
+            numLines++;
+    }
+    return numLines;
 }
 
 Text readFile(FILE *fp)
 {
     assert(fp != nullptr);
-//
-//    struct stat buff;
-//    fstat(fileno(fp), &buff);
-//    long lenOfFile = buff.st_size;
-//
-//    char *txt = (char *) calloc(lenOfFile, sizeof(char));
-//    fread(txt, sizeof(char), lenOfFile, fp);
+
     long lenOfFile = 0;
-    char *txt = readF(fp, &lenOfFile);
-    size_t countLines = 1;
-    for (long i = 0; i < lenOfFile; i++)
+    char *txt = readFileToBuf(fp, &lenOfFile);
+
+    size_t numLines = countLines(txt, lenOfFile);
+
+    Line *lines = (Line *) calloc(numLines + 1, sizeof(lines[0]));
+    if (lines == nullptr)
     {
-        if (txt[i] == '\n')
-            countLines++;
+        fprintf(stderr, "Can't allocate memory.");
     }
-
-    Line *lines = (Line *) calloc(countLines, sizeof(Line));
-
     long position = 0;
     long line_id = 0;
 
@@ -55,7 +64,7 @@ Text readFile(FILE *fp)
             line_id++;
         }
     }
-    return {lines, countLines, txt};
+    return {lines, numLines, txt};
 }
 
 int compareStr(const void *lhsVoid, const void *rhsVoid)
@@ -66,44 +75,45 @@ int compareStr(const void *lhsVoid, const void *rhsVoid)
     const Line *lhs = (const Line *) lhsVoid;
     const Line *rhs = (const Line *) rhsVoid;
 
-    long i = 0;
-    long j = 0;
+    long l_pos = 0;
+    long r_pos = 0;
 
-    while (lhs->str[i] != '\0' and rhs->str[j] != '\0')
+    while (lhs->str[l_pos] != '\0' and rhs->str[r_pos] != '\0')
     {
-        if (!isalnum(lhs->str[i]))
+        if (!isalnum(lhs->str[l_pos]))
         {
-            i++;
+            l_pos++;
             continue;
         }
-        if (!isalnum(rhs->str[j]))
+        if (!isalnum(rhs->str[r_pos]))
         {
-            j++;
+            r_pos++;
             continue;
         }
-
-        if (lhs->str[i] < rhs->str[j])
+        // как тут удалять
+        if (lhs->str[l_pos] < rhs->str[r_pos])
         {
             return -1;
         }
-        if (lhs->str[i] > rhs->str[j])
+
+        if (lhs->str[l_pos] > rhs->str[r_pos])
             return 1;
 
-        i++;
-        j++;
+        l_pos++;
+        r_pos++;
     }
-    while (!isalnum(lhs->str[i]))
+    while (!isalnum(lhs->str[l_pos]))
     {
-        i++;
+        l_pos++;
     }
-    while (!isalnum(rhs->str[j]))
+    while (!isalnum(rhs->str[r_pos]))
     {
-        j++;
+        r_pos++;
     }
-    if (lhs->str[i] == '\0' and rhs->str[j] == '\0')
+    if (lhs->str[l_pos] == '\0' and rhs->str[r_pos] == '\0')
         return 0;
 
-    if (lhs->str[i] == '\0' and rhs->str[j] != '\0')
+    if (lhs->str[l_pos] == '\0' and rhs->str[r_pos] != '\0')
     {
         return -1;
     }
@@ -118,49 +128,49 @@ int compareStrBack(const void *lhsVoid, const void *rhsVoid)
     const Line *lhs = (const Line *) lhsVoid;
     const Line *rhs = (const Line *) rhsVoid;
 
-    long i = lhs->length - 1;
-    long j = rhs->length - 1;
+    long l_pos = lhs->length - 1;
+    long r_pos = rhs->length - 1;
 
-    while (i >= 0 and j >= 0)
+    while (l_pos >= 0 and r_pos >= 0)
     {
-        if (!isalnum(lhs->str[i]) or lhs->str[i] == '\0')
+        if (!isalnum(lhs->str[l_pos]) or lhs->str[l_pos] == '\0')
         {
-            i--;
+            l_pos--;
             continue;
         }
-        if (!isalnum(rhs->str[j]) or rhs->str[j] == '\0')
+        if (!isalnum(rhs->str[r_pos]) or rhs->str[r_pos] == '\0')
         {
-            j--;
+            r_pos--;
             continue;
         }
 
-        if (lhs->str[i] < rhs->str[j])
+        if (lhs->str[l_pos] < rhs->str[r_pos])
         {
             return -1;
         }
-        if (lhs->str[i] > rhs->str[j])
+        if (lhs->str[l_pos] > rhs->str[r_pos])
         {
             return 1;
         }
 
-        i--;
-        j--;
+        l_pos--;
+        r_pos--;
     }
 
-    while (!isalnum(lhs->str[i]))
+    while (!isalnum(lhs->str[l_pos]))
     {
-        i--;
+        l_pos--;
     }
-    while (!isalnum(rhs->str[j]))
+    while (!isalnum(rhs->str[r_pos]))
     {
-        j--;
+        r_pos--;
     }
-    if (i < 0 and j < 0)
+    if (l_pos < 0 and r_pos < 0)
     {
         return 0;
     }
 
-    if (i < 0)
+    if (l_pos < 0)
     {
         return -1;
     }
@@ -231,6 +241,7 @@ void printFile(Text *text, const char *filename, bool sorted)
 
     if (sorted)
     {
+        // print of sorted array
         for (int i = 0; i < text->length; i++)
         {
             fprintf(fp, "%s\n", text->lines[i].str);
@@ -238,6 +249,7 @@ void printFile(Text *text, const char *filename, bool sorted)
     }
     else
     {
+        // print original text
         size_t i = 0;
         size_t length = 0;
         while (length < text->length)

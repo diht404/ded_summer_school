@@ -44,7 +44,7 @@ struct Poem
 
 const int ShakespeareNumLines = 7;
 
-char *readF(FILE *fp, long *lenOfFile);
+char *readFileToBuf(FILE *fp, long *lenOfFile);
 
 Text readFile(FILE *fp);
 
