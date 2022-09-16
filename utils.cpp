@@ -1,17 +1,30 @@
 #include "onegin.h"
 
-Text readFile(FILE *fp)
+char *readF(FILE *fp, long *lenOfFile)
 {
-
     assert(fp != nullptr);
 
     struct stat buff;
     fstat(fileno(fp), &buff);
-    long lenOfFile = buff.st_size;
+    *lenOfFile = buff.st_size;
 
-    char *txt = (char *) calloc(lenOfFile, sizeof(char));
-    fread(txt, sizeof(char), lenOfFile, fp);
+    char *txt = (char *) calloc(*lenOfFile, sizeof(char));
+    fread(txt, sizeof(char), *lenOfFile, fp);
+    return txt;
+}
 
+Text readFile(FILE *fp)
+{
+    assert(fp != nullptr);
+//
+//    struct stat buff;
+//    fstat(fileno(fp), &buff);
+//    long lenOfFile = buff.st_size;
+//
+//    char *txt = (char *) calloc(lenOfFile, sizeof(char));
+//    fread(txt, sizeof(char), lenOfFile, fp);
+    long lenOfFile = 0;
+    char *txt = readF(fp, &lenOfFile);
     size_t countLines = 1;
     for (long i = 0; i < lenOfFile; i++)
     {
