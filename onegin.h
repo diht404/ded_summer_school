@@ -14,7 +14,7 @@
 struct Line
 {
     char *str = nullptr;
-    long length = 0;
+    size_t length = 0;
 };
 
 /**
@@ -25,7 +25,8 @@ struct Text
 {
     Line *lines = nullptr;
     size_t length = 0;
-    char *txt;
+    char *txt = nullptr;
+    size_t *lensOfStrings = nullptr;
 };
 
 /**
@@ -44,8 +45,27 @@ struct Poem
 
 const int ShakespeareNumLines = 7;
 
+/**
+ * @brief return length of file in bytes
+ *
+ * @param fp - opened file
+ * @return length of file
+ */
+long getLenOfFile(FILE *fp);
+
+/**
+ * reads file to buffer
+ * @param fp - opened file
+ * @param lenOfFile - variable for storing length of file
+ * @return array storing file
+ */
 char *readFileToBuf(FILE *fp, long *lenOfFile);
 
+/**
+ * reads file to struct Text
+ * @param fp - opened file
+ * @return struct Text with file
+ */
 Text readFile(FILE *fp);
 
 /**

@@ -4,11 +4,8 @@ int main(int argc, char *argv[])
 {
     // error codes
 
-    char *filename = "onegin.txt";
-    if (argc == 1)
-    {
-        filename = "onegin.txt";
-    }
+    const char *filename = "onegin.txt";
+    
     if (argc == 2)
     {
         filename = argv[1];

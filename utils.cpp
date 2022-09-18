@@ -1,13 +1,19 @@
 #include "onegin.h"
 
+long getLenOfFile(FILE *fp)
+{
+    struct stat buff = {};
+    fstat(fileno(fp), &buff);
+    long lenOfFile = buff.st_size;
+    return lenOfFile;
+}
+
 char *readFileToBuf(FILE *fp, long *lenOfFile)
 {
     assert(fp != nullptr);
-    assert(fp != nullptr);
+    assert(lenOfFile != nullptr);
 
-    struct stat buff = {};
-    fstat(fileno(fp), &buff);
-    *lenOfFile = buff.st_size;
+    *lenOfFile = getLenOfFile(fp);
 
     char *txt = (char *) calloc(*lenOfFile + 1, sizeof(char));
     if (txt == nullptr)
@@ -39,12 +45,14 @@ Text readFile(FILE *fp)
     size_t numLines = countLines(txt, lenOfFile);
 
     Line *lines = (Line *) calloc(numLines + 1, sizeof(lines[0]));
+    size_t *lensOfStrings = (size_t *) calloc(numLines + 1, sizeof(lensOfStrings[0]));
+
     if (lines == nullptr)
     {
         fprintf(stderr, "Can't allocate memory.");
     }
-    long position = 0;
-    long line_id = 0;
+    size_t position = 0;
+    size_t line_id = 0;
 
     for (long i = 0; i < lenOfFile; i++)
     {
@@ -59,12 +67,13 @@ Text readFile(FILE *fp)
         if (txt[i] == '\n')
         {
             lines[line_id].length = position;
+            lensOfStrings[line_id] = position;
             position = 0;
             txt[i] = '\0';
             line_id++;
         }
     }
-    return {lines, numLines, txt};
+    return {lines, numLines, txt, lensOfStrings};
 }
 
 int compareStr(const void *lhsVoid, const void *rhsVoid)
@@ -250,21 +259,13 @@ void printFile(Text *text, const char *filename, bool sorted)
     else
     {
         // print original text
-        size_t i = 0;
-        size_t length = 0;
-        while (length < text->length)
+        size_t startOfString = 0;
+        size_t numOfLines = 0;
+        while (numOfLines < text->length)
         {
-            if (text->txt[i] == '\0')
-            {
-                fprintf(fp, "\n");
-                length++;
-                i++;
-            }
-            else
-            {
-                fprintf(fp, "%c", text->txt[i]);
-                i++;
-            }
+            fprintf(fp, "%s\n", text->txt+startOfString);
+            startOfString+=text->lensOfStrings[numOfLines];
+            numOfLines++;
         }
     }
     fclose(fp);
@@ -348,4 +349,5 @@ void freeAll(Text *text, Poem *poem)
     free(text->txt);
     free(text->lines);
     free(poem->poem);
+    free(text->lensOfStrings);
 }
